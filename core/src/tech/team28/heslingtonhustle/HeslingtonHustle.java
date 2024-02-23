@@ -12,12 +12,12 @@ public class HeslingtonHustle extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		img = new Texture("logo.png");
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 		batch.draw(img, 0, 0);
 		batch.end();

@@ -8,7 +8,8 @@ import tech.team28.heslingtonhustle.HeslingtonHustle;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setForegroundFPS(60);
+		config.setForegroundFPS(0);
+		config.setWindowedMode(1920, 1080);
 		config.setTitle("Heslington Hustle");
 		new Lwjgl3Application(new HeslingtonHustle(), config);
 	}
