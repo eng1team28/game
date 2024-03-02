@@ -6,9 +6,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public class HeslingtonHustle extends ApplicationAdapter {
 
@@ -17,22 +18,29 @@ public class HeslingtonHustle extends ApplicationAdapter {
 
 	Texture playerImage;
 	private Rectangle player;
-	private float playerSpeed = 500;
-	
+
+	private static final int SCREEN_WIDTH = 1920;
+	private static final int SCREEN_HEIGHT = 1080;
+
+	// TODO - Move all player logic into a Player class, create and assign movementComponent (Composition)
+	private static final int PLAYER_WIDTH = 32;
+	private static final int PLAYER_HEIGHT = 64;
+	private static final float PLAYER_SPEED = 1000;
+	private static final String PLAYER_TEXTURE = "player.png";
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 1920, 1080);
+		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		playerImage = new Texture("player.png");
+		playerImage = new Texture(PLAYER_TEXTURE);
 		player = new Rectangle();
-		player.x = 1920 / 2 - 32/ 2;
-		player.y = 1080 / 2;
-		player.width = 32;
-		player.height = 64;
-
+		player.x = (float) SCREEN_WIDTH / 2 - (float) PLAYER_WIDTH / 2;
+		player.y = (float) SCREEN_HEIGHT / 2 - (float) PLAYER_HEIGHT /2;
+		player.width = PLAYER_WIDTH;
+		player.height = PLAYER_HEIGHT;
 	}
 
 	@Override
@@ -46,16 +54,21 @@ public class HeslingtonHustle extends ApplicationAdapter {
 		batch.draw(playerImage, player.x, player.y);
 		batch.end();
 
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) player.x -= playerSpeed * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) player.x += playerSpeed * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Input.Keys.UP)) player.y += playerSpeed * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) player.y -= playerSpeed * Gdx.graphics.getDeltaTime();
+		Vector2 inputVector = new Vector2();
+		inputVector.setZero();
+		inputVector.add(Gdx.input.isKeyPressed(Input.Keys.LEFT) ? -1 : 0, Gdx.input.isKeyPressed(Input.Keys.UP) ? 1 : 0);
+		inputVector.add(Gdx.input.isKeyPressed(Input.Keys.RIGHT) ? 1 : 0, Gdx.input.isKeyPressed(Input.Keys.DOWN) ? -1 : 0);
+		// Normalize vector so that diagonal movement has the same magnitude
+		inputVector.nor();
 
-		if(player.x < 0) player.x = 0;
-		if(player.x > 1920 - player.width) player.x = 1920 - player.width;
-		if(player.y < 0) player.y = 0;
-		if(player.y > 1080 - player.height) player.y = 1080 - player.height;
+		// Move the player based on input and PLAYER_SPEED
+		//  * deltaTime -> Frame-rate independent
+		Vector2 displacementVector = inputVector.scl(PLAYER_SPEED * Gdx.graphics.getDeltaTime());
+		player.setPosition(player.getPosition(new Vector2()).add(displacementVector));
 
+		// Clamp player to screen
+		player.x = MathUtils.clamp(player.x, 0, SCREEN_WIDTH - PLAYER_WIDTH);
+		player.y = MathUtils.clamp(player.y, 0, SCREEN_HEIGHT - PLAYER_HEIGHT);
 	}
 	
 	@Override
