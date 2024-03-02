@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -15,7 +14,6 @@ public class GameScreen implements Screen {
 	final HeslingtonHustle game;
 
 	private OrthographicCamera camera;
-	SpriteBatch batch;
 
 	Texture playerImage;
 	private Rectangle player;
@@ -31,8 +29,6 @@ public class GameScreen implements Screen {
 
 	public GameScreen (final HeslingtonHustle game) {
 		this.game = game;
-
-		batch = new SpriteBatch();
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -50,11 +46,11 @@ public class GameScreen implements Screen {
 		ScreenUtils.clear(0, 0, 0, 1);
 
 		camera.update();
-		batch.setProjectionMatrix(camera.combined);
+		game.batch.setProjectionMatrix(camera.combined);
 
-		batch.begin();
-		batch.draw(playerImage, player.x, player.y);
-		batch.end();
+		game.batch.begin();
+		game.batch.draw(playerImage, player.x, player.y);
+		game.batch.end();
 
 		Vector2 inputVector = new Vector2();
 		inputVector.setZero();
@@ -100,7 +96,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose () {
-		batch.dispose();
 		playerImage.dispose();
 	}
 }
