@@ -1,12 +1,10 @@
 package tech.team28.heslingtonhustle;
 
-import com.badlogic.gdx.Game;
-
 public class GameManager {
 
     private static GameManager instance;
 
-    enum Day{
+    enum Day {
         Monday,
         Tuesday,
         Wednesday,
@@ -15,13 +13,12 @@ public class GameManager {
         Saturday,
         Sunday;
     }
+
     private Day day;
     private float time;
     private final float dayDuration;
 
-
-
-    private GameManager(){
+    private GameManager() {
         day = Day.Monday;
         time = 0;
         dayDuration = 24;
@@ -34,9 +31,9 @@ public class GameManager {
         return instance;
     }
 
-    boolean incrementTime(float amount){
+    boolean incrementTime(float amount) {
         float newTime = time + amount;
-        if (newTime >= dayDuration){
+        if (newTime >= dayDuration) {
             return false;
         } else {
             time = newTime;
@@ -44,11 +41,11 @@ public class GameManager {
         }
     }
 
-    Day incrementDay(){
+    Day incrementDay() {
         // TODO - What happens after Sunday? does index need to wrap around array?
-        time = 0;  // reset time of day
+        time = 0; // reset time of day
 
-        if(day == Day.Sunday){
+        if (day == Day.Sunday) {
             TakeExam();
             return null;
         }
@@ -59,10 +56,8 @@ public class GameManager {
         return day;
     }
 
-    private void TakeExam(){
+    private void TakeExam() {
         // TODO - Exam Logic
         return;
     }
-
-
 }
