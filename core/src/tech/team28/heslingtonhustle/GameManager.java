@@ -34,17 +34,20 @@ public class GameManager {
         return instance;
     }
 
-    float incrementTime(float amount){
-        time += amount;
-        if (time >= dayDuration){
-            time = 0;
-            incrementDay();
+    boolean incrementTime(float amount){
+        float newTime = time + amount;
+        if (newTime >= dayDuration){
+            return false;
+        } else {
+            time = newTime;
+            return true;
         }
-        return time;
     }
 
     Day incrementDay(){
         // TODO - What happens after Sunday? does index need to wrap around array?
+        time = 0;  // reset time of day
+
         if(day == Day.Sunday){
             TakeExam();
             return null;
