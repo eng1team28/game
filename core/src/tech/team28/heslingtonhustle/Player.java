@@ -19,6 +19,7 @@ public class Player {
     private float energy;
     private final float maxEnergy;
     private float intelligence;
+    private final float maxIntelligence;
     private final float playerSpeed;
 
     public Texture getPlayerImage() {
@@ -29,6 +30,7 @@ public class Player {
         energy = 100;
         maxEnergy = 100;
         intelligence = 0;
+        maxIntelligence = 100;
         playerSpeed = 1000;
 
         moveComponent = new MoveComponent();
@@ -50,6 +52,14 @@ public class Player {
 
     public void setEnergy(float energy) {
         this.energy = MathUtils.clamp(energy, 0, maxEnergy);
+    }
+
+    public float getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(float intelligence) {
+        this.intelligence = MathUtils.clamp(intelligence, 0, maxIntelligence);
     }
 
     // Runs every frame
