@@ -22,6 +22,9 @@ public class StudyArea implements Interactable {
     }
 
     private void applyStudyEffect(Player player) {
+
         player.setEnergy(player.getEnergy() - studyEnergyCost);
+        player.setIntelligence(player.getIntelligence() + 10); // Increase intelligence by 10, this can be altered to more/less
+
     }
 }
