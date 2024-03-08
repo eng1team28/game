@@ -1,6 +1,8 @@
 package tech.team28.heslingtonhustle;
 
 public class GameManager {
+    static final int SCREEN_WIDTH = 1920;
+    static final int SCREEN_HEIGHT = 1080;
 
     private static GameManager instance;
 
