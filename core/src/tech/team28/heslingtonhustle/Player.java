@@ -55,7 +55,8 @@ public class Player {
     // Runs every frame
     void update(float delta) {
         // Move the player based on input and player_speed
-        Vector2 displacementVector = get_normalized_input_vector().scl(playerSpeed * Gdx.graphics.getDeltaTime());
+        Vector2 displacementVector =
+                get_normalized_input_vector().scl(playerSpeed * Gdx.graphics.getDeltaTime());
         collider.setPosition(collider.getPosition(new Vector2()).add(displacementVector));
 
         // Clamp player to screen

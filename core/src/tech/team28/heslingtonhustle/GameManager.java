@@ -43,6 +43,10 @@ public class GameManager {
         }
     }
 
+    String getTime() {
+        return "Time:" + time + ":00";
+    }
+
     Day incrementDay() {
         // TODO - What happens after Sunday? does index need to wrap around array?
         time = 0; // reset time of day
