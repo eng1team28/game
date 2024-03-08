@@ -32,6 +32,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
 
+        player.update(delta);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
