@@ -18,6 +18,7 @@ public class Player {
 
     private float energy;
     private final float maxEnergy;
+    private float intelligence;
     private final float playerSpeed;
 
     public Texture getPlayerImage() {
@@ -27,6 +28,7 @@ public class Player {
     public Player() {
         energy = 100;
         maxEnergy = 100;
+        intelligence = 0;
         playerSpeed = 1000;
 
         moveComponent = new MoveComponent();
