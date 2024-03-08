@@ -15,7 +15,7 @@ public class Player {
     }
 
     public void setEnergy(float energy) {
-        this.energy = MathUtils.clamp(this.energy + energy, 0, maxEnergy);
+        this.energy = MathUtils.clamp(energy, 0, maxEnergy);
     }
 
     public Player() {
