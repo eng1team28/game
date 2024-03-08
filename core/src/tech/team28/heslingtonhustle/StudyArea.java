@@ -17,6 +17,8 @@ public class StudyArea implements Interactable {
     @Override
     public void Interact(Player player) {
         GameManager.getInstance().incrementTime(studyDuration);
+
+        applyStudyEffect(player);
     }
 
     private void applyStudyEffect(Player player) {
