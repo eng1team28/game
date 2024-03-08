@@ -9,6 +9,7 @@ public class Player {
 
     private float energy;
     private float maxEnergy;
+    private float intelligence;
 
     public float getEnergy() {
         return energy;
@@ -19,6 +20,7 @@ public class Player {
     }
 
     public Player() {
+        intelligence = 0;
         energy = 100;
         maxEnergy = 100;
         moveComponent = new MoveComponent();
