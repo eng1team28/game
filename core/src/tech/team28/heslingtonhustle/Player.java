@@ -76,4 +76,8 @@ public class Player {
         // Normalize vector so that diagonal movement has the same magnitude
         return inputVector.nor();
     }
+
+    void dispose(){
+        playerImage.dispose();
+    }
 }
