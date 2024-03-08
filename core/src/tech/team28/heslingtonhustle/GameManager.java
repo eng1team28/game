@@ -44,7 +44,7 @@ public class GameManager {
     }
 
     String getTime() {
-        return "Time:" + time + ":00";
+        return String.format("Time: %02.0f:00", time);
     }
 
     Day incrementDay() {

@@ -55,6 +55,8 @@ public class GameScreen implements Screen {
                 new Label(
                         gameManager.getTime(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Table table = new Table();
+        table.setFillParent(true);
+        table.row();
         table.add(timeLabel);
         stage.addActor(table);
     }
