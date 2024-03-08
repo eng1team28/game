@@ -19,11 +19,13 @@ public class GameManager {
     private Day day;
     private float time;
     private final float dayDuration;
+    private Player player;
 
     private GameManager() {
         day = Day.Monday;
         time = 0;
         dayDuration = 24;
+        player = new Player();
     }
 
     public static GameManager getInstance() {
@@ -64,6 +66,13 @@ public class GameManager {
 
     private void TakeExam() {
         // TODO - Exam Logic
-        return;
+
+        if(player.getIntelligence() >= 60){
+            // TODO - Win Game and give a grade
+        }
+        else{
+            // TODO - Lose Game and fail the exam
+        }
+
     }
 }
