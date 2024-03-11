@@ -1,11 +1,21 @@
 package tech.team28.heslingtonhustle;
 
+import com.badlogic.gdx.utils.Array;
+
 public class GameManager {
     static final int SCREEN_WIDTH = 1920;
     static final int SCREEN_HEIGHT = 1080;
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public Array<Interactable> getInteractables(){
+        return interactables;
+    }
+    public boolean addInteractable(Interactable newInteractable){
+        interactables.add(newInteractable);
+        return true;
     }
 
     private static GameManager instance;
@@ -25,10 +35,13 @@ public class GameManager {
     private final float dayDuration;
     private Player player;
 
+    private Array<Interactable> interactables;
+
     private GameManager() {
         day = Day.Monday;
         time = 0;
         dayDuration = 24;
+        interactables = new Array<Interactable>(4);
     }
 
     public static GameManager getInstance() {

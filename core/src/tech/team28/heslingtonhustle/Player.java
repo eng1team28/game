@@ -72,6 +72,17 @@ public class Player {
         // Clamp player to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.SCREEN_WIDTH - collider.width);
         collider.y = MathUtils.clamp(collider.y, 0, GameManager.SCREEN_HEIGHT - collider.height);
+
+        // Player Interact
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
+            for(Interactable interactable: GameManager.getInstance().getInteractables()) {
+                if(collider.overlaps(interactable.getCollider())){
+                    interactable.Interact(this);
+                    Gdx.app.log("MyTag", "Interact works");
+                }
+            }
+        }
+
     }
 
     private Vector2 get_normalized_input_vector() {

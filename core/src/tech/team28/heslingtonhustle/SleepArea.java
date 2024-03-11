@@ -1,5 +1,8 @@
 package tech.team28.heslingtonhustle;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+
 public class SleepArea implements Interactable {
 
     private final float sleepDuration;
@@ -17,6 +20,16 @@ public class SleepArea implements Interactable {
         gameManager.incrementTime(8);
 
         applySleepEffect(player);
+    }
+
+    @Override
+    public Rectangle getCollider() {
+        return null;
+    }
+
+    @Override
+    public Texture getImage() {
+        return null;
     }
 
     private void applySleepEffect(Player player) {

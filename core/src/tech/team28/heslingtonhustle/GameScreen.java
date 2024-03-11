@@ -1,5 +1,6 @@
 package tech.team28.heslingtonhustle;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -28,6 +29,7 @@ public class GameScreen implements Screen {
 
         player = new Player();
         gameManager.setPlayer(player);
+        gameManager.addInteractable(new StudyArea());
     }
 
     @Override
@@ -40,6 +42,11 @@ public class GameScreen implements Screen {
 
         game.batch.begin();
         game.batch.draw(player.getPlayerImage(), player.getCollider().x, player.getCollider().y);
+
+        for(Interactable interactable: GameManager.getInstance().getInteractables()) {
+            game.batch.draw(interactable.getImage(), interactable.getCollider().x, interactable.getCollider().y);
+        }
+
         game.batch.end();
 
         timeLabel.setText(gameManager.getTime());
