@@ -64,11 +64,21 @@ public class GameManager {
     }
 
     String getTimeFormatted() {
-        return String.format("Time: %02.0f:00, Day: %s", time, day);
+        // Formats time with two digits, zero-padded, no decimal point
+        // I.E. as 24hr format
+        return String.format("Time: %02.0f:00", getTime());
     }
 
     float getTime() {
         return time;
+    }
+
+    Day getDay() {
+        return day;
+    }
+
+    String getDayFormatted() {
+        return String.format("Day: %s", getDay());
     }
 
     Day incrementDay() {
