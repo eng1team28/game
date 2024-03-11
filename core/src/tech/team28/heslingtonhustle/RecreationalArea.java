@@ -10,7 +10,6 @@ public class RecreationalArea implements Interactable {
     private final Rectangle collider;
     private final TextureAtlas.AtlasRegion image;
 
-
     public RecreationalArea(
             TextureAtlas atlas,
             float recreationDuration,
@@ -40,6 +39,7 @@ public class RecreationalArea implements Interactable {
                 (float) GameManager.SCREEN_WIDTH / 2,
                 (float) GameManager.SCREEN_HEIGHT / 100);
     }
+
     @Override
     public void interact(Player player) {
         GameManager.getInstance().incrementTime(recreationDuration);
@@ -59,10 +59,9 @@ public class RecreationalArea implements Interactable {
 
     private void applyRecreationalEffect(Player player) {
         player.setEnergy(player.getEnergy() - recreationEnergyCost);
-        if (player.getHappiness() < 1.2){
+        if (player.getHappiness() < 1.2) {
             player.setHappiness(player.getHappiness() + recreationHappinessGain);
-        }
-        else {
+        } else {
             player.setHappiness(1.5);
         }
     }

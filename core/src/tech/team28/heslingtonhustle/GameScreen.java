@@ -1,5 +1,7 @@
 package tech.team28.heslingtonhustle;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -52,6 +54,11 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)
+                && Gdx.input.isKeyPressed(Input.Keys.Q)) {
+            Gdx.app.exit();
+        }
+
         ScreenUtils.clear(0, 0, 0, 1);
 
         player.update(delta);
