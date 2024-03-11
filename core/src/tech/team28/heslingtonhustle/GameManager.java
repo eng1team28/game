@@ -83,12 +83,10 @@ public class GameManager {
     private void TakeExam() {
         // TODO - Exam Logic
 
-        if(player.getIntelligence() >= 60){
+        if (player.getIntelligence() >= 60) {
             // TODO - Win Game and give a grade
-        }
-        else{
+        } else {
             // TODO - Lose Game and fail the exam
         }
-
     }
 }

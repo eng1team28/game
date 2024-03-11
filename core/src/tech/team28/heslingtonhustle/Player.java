@@ -65,9 +65,13 @@ public class Player {
     // Runs every frame
     void update(float delta) {
         // Move the player based on input and player_speed
-        Vector2 displacementVector =
-                get_normalized_input_vector().scl(playerSpeed * delta);
-        collider.setPosition(collider.getPosition(new Vector2()).add(displacementVector));
+        Vector2 displacementVector = get_normalized_input_vector();
+        displacementVector.scl(playerSpeed * delta);
+
+        Vector2 position = new Vector2();
+        collider.getPosition(position);
+        position.add(displacementVector);
+        collider.setPosition(position);
 
         // Clamp player to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.SCREEN_WIDTH - collider.width);
@@ -98,7 +102,7 @@ public class Player {
         return inputVector.nor();
     }
 
-    void dispose(){
+    void dispose() {
         playerImage.dispose();
     }
 }
