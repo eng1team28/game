@@ -28,7 +28,7 @@ public class GameManager {
         Thursday,
         Friday,
         Saturday,
-        Sunday;
+        Sunday
     }
 
     private Day day;

@@ -21,7 +21,5 @@ public class RecreationalArea implements Interactable {
         return null;
     }
 
-    private void applyRecreationalEffect(Player player) {
-        return;
-    }
+    private void applyRecreationalEffect(Player player) {}
 }

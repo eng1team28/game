@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 
 public interface Interactable {
-    abstract void Interact(Player player);
+    void Interact(Player player);
 
-    abstract Rectangle getCollider();
+    Rectangle getCollider();
 
-    abstract TextureAtlas.AtlasRegion getImage();
+    TextureAtlas.AtlasRegion getImage();
 }

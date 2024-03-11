@@ -21,7 +21,5 @@ public class EatArea implements Interactable {
         return null;
     }
 
-    private void applyEatEffect(Player player) {
-        return;
-    }
+    private void applyEatEffect(Player player) {}
 }
