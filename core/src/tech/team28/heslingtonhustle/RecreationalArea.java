@@ -21,6 +21,11 @@ public class RecreationalArea implements Interactable {
         return null;
     }
 
+    @Override
+    public void dispose() {
+
+    }
+
     private void applyRecreationalEffect(Player player) {
         return;
     }

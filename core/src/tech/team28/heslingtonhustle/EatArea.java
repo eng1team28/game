@@ -21,6 +21,11 @@ public class EatArea implements Interactable {
         return null;
     }
 
+    @Override
+    public void dispose() {
+
+    }
+
     private void applyEatEffect(Player player) {
         return;
     }

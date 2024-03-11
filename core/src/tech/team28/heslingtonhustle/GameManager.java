@@ -53,7 +53,7 @@ public class GameManager {
 
     boolean incrementTime(float amount) {
         float newTime = time + amount;
-        if (newTime >= dayDuration) {
+        if (newTime > dayDuration) {
             return false;
         } else {
             time = newTime;
@@ -61,9 +61,11 @@ public class GameManager {
         }
     }
 
-    String getTime() {
+    String getTimeFormatted() {
         return String.format("Time: %02.0f:00", time);
     }
+
+    float getTime() { return time; }
 
     Day incrementDay() {
         // TODO - What happens after Sunday? does index need to wrap around array?

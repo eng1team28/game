@@ -9,37 +9,48 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player {
 
+    // TEXTURES
     private static final String PLAYER_TEXTURE = "player.png";
     private final Texture playerImage;
 
+    // COLLIDERS
     private final Rectangle collider;
-    private final MoveComponent moveComponent;
-    private final float interactRadius = 150;
+    private final Rectangle interactCollider;
 
+    // COMPONENTS
+    private final MoveComponent moveComponent;
+
+    // PLAYER STATS
     private float energy;
     private final float maxEnergy;
     private float intelligence;
     private final float maxIntelligence;
-    private final float playerSpeed;
 
-    public Texture getPlayerImage() {
-        return playerImage;
-    }
+    // Not final as they can change (maybe)
+    private float playerSpeed = 1000;
+    private float playerAcceleration = 25;
+    private float interactRange = 150;
 
     public Player() {
         energy = 100;
         maxEnergy = 100;
         intelligence = 0;
         maxIntelligence = 100;
-        playerSpeed = 1000;
 
-        moveComponent = new MoveComponent();
+        moveComponent = new MoveComponent(playerAcceleration, playerSpeed);
+
         playerImage = new Texture(PLAYER_TEXTURE);
         collider = new Rectangle();
         collider.x = (float) GameManager.SCREEN_WIDTH / 2 - (float) collider.width / 2;
         collider.y = (float) GameManager.SCREEN_HEIGHT / 2 - (float) collider.height / 2;
         collider.width = 32;
         collider.height = 64;
+
+        interactCollider = new Rectangle(0, 0, interactRange, interactRange);
+    }
+
+    public Texture getPlayerImage() {
+        return playerImage;
     }
 
     public Rectangle getCollider() {
@@ -64,14 +75,11 @@ public class Player {
 
     // Runs every frame
     void update(float delta) {
-        // Move the player based on input and player_speed
-        Vector2 displacementVector = get_normalized_input_vector();
-        displacementVector.scl(playerSpeed * delta);
+        Vector2 inputVector = getNormalizedInputVector();
 
-        Vector2 position = new Vector2();
-        collider.getPosition(position);
-        position.add(displacementVector);
-        collider.setPosition(position);
+        // Move Player using moveComponent
+        moveComponent.MoveTowards(inputVector, collider, delta);
+        interactCollider.setPosition(new Vector2(collider.x - interactRange/2, collider.y - interactRange/2));
 
         // Clamp player to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.SCREEN_WIDTH - collider.width);
@@ -80,16 +88,16 @@ public class Player {
         // Player Interact
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
             for(Interactable interactable: GameManager.getInstance().getInteractables()) {
-                if(collider.overlaps(interactable.getCollider())){
+                if(interactCollider.overlaps(interactable.getCollider())){
                     interactable.Interact(this);
-                    Gdx.app.log("MyTag", "Interact works");
+                    Gdx.app.log("MyTag", String.valueOf(getEnergy()));
                 }
             }
         }
 
     }
 
-    private Vector2 get_normalized_input_vector() {
+    private Vector2 getNormalizedInputVector() {
         Vector2 inputVector = new Vector2();
         inputVector.setZero();
         inputVector.add(

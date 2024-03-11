@@ -32,6 +32,10 @@ public class SleepArea implements Interactable {
         return null;
     }
 
+    @Override
+    public void dispose() {
+    }
+
     private void applySleepEffect(Player player) {
         player.setEnergy(player.getEnergy() + sleepEnergyRecovery);
     }

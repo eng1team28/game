@@ -1,6 +1,5 @@
 package tech.team28.heslingtonhustle;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -49,7 +48,7 @@ public class GameScreen implements Screen {
 
         game.batch.end();
 
-        timeLabel.setText(gameManager.getTime());
+        timeLabel.setText(gameManager.getTimeFormatted());
         stage.act();
         stage.draw();
     }
@@ -62,7 +61,7 @@ public class GameScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         timeLabel =
                 new Label(
-                        gameManager.getTime(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+                        gameManager.getTimeFormatted(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Table table = new Table();
         table.setFillParent(true);
         table.row();
@@ -82,6 +81,9 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         player.dispose();
+        for(Interactable interactable: GameManager.getInstance().getInteractables()) {
+            interactable.dispose();
+        }
         stage.dispose();
     }
 }

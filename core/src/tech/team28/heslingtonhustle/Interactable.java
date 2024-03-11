@@ -7,5 +7,6 @@ public interface Interactable{
     abstract void Interact(Player player);
     abstract Rectangle getCollider();
     abstract Texture getImage();
+    abstract void dispose();
 
 }
