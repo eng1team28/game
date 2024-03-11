@@ -3,6 +3,7 @@ package tech.team28.heslingtonhustle;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -60,8 +61,7 @@ public class GameScreen implements Screen {
         table.add(dayLabel);
         stage.addActor(table);
 
-        TextureAtlas.AtlasRegion cristalRegion =
-                    game.atlas.findRegion("sigil");
+        TextureAtlas.AtlasRegion cristalRegion = game.atlas.findRegion("sigil");
         jingle = Gdx.audio.newSound(Gdx.files.internal("jingle.mp3"));
         class MyActor extends Actor {
             public TextureAtlas.AtlasRegion region = cristalRegion;
@@ -83,13 +83,12 @@ public class GameScreen implements Screen {
                         getRotation());
                 batch.setColor(Color.WHITE);
             }
-
         }
         hehe = new MyActor();
         hehe.setSize(cristalRegion.originalWidth, cristalRegion.originalHeight);
         hehe.setOrigin(Align.center);
-        hehe.setX((float) 1920/2, Align.center);
-        hehe.setY((float) 1080/2, Align.center);
+        hehe.setX((float) 1920 / 2, Align.center);
+        hehe.setY((float) 1080 / 2, Align.center);
         hehe.setVisible(false);
         stage.addActor(hehe);
     }
@@ -106,13 +105,16 @@ public class GameScreen implements Screen {
                         parallel(fadeIn(1), scaleTo(1f, 1f, 4)),
                         delay(2),
                         fadeOut(1),
-                        Actions.hide()
-                )
-        );
+                        Actions.hide()));
     }
 
     @Override
     public void render(float delta) {
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)
+                && Gdx.input.isKeyPressed(Input.Keys.Q)) {
+            Gdx.app.exit();
+        }
+
         ScreenUtils.clear(0, 0, 0, 1);
 
         player.update(delta);
