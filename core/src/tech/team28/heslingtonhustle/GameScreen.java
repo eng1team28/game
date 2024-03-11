@@ -16,6 +16,7 @@ public class GameScreen implements Screen {
     private final OrthographicCamera camera;
     private final Player player;
     private Stage stage;
+    private Label dayLabel;
     private Label timeLabel;
     private final GameManager gameManager;
 
@@ -35,13 +36,17 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(new RecreationalArea(game.atlas));
 
         // Scene2D stage and UI
-        stage = new Stage(new ScreenViewport());
-        timeLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        stage = new Stage(new ScreenViewport(camera), game.batch);
+        Label.LabelStyle sillyStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        dayLabel = new Label("", sillyStyle);
+        timeLabel = new Label("", sillyStyle);
         Table table = new Table();
         table.setFillParent(true);
         table.top().left();
         table.row();
         table.add(timeLabel);
+        table.row();
+        table.add(dayLabel);
         stage.addActor(table);
     }
 
@@ -65,6 +70,7 @@ public class GameScreen implements Screen {
 
         game.batch.end();
 
+        dayLabel.setText(gameManager.getDayFormatted());
         timeLabel.setText(gameManager.getTimeFormatted());
         stage.act();
         stage.draw();
