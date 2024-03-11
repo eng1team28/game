@@ -1,6 +1,6 @@
 package tech.team28.heslingtonhustle;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 
 public class SleepArea implements Interactable {
@@ -28,7 +28,7 @@ public class SleepArea implements Interactable {
     }
 
     @Override
-    public Texture getImage() {
+    public TextureAtlas.AtlasRegion getImage() {
         return null;
     }
 

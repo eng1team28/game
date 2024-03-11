@@ -2,15 +2,15 @@ package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
 
-    private static final String PLAYER_TEXTURE = "player.png";
-    private final Texture playerImage;
+    private static final String PLAYER_TEXTURE = "player";
+    private final TextureAtlas.AtlasRegion playerImage;
 
     private final Rectangle collider;
     private final MoveComponent moveComponent;
@@ -22,11 +22,11 @@ public class Player {
     private final float maxIntelligence;
     private final float playerSpeed;
 
-    public Texture getPlayerImage() {
+    public TextureAtlas.AtlasRegion getPlayerImage() {
         return playerImage;
     }
 
-    public Player() {
+    public Player(TextureAtlas atlas) {
         energy = 100;
         maxEnergy = 100;
         intelligence = 0;
@@ -34,7 +34,7 @@ public class Player {
         playerSpeed = 1000;
 
         moveComponent = new MoveComponent();
-        playerImage = new Texture(PLAYER_TEXTURE);
+        playerImage = atlas.findRegion(PLAYER_TEXTURE);
         collider = new Rectangle();
         collider.x = (float) GameManager.SCREEN_WIDTH / 2 - (float) collider.width / 2;
         collider.y = (float) GameManager.SCREEN_HEIGHT / 2 - (float) collider.height / 2;
@@ -78,15 +78,14 @@ public class Player {
         collider.y = MathUtils.clamp(collider.y, 0, GameManager.SCREEN_HEIGHT - collider.height);
 
         // Player Interact
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
-            for(Interactable interactable: GameManager.getInstance().getInteractables()) {
-                if(collider.overlaps(interactable.getCollider())){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            for (Interactable interactable : GameManager.getInstance().getInteractables()) {
+                if (collider.overlaps(interactable.getCollider())) {
                     interactable.Interact(this);
                     Gdx.app.log("MyTag", "Interact works");
                 }
             }
         }
-
     }
 
     private Vector2 get_normalized_input_vector() {
@@ -100,9 +99,5 @@ public class Player {
                 Gdx.input.isKeyPressed(Input.Keys.DOWN) ? -1 : 0);
         // Normalize vector so that diagonal movement has the same magnitude
         return inputVector.nor();
-    }
-
-    void dispose() {
-        playerImage.dispose();
     }
 }

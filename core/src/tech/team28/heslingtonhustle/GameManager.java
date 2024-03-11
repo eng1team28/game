@@ -10,10 +10,11 @@ public class GameManager {
         this.player = player;
     }
 
-    public Array<Interactable> getInteractables(){
+    public Array<Interactable> getInteractables() {
         return interactables;
     }
-    public boolean addInteractable(Interactable newInteractable){
+
+    public boolean addInteractable(Interactable newInteractable) {
         interactables.add(newInteractable);
         return true;
     }
