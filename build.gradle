@@ -9,13 +9,13 @@ buildscript {
         google()
     }
     dependencies {
-        classpath("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.25.0"
 
     }
 }
 
 allprojects {
-    apply plugin: "eclipse"
+    apply plugin: "idea"
 
     version = '0.0.1'
     ext {
@@ -27,6 +27,13 @@ allprojects {
         aiVersion = '1.8.2'
         gdxControllersVersion = '2.2.3'
     }
+
+    // broken
+//    idea {
+//        project {
+//            jdkName = '11'
+//        }
+//    }
 
     repositories {
         mavenLocal()
