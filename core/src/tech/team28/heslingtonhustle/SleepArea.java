@@ -8,28 +8,51 @@ public class SleepArea implements Interactable {
     private final float sleepDuration;
     private final float sleepEnergyRecovery;
 
-    public SleepArea(float sleepDuration, float sleepEnergyRecovery) {
+    private final Rectangle collider;
+    private final TextureAtlas.AtlasRegion image;
+
+    public SleepArea(
+            TextureAtlas atlas,
+            float sleepDuration,
+            float sleepEnergyRecovery,
+            float spawnPosX,
+            float spawnPosY) {
         this.sleepDuration = sleepDuration;
         this.sleepEnergyRecovery = sleepEnergyRecovery;
+
+        this.collider = new Rectangle();
+        this.collider.width = 512;
+        this.collider.height = 512;
+        this.collider.x = spawnPosX;
+        this.collider.y = spawnPosY;
+
+        this.image = atlas.findRegion("Blue512x512");
+    }
+
+    public SleepArea(TextureAtlas atlas) {
+        this(
+                atlas,
+                8,
+                100,
+                (float) GameManager.SCREEN_WIDTH / 10,
+                (float) GameManager.SCREEN_HEIGHT / 5);
     }
 
     @Override
     public void Interact(Player player) {
-        GameManager gameManager = GameManager.getInstance();
-        gameManager.incrementDay();
-        gameManager.incrementTime(8);
+        GameManager.getInstance().incrementTime(sleepDuration);
 
         applySleepEffect(player);
     }
 
     @Override
     public Rectangle getCollider() {
-        return null;
+        return collider;
     }
 
     @Override
     public TextureAtlas.AtlasRegion getImage() {
-        return null;
+        return image;
     }
 
     private void applySleepEffect(Player player) {
