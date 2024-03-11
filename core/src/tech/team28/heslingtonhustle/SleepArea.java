@@ -39,7 +39,7 @@ public class SleepArea implements Interactable {
     }
 
     @Override
-    public void Interact(Player player) {
+    public void interact(Player player) {
         GameManager.getInstance().incrementTime(sleepDuration);
 
         applySleepEffect(player);

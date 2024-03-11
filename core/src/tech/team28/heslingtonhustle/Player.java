@@ -90,7 +90,7 @@ public class Player {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             for (Interactable interactable : GameManager.getInstance().getInteractables()) {
                 if (interactCollider.overlaps(interactable.getCollider())) {
-                    interactable.Interact(this);
+                    interactable.interact(this);
                     Gdx.app.log("MyTag", String.valueOf(getEnergy()));
                 }
             }

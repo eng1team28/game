@@ -38,7 +38,7 @@ public class StudyArea implements Interactable {
     } // Overriding Constructor for default values
 
     @Override
-    public void Interact(Player player) {
+    public void interact(Player player) {
         if (player.getEnergy() < studyEnergyCost
                 || !GameManager.getInstance().incrementTime(studyDuration)) {
             return;

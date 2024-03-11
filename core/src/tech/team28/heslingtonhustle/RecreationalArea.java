@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class RecreationalArea implements Interactable {
     @Override
-    public void Interact(Player player) {
+    public void interact(Player player) {
         GameManager.getInstance().incrementTime(1);
 
         applyRecreationalEffect(player);
