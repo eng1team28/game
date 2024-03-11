@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(new SleepArea(game.atlas));
 
         // Scene2D stage and UI
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new ScreenViewport(camera), game.batch);
         timeLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Table table = new Table();
         table.setFillParent(true);
