@@ -23,13 +23,25 @@ public class GameScreen implements Screen {
         this.game = game;
         gameManager = GameManager.getInstance();
 
+        // Camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, GameManager.SCREEN_WIDTH, GameManager.SCREEN_HEIGHT);
 
+        // Player and interactables
         player = new Player(game.atlas);
         gameManager.setPlayer(player);
         gameManager.addInteractable(new StudyArea(game.atlas));
         gameManager.addInteractable(new SleepArea(game.atlas));
+
+        // Scene2D stage and UI
+        stage = new Stage(new ScreenViewport());
+        timeLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Table table = new Table();
+        table.setFillParent(true);
+        table.top().left();
+        table.row();
+        table.add(timeLabel);
+        stage.addActor(table);
     }
 
     @Override
@@ -61,19 +73,7 @@ public class GameScreen implements Screen {
     public void resize(int width, int height) {}
 
     @Override
-    public void show() {
-        stage = new Stage(new ScreenViewport());
-        timeLabel =
-                new Label(
-                        gameManager.getTimeFormatted(),
-                        new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        Table table = new Table();
-        table.setFillParent(true);
-        table.top().left();
-        table.row();
-        table.add(timeLabel);
-        stage.addActor(table);
-    }
+    public void show() {}
 
     @Override
     public void hide() {}
