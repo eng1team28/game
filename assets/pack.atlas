@@ -38,3 +38,16 @@ Blue512x512
   orig: 512, 512
   offset: 0, 0
   index: -1
+
+pack3.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Red512x512
+  rotate: false
+  xy: 2, 2
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1

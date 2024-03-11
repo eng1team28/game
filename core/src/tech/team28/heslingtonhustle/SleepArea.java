@@ -26,7 +26,7 @@ public class SleepArea implements Interactable {
         this.collider.x = spawnPosX;
         this.collider.y = spawnPosY;
 
-        this.image = atlas.findRegion("Blue512x512");
+        this.image = atlas.findRegion("Red512x512");
     }
 
     public SleepArea(TextureAtlas atlas) {
