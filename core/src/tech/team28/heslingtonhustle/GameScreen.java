@@ -17,15 +17,17 @@ public class GameScreen implements Screen {
     private final Player player;
     private Stage stage;
     private Label timeLabel;
-    private GameManager gameManager;
+    private final GameManager gameManager;
 
     public GameScreen(final HeslingtonHustle game) {
         this.game = game;
+        gameManager = GameManager.getInstance();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, GameManager.SCREEN_WIDTH, GameManager.SCREEN_HEIGHT);
 
         player = new Player();
+        gameManager.setPlayer(player);
     }
 
     @Override
@@ -50,7 +52,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        gameManager = GameManager.getInstance();
         stage = new Stage(new ScreenViewport());
         timeLabel =
                 new Label(

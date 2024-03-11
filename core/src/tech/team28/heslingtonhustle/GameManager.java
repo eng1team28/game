@@ -4,6 +4,10 @@ public class GameManager {
     static final int SCREEN_WIDTH = 1920;
     static final int SCREEN_HEIGHT = 1080;
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     private static GameManager instance;
 
     enum Day {
@@ -25,7 +29,6 @@ public class GameManager {
         day = Day.Monday;
         time = 0;
         dayDuration = 24;
-        player = new Player();
     }
 
     public static GameManager getInstance() {
