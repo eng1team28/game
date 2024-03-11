@@ -4,6 +4,26 @@ size: 1024, 1024
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+player
+  rotate: false
+  xy: 2, 2
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+sigil
+  rotate: false
+  xy: 2, 68
+  size: 798, 862
+  orig: 798, 862
+  offset: 0, 0
+  index: -1
+
+pack2.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
 badlogic
   rotate: false
   xy: 2, 2
@@ -18,15 +38,8 @@ logo
   orig: 622, 608
   offset: 0, 0
   index: -1
-player
-  rotate: false
-  xy: 626, 804
-  size: 32, 64
-  orig: 32, 64
-  offset: 0, 0
-  index: -1
 
-pack2.png
+pack3.png
 size: 1024, 1024
 format: RGBA8888
 filter: Nearest, Nearest
@@ -39,7 +52,7 @@ Blue512x512
   offset: 0, 0
   index: -1
 
-pack3.png
+pack4.png
 size: 1024, 1024
 format: RGBA8888
 filter: Nearest, Nearest
@@ -52,8 +65,7 @@ Red512x512
   offset: 0, 0
   index: -1
 
-
-pack4.png
+pack5.png
 size: 1024, 1024
 format: RGBA8888
 filter: Nearest, Nearest
@@ -65,4 +77,3 @@ Yellow512x512
   orig: 512, 512
   offset: 0, 0
   index: -1
-  

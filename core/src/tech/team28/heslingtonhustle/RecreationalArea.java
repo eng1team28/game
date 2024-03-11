@@ -1,5 +1,6 @@
 package tech.team28.heslingtonhustle;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -9,6 +10,7 @@ public class RecreationalArea implements Interactable {
     private final float recreationEnergyCost;
     private final Rectangle collider;
     private final TextureAtlas.AtlasRegion image;
+    GameScreen gameScreen;
 
 
     public RecreationalArea(
@@ -31,7 +33,7 @@ public class RecreationalArea implements Interactable {
         this.image = atlas.findRegion("Yellow512x512");
     }
 
-    public RecreationalArea(TextureAtlas atlas) {
+    public RecreationalArea(TextureAtlas atlas, GameScreen gameScreen) {
         this(
                 atlas,
                 1,
@@ -39,12 +41,14 @@ public class RecreationalArea implements Interactable {
                 1,
                 (float) GameManager.SCREEN_WIDTH / 2,
                 (float) GameManager.SCREEN_HEIGHT / 100);
+        this.gameScreen = gameScreen;
     }
     @Override
     public void interact(Player player) {
         GameManager.getInstance().incrementTime(recreationDuration);
 
         applyRecreationalEffect(player);
+        gameScreen.yourFatherWantedYouToHaveThis();
     }
 
     @Override
