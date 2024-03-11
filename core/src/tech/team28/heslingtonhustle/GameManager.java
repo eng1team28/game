@@ -54,6 +54,7 @@ public class GameManager {
     boolean incrementTime(float amount) {
         float newTime = time + amount;
         if (newTime > dayDuration) {
+            incrementDay();
             return false;
         } else {
             time = newTime;
@@ -62,7 +63,7 @@ public class GameManager {
     }
 
     String getTimeFormatted() {
-        return String.format("Time: %02.0f:00", time);
+        return String.format("Time: %02.0f:00, Day: %s" , time, day);
     }
 
     float getTime() { return time; }

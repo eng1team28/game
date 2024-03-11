@@ -29,6 +29,7 @@ public class GameScreen implements Screen {
         player = new Player();
         gameManager.setPlayer(player);
         gameManager.addInteractable(new StudyArea());
+        gameManager.addInteractable(new SleepArea());
     }
 
     @Override
@@ -64,6 +65,7 @@ public class GameScreen implements Screen {
                         gameManager.getTimeFormatted(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Table table = new Table();
         table.setFillParent(true);
+        table.top().left();
         table.row();
         table.add(timeLabel);
         stage.addActor(table);
