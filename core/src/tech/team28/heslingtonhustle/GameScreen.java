@@ -51,7 +51,7 @@ public class GameScreen implements Screen {
 
         game.batch.end();
 
-        timeLabel.setText(gameManager.getTime());
+        timeLabel.setText(gameManager.getTimeFormatted());
         stage.act();
         stage.draw();
     }
@@ -64,7 +64,8 @@ public class GameScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         timeLabel =
                 new Label(
-                        gameManager.getTime(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+                        gameManager.getTimeFormatted(),
+                        new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Table table = new Table();
         table.setFillParent(true);
         table.row();
