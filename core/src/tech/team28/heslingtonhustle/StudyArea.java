@@ -60,6 +60,7 @@ public class StudyArea implements Interactable {
 
         player.setEnergy(player.getEnergy() - studyEnergyCost);
         // Increase intelligence by 10, this can be altered to more/less
-        player.setIntelligence(player.getIntelligence() + 10);
+        player.setIntelligence(player.getIntelligence() + (10 * player.getHappiness()));
+        player.setHappiness(player.getHappiness() - 0.3);
     }
 }

@@ -23,8 +23,10 @@ public class Player {
     // PLAYER STATS
     private float energy;
     private final float maxEnergy;
-    private float intelligence;
-    private final float maxIntelligence;
+    private double intelligence;
+    private final double maxIntelligence;
+    private double happiness;
+    private final double maxHappiness;
 
     // Not final as they can change (maybe)
     private float playerSpeed = 1000;
@@ -36,6 +38,8 @@ public class Player {
         maxEnergy = 100;
         intelligence = 0;
         maxIntelligence = 100;
+        happiness = 1.5;
+        maxHappiness = 1.5;
 
         moveComponent = new MoveComponent(playerAcceleration, playerSpeed);
 
@@ -65,12 +69,20 @@ public class Player {
         this.energy = MathUtils.clamp(energy, 0, maxEnergy);
     }
 
-    public float getIntelligence() {
+    public double getIntelligence() {
         return intelligence;
     }
 
-    public void setIntelligence(float intelligence) {
+    public void setIntelligence(double intelligence) {
         this.intelligence = MathUtils.clamp(intelligence, 0, maxIntelligence);
+    }
+
+    public double getHappiness() {
+        return happiness;
+    }
+
+    public void setHappiness(double happiness) {
+        this.happiness = MathUtils.clamp(happiness, 0, maxHappiness);
     }
 
     // Runs every frame
