@@ -9,26 +9,32 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'org.wisepersist:gwt-gradle-plugin:1.1.16'
-        classpath 'org.gretty:gretty:3.0.7'
-        
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:6.25.0"
+        classpath "com.badlogicgames.gdx:gdx-tools:1.12.1"
 
     }
 }
 
 allprojects {
-    apply plugin: "eclipse"
+    apply plugin: "idea"
 
-    version = '1.0'
+    version = '0.0.1'
     ext {
         appName = "Heslington Hustle"
-        gdxVersion = '1.12.0'
+        gdxVersion = '1.12.1'
         roboVMVersion = '2.3.20'
         box2DLightsVersion = '1.5'
         ashleyVersion = '1.7.4'
         aiVersion = '1.8.2'
-        gdxControllersVersion = '2.2.1'
+        gdxControllersVersion = '2.2.3'
     }
+
+    // broken
+//    idea {
+//        project {
+//            jdkName = '11'
+//        }
+//    }
 
     repositories {
         mavenLocal()
@@ -43,7 +49,14 @@ allprojects {
 
 project(":desktop") {
     apply plugin: "java-library"
+    apply plugin: "com.diffplug.spotless"
 
+    spotless {
+        java {
+            // aosp means 4 space indents
+            googleJavaFormat().aosp()
+        }
+    }
 
     dependencies {
         implementation project(":core")
@@ -53,28 +66,35 @@ project(":desktop") {
     }
 }
 
-project(":html") {
-    apply plugin: "java-library"
-    apply plugin: "gwt"
-    apply plugin: "war"
-    apply plugin: "org.gretty"
-
-
-    dependencies {
-        implementation project(":core")
-        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
-        api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
-        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        
-    }
-}
-
 project(":core") {
     apply plugin: "java-library"
+    apply plugin: "com.diffplug.spotless"
 
+    spotless {
+        java {
+            googleJavaFormat().aosp()
+        }
+    }
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         
     }
+}
+
+// https://libgdx.com/wiki/tools/texture-packer#from-source
+// Store the parameters you want to pass the texturePacker here...
+project.ext.texturePacker = [ "assets-images", "assets", "pack.atlas" ]
+
+// Import the texture packer
+import com.badlogic.gdx.tools.texturepacker.TexturePacker
+
+// Add a new task that packs the textures for you
+task texturePacker {
+  doLast {
+    if (project.ext.has('texturePacker')) {
+      logger.info "Calling TexturePacker: "+texturePacker
+      TexturePacker.process(texturePacker[0], texturePacker[1], texturePacker[2])
+    }
+  }
 }

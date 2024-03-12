@@ -1,31 +1,33 @@
 package tech.team28.heslingtonhustle;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-public class HeslingtonHustle extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-	}
+public class HeslingtonHustle extends Game {
+    private AssetManager manager;
+    public SpriteBatch batch;
+    public TextureAtlas atlas;
+    private static final String ATLAS_NAME = "pack.atlas";
 
-	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
-	}
+    @Override
+    public void create() {
+        // Asset manager loading
+        manager = new AssetManager();
+        manager.load(ATLAS_NAME, TextureAtlas.class);
+        manager.finishLoading();
+
+        // Create shared resources
+        batch = new SpriteBatch();
+        atlas = manager.get(ATLAS_NAME, TextureAtlas.class);
+        this.setScreen(new GameScreen(this));
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        // Disposing of the manager disposes of all its assets
+        manager.dispose();
+    }
 }
