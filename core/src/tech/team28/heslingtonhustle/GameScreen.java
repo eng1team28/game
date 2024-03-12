@@ -54,8 +54,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)
-                && Gdx.input.isKeyPressed(Input.Keys.Q)) {
+        if (Util.allKeysPressed(Input.Keys.CONTROL_LEFT, Input.Keys.Q)
+                || Util.allKeysPressed(Input.Keys.CONTROL_RIGHT, Input.Keys.Q)) {
             Gdx.app.exit();
         }
 

@@ -114,11 +114,11 @@ public class Player {
         Vector2 inputVector = new Vector2();
         inputVector.setZero();
         inputVector.add(
-                Gdx.input.isKeyPressed(Input.Keys.LEFT) ? -1 : 0,
-                Gdx.input.isKeyPressed(Input.Keys.UP) ? 1 : 0);
+                Util.anyKeyPressed(Input.Keys.LEFT, Input.Keys.A) ? -1 : 0,
+                Util.anyKeyPressed(Input.Keys.UP, Input.Keys.W) ? 1 : 0);
         inputVector.add(
-                Gdx.input.isKeyPressed(Input.Keys.RIGHT) ? 1 : 0,
-                Gdx.input.isKeyPressed(Input.Keys.DOWN) ? -1 : 0);
+                Util.anyKeyPressed(Input.Keys.RIGHT, Input.Keys.D) ? 1 : 0,
+                Util.anyKeyPressed(Input.Keys.DOWN, Input.Keys.S) ? -1 : 0);
         // Normalize vector so that diagonal movement has the same magnitude
         return inputVector.nor();
     }
