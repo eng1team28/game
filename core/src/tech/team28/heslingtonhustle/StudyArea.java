@@ -1,6 +1,7 @@
 package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class StudyArea implements Interactable {
@@ -8,7 +9,7 @@ public class StudyArea implements Interactable {
     private final float studyDuration;
     private final float studyEnergyCost;
     private final Rectangle collider;
-    private final TextureAtlas.AtlasRegion image;
+    private final TextureRegion image;
 
     public StudyArea(
             TextureAtlas atlas,
@@ -52,7 +53,7 @@ public class StudyArea implements Interactable {
     }
 
     @Override
-    public TextureAtlas.AtlasRegion getImage() {
+    public TextureRegion getImage() {
         return image;
     }
 

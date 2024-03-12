@@ -1,6 +1,6 @@
 package tech.team28.heslingtonhustle;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class EatArea implements Interactable {
@@ -17,7 +17,7 @@ public class EatArea implements Interactable {
     }
 
     @Override
-    public TextureAtlas.AtlasRegion getImage() {
+    public TextureRegion getImage() {
         return null;
     }
 

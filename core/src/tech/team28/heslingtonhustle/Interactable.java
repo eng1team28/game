@@ -1,6 +1,6 @@
 package tech.team28.heslingtonhustle;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public interface Interactable {
@@ -8,5 +8,5 @@ public interface Interactable {
 
     Rectangle getCollider();
 
-    TextureAtlas.AtlasRegion getImage();
+    TextureRegion getImage();
 }

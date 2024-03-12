@@ -3,6 +3,7 @@ package tech.team28.heslingtonhustle;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +12,7 @@ public class Player {
 
     // TEXTURES
     private static final String PLAYER_TEXTURE = "player";
-    private final TextureAtlas.AtlasRegion playerImage;
+    private final TextureRegion playerImage;
 
     // COLLIDERS
     private final Rectangle collider;
@@ -53,7 +54,7 @@ public class Player {
         interactCollider = new Rectangle(0, 0, interactRange, interactRange);
     }
 
-    public TextureAtlas.AtlasRegion getPlayerImage() {
+    public TextureRegion getPlayerImage() {
         return playerImage;
     }
 
