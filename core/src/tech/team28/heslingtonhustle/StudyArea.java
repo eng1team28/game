@@ -33,7 +33,7 @@ public class StudyArea implements Interactable {
         this(
                 atlas,
                 1,
-                1,
+                10,
                 (float) GameManager.SCREEN_WIDTH / 2,
                 (float) GameManager.SCREEN_HEIGHT / 2);
     } // Overriding Constructor for default values

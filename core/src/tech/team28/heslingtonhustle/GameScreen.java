@@ -36,6 +36,7 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(new StudyArea(game.atlas));
         gameManager.addInteractable(new SleepArea(game.atlas));
         gameManager.addInteractable(new RecreationalArea(game.atlas));
+        gameManager.addInteractable(new EatArea(game.atlas));
 
         // Scene2D stage and UI
         stage = new Stage(new ScreenViewport(camera), game.batch);

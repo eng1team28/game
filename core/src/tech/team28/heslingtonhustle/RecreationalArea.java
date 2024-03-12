@@ -36,7 +36,7 @@ public class RecreationalArea implements Interactable {
                 atlas,
                 1,
                 0.3,
-                1,
+                10,
                 (float) GameManager.SCREEN_WIDTH / 2,
                 (float) GameManager.SCREEN_HEIGHT / 100);
     }
