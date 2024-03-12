@@ -70,6 +70,10 @@ public class Player {
         this.energy = MathUtils.clamp(energy, 0, maxEnergy);
     }
 
+    String getEnergyFormatted(){
+        return String.format("Energy: %s", getEnergy());
+    }
+
     public double getIntelligence() {
         return intelligence;
     }
@@ -78,12 +82,20 @@ public class Player {
         this.intelligence = MathUtils.clamp(intelligence, 0, maxIntelligence);
     }
 
+    String getIntelligenceFormatted(){
+        return String.format("Intelligence: %s", getIntelligence());
+    }
+
     public double getHappiness() {
         return happiness;
     }
 
     public void setHappiness(double happiness) {
         this.happiness = MathUtils.clamp(happiness, 0, maxHappiness);
+    }
+
+    String getHappinessFormatted(){
+        return String.format("Happiness: %s", getHappiness());
     }
 
     // Runs every frame

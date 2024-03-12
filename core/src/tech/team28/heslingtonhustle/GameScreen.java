@@ -20,6 +20,9 @@ public class GameScreen implements Screen {
     private Stage stage;
     private Label dayLabel;
     private Label timeLabel;
+    private Label energyLabel;
+    private Label intelligenceLabel;
+    private Label happinessLabel;
     private final GameManager gameManager;
 
     public GameScreen(final HeslingtonHustle game) {
@@ -43,6 +46,9 @@ public class GameScreen implements Screen {
         Label.LabelStyle sillyStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
         dayLabel = new Label("", sillyStyle);
         timeLabel = new Label("", sillyStyle);
+        energyLabel = new Label("", sillyStyle);
+        happinessLabel = new Label("", sillyStyle);
+        intelligenceLabel = new Label("", sillyStyle);
         Table table = new Table();
         table.setFillParent(true);
         table.top().left();
@@ -50,6 +56,12 @@ public class GameScreen implements Screen {
         table.add(timeLabel);
         table.row();
         table.add(dayLabel);
+        table.row();
+        table.add(energyLabel);
+        table.row();
+        table.add(happinessLabel);
+        table.row();
+        table.add(intelligenceLabel);
         stage.addActor(table);
     }
 
@@ -80,6 +92,9 @@ public class GameScreen implements Screen {
 
         dayLabel.setText(gameManager.getDayFormatted());
         timeLabel.setText(gameManager.getTimeFormatted());
+        energyLabel.setText(player.getEnergyFormatted());
+        happinessLabel.setText(player.getHappinessFormatted());
+        intelligenceLabel.setText(player.getIntelligenceFormatted());
         stage.act();
         stage.draw();
     }
