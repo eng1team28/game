@@ -49,7 +49,7 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(new RecreationalArea(game.atlas));
         gameManager.addInteractable(new EatArea(game.atlas));
 
-        map = game.atlas.createSprite("check1000");
+        map = game.atlas.createSprite("placeholder_map");
         map.setSize(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT);
 
         // Scene2D stage and UI
