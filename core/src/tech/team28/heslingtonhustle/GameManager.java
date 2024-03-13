@@ -92,7 +92,7 @@ public class GameManager {
     Day incrementDay() {
         if (this.day == Day.Sunday){
             TakeExam();
-            day = Day.values()[7];//This should always return ExamDay
+            day = Day.values()[7];//This should always return ExamDay. Also this might be a terrible way of doing this
             return day;
         }else{
             time = 0; // reset time of day
