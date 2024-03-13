@@ -3,8 +3,10 @@ package tech.team28.heslingtonhustle;
 import com.badlogic.gdx.utils.Array;
 
 public class GameManager {
-    static final int SCREEN_WIDTH = 1920;
-    static final int SCREEN_HEIGHT = 1080;
+    static final int GAME_WIDTH = 1000;
+    static final int GAME_HEIGHT = 1000;
+    // View width determined by window aspect ratio
+    static final int VIEW_HEIGHT = 1000;
 
     public void setPlayer(Player player) {
         this.player = player;

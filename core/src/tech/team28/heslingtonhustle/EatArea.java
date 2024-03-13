@@ -34,8 +34,8 @@ public class EatArea implements Interactable {
                 atlas,
                 1,
                 10,
-                (float) GameManager.SCREEN_WIDTH / 100,
-                (float) GameManager.SCREEN_HEIGHT / 100);
+                (float) GameManager.GAME_WIDTH / 100,
+                (float) GameManager.GAME_HEIGHT / 100);
     }
     @Override
     public void interact(Player player) {

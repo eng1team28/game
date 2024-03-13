@@ -46,8 +46,8 @@ public class Player {
 
         playerImage = atlas.findRegion(PLAYER_TEXTURE);
         collider = new Rectangle();
-        collider.x = (float) GameManager.SCREEN_WIDTH / 2 - collider.width / 2;
-        collider.y = (float) GameManager.SCREEN_HEIGHT / 2 - collider.height / 2;
+        collider.x = (float) GameManager.GAME_WIDTH / 2 - collider.width / 2;
+        collider.y = (float) GameManager.GAME_HEIGHT / 2 - collider.height / 2;
         collider.width = 32;
         collider.height = 64;
 
@@ -108,8 +108,8 @@ public class Player {
                 new Vector2(collider.x - interactRange / 2, collider.y - interactRange / 2));
 
         // Clamp player to screen
-        collider.x = MathUtils.clamp(collider.x, 0, GameManager.SCREEN_WIDTH - collider.width);
-        collider.y = MathUtils.clamp(collider.y, 0, GameManager.SCREEN_HEIGHT - collider.height);
+        collider.x = MathUtils.clamp(collider.x, 0, GameManager.GAME_WIDTH - collider.width);
+        collider.y = MathUtils.clamp(collider.y, 0, GameManager.GAME_HEIGHT - collider.height);
 
         // Player Interact
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {

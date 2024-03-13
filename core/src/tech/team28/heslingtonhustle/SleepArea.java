@@ -35,8 +35,8 @@ public class SleepArea implements Interactable {
                 atlas,
                 8,
                 100,
-                (float) GameManager.SCREEN_WIDTH / 100,
-                (float) GameManager.SCREEN_HEIGHT / 2);
+                (float) GameManager.GAME_WIDTH / 100,
+                (float) GameManager.GAME_HEIGHT / 2);
     }
 
     @Override

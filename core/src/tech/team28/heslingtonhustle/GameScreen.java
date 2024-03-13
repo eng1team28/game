@@ -6,6 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -17,6 +19,7 @@ public class GameScreen implements Screen {
     final HeslingtonHustle game;
     private final OrthographicCamera camera;
     private final Player player;
+    private Sprite map;
     private Stage stage;
     private Label dayLabel;
     private Label timeLabel;
@@ -31,7 +34,8 @@ public class GameScreen implements Screen {
 
         // Camera
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, GameManager.SCREEN_WIDTH, GameManager.SCREEN_HEIGHT);
+        camera.setToOrtho(false, getCameraWidth(), getCameraHeight());
+        camera.position.set(0, -1000, 0);
 
         // Player and interactables
         player = new Player(game.atlas);
@@ -40,6 +44,9 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(new SleepArea(game.atlas));
         gameManager.addInteractable(new RecreationalArea(game.atlas));
         gameManager.addInteractable(new EatArea(game.atlas));
+
+        map = game.atlas.createSprite("check1000");
+        map.setSize(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT);
 
         // Scene2D stage and UI
         stage = new Stage(new ScreenViewport(camera), game.batch);
@@ -74,12 +81,14 @@ public class GameScreen implements Screen {
 
         ScreenUtils.clear(0, 0, 0, 1);
 
+        camera.position.set(player.getCollider().getPosition(new Vector2()), 0);
         player.update(delta);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.batch.draw(player.getPlayerImage(), player.getCollider().x, player.getCollider().y);
+
+        map.draw(game.batch);
 
         for (Interactable interactable : GameManager.getInstance().getInteractables()) {
             game.batch.draw(
@@ -88,8 +97,12 @@ public class GameScreen implements Screen {
                     interactable.getCollider().y);
         }
 
+        // Draw player on top of world
+        game.batch.draw(player.getPlayerImage(), player.getCollider().x, player.getCollider().y);
+
         game.batch.end();
 
+        // Draw UI on top of everything else
         dayLabel.setText(gameManager.getDayFormatted());
         timeLabel.setText(gameManager.getTimeFormatted());
         energyLabel.setText(player.getEnergyFormatted());
@@ -99,8 +112,24 @@ public class GameScreen implements Screen {
         stage.draw();
     }
 
+    float getAspectRatio() {
+        return (float) Gdx.graphics.getWidth() / Gdx.graphics.getHeight();
+    }
+
+    float getCameraHeight() {
+        return GameManager.VIEW_HEIGHT;
+    }
+
+    float getCameraWidth() {
+        return getCameraHeight() * getAspectRatio();
+    }
+
     @Override
-    public void resize(int width, int height) {}
+    public void resize(int width, int height) {
+        camera.viewportHeight = getCameraHeight();
+        camera.viewportWidth = getCameraWidth();
+        camera.update();
+    }
 
     @Override
     public void show() {}
