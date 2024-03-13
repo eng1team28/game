@@ -49,6 +49,15 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(new RecreationalArea(game.atlas));
         gameManager.addInteractable(new EatArea(game.atlas));
 
+        // For Debugging Interaction
+        gameManager.addInteractable(
+                new EatArea(
+                        game.atlas,
+                        1f,
+                        1f,
+                        GameManager.GAME_WIDTH / 2.6f,
+                        GameManager.GAME_HEIGHT / 100));
+
         map = game.atlas.createSprite("placeholder_map");
         map.setSize(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT);
 
