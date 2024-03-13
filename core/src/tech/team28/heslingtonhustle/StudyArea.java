@@ -34,8 +34,8 @@ public class StudyArea implements Interactable {
                 atlas,
                 1,
                 10,
-                (float) GameManager.GAME_WIDTH / 2,
-                (float) GameManager.GAME_HEIGHT / 2);
+                GameManager.GAME_WIDTH / 2,
+                GameManager.GAME_HEIGHT / 2);
     } // Overriding Constructor for default values
 
     @Override

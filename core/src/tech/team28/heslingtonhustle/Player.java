@@ -46,8 +46,8 @@ public class Player {
 
         playerImage = atlas.findRegion(PLAYER_TEXTURE);
         collider = new Rectangle();
-        collider.x = (float) GameManager.GAME_WIDTH / 2 - collider.width / 2;
-        collider.y = (float) GameManager.GAME_HEIGHT / 2 - collider.height / 2;
+        collider.x = GameManager.GAME_WIDTH / 2 - collider.width / 2;
+        collider.y = GameManager.GAME_HEIGHT / 2 - collider.height / 2;
         collider.width = 32;
         collider.height = 64;
 

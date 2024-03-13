@@ -37,8 +37,8 @@ public class RecreationalArea implements Interactable {
                 1,
                 0.3,
                 10,
-                (float) GameManager.GAME_WIDTH / 2,
-                (float) GameManager.GAME_HEIGHT / 100);
+                GameManager.GAME_WIDTH / 2,
+                GameManager.GAME_HEIGHT / 100);
     }
 
     @Override
