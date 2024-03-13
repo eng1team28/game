@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -85,11 +86,16 @@ public class GameScreen implements Screen {
 
         // Player movement
         player.update(delta);
+
         // Camera follows player
         Vector2 cameraPosition = new Vector2();
         Rectangle playerCollider = player.getCollider();
         playerCollider.getPosition(cameraPosition);
         cameraPosition.add(playerCollider.width / 2, playerCollider.height / 2);
+        float xBorder = camera.viewportWidth / 2;
+        float yBorder = camera.viewportHeight / 2;
+        cameraPosition.x = MathUtils.clamp(cameraPosition.x, xBorder, GameManager.GAME_WIDTH - xBorder);
+        cameraPosition.y = MathUtils.clamp(cameraPosition.y, yBorder, GameManager.GAME_HEIGHT - yBorder);
         camera.position.set(cameraPosition, 0);
 
         camera.update();
