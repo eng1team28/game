@@ -3,10 +3,13 @@ package tech.team28.heslingtonhustle;
 import com.badlogic.gdx.utils.Array;
 
 public class GameManager {
-    static final float GAME_WIDTH = 2560f;
-    static final float GAME_HEIGHT = 1440f;
-    // View width determined by window aspect ratio
-    static final float VIEW_HEIGHT = 720f;
+    // Size of the game region in arbitrary units
+    // This is not the size of the window in pixels
+    // The game region is scaled by the camera
+    static final float GAME_WIDTH = 2568;
+    static final float GAME_HEIGHT = 1424f;
+    // View width is dynamically determined by window aspect ratio
+    static final float VIEW_HEIGHT = 712f;
 
     public void setPlayer(Player player) {
         this.player = player;
@@ -61,11 +64,10 @@ public class GameManager {
             if (day == Day.Sunday && newTime > dayDuration) {
                 day = Day.Monday;
             }
-            return true;
         } else {
             time = newTime;
-            return true;
         }
+        return true;
     }
 
     String getTimeFormatted() {

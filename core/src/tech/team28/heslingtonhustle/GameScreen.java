@@ -108,10 +108,7 @@ public class GameScreen implements Screen {
         map.draw(game.batch);
 
         for (Interactable interactable : GameManager.getInstance().getInteractables()) {
-            game.batch.draw(
-                    interactable.getImage(),
-                    interactable.getCollider().x,
-                    interactable.getCollider().y);
+            interactable.draw(game.batch);
         }
 
         // Draw player on top of world

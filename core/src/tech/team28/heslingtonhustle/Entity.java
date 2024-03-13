@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Entity extends Sprite {
-    private float width = 50;
-    private float height = 50;
+    private float width = 256;
+    private float height = 256;
 
     public Entity(Sprite sprite, float spawnPosX, float spawnPosY) {
         super();
