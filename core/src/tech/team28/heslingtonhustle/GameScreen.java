@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -35,7 +36,6 @@ public class GameScreen implements Screen {
         // Camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, getCameraWidth(), getCameraHeight());
-        camera.position.set(0, -1000, 0);
 
         // Player and interactables
         player = new Player(game.atlas);
@@ -74,15 +74,24 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        // Fast quit keybinding
         if (Util.allKeysPressed(Input.Keys.CONTROL_LEFT, Input.Keys.Q)
                 || Util.allKeysPressed(Input.Keys.CONTROL_RIGHT, Input.Keys.Q)) {
             Gdx.app.exit();
         }
 
-        ScreenUtils.clear(0, 0, 0, 1);
+        // Clear screen ready for new frame
+        ScreenUtils.clear(Color.BLACK);
 
-        camera.position.set(player.getCollider().getPosition(new Vector2()), 0);
+        // Player movement
         player.update(delta);
+        // Camera follows player
+        Vector2 cameraPosition = new Vector2();
+        Rectangle playerCollider = player.getCollider();
+        playerCollider.getPosition(cameraPosition);
+        cameraPosition.add(playerCollider.width / 2, playerCollider.height / 2);
+        camera.position.set(cameraPosition, 0);
+
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 

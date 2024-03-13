@@ -6,7 +6,7 @@ public class GameManager {
     static final float GAME_WIDTH = 1000f;
     static final float GAME_HEIGHT = 1000f;
     // View width determined by window aspect ratio
-    static final float VIEW_HEIGHT = 1000f;
+    static final float VIEW_HEIGHT = 200f;
 
     public void setPlayer(Player player) {
         this.player = player;
