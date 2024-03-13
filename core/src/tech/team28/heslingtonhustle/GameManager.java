@@ -56,9 +56,12 @@ public class GameManager {
 
     boolean incrementTime(float amount) {
         float newTime = time + amount;
-        if (newTime > dayDuration) {
+        if (newTime >= dayDuration) {
             incrementDay();
-            return false;
+            if (day == Day.Sunday && newTime > dayDuration) {
+                day = Day.Monday;
+            }
+            return true;
         } else {
             time = newTime;
             return true;
@@ -87,10 +90,6 @@ public class GameManager {
         // TODO - What happens after Sunday? does index need to wrap around array?
         time = 0; // reset time of day
 
-        if (day == Day.Sunday) {
-            TakeExam();
-            return null;
-        }
         Day[] days = Day.values(); // get an array of all the enum constants
         int index = day.ordinal(); // get the index of the current day in the array
         index = (index + 1) % days.length; // add one to the index and wrap around the array
