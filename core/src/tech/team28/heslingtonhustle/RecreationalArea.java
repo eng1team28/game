@@ -1,15 +1,11 @@
 package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 
-public class RecreationalArea implements Interactable {
+public class RecreationalArea extends Interactable {
     private final float recreationDuration;
     private final double recreationHappinessGain;
     private final float recreationEnergyCost;
-    private final Rectangle collider;
-    private final TextureRegion image;
 
     public RecreationalArea(
             TextureAtlas atlas,
@@ -18,17 +14,10 @@ public class RecreationalArea implements Interactable {
             float recreationEnergyCost,
             float spawnPosX,
             float spawnPosY) {
+        super(atlas.createSprite("Yellow512x512"), spawnPosX, spawnPosY);
         this.recreationDuration = recreationDuration;
         this.recreationHappinessGain = recreationHappinessGain;
         this.recreationEnergyCost = recreationEnergyCost;
-
-        this.collider = new Rectangle();
-        this.collider.width = 512;
-        this.collider.height = 512;
-        this.collider.x = spawnPosX;
-        this.collider.y = spawnPosY;
-
-        this.image = atlas.findRegion("Yellow512x512");
     }
 
     public RecreationalArea(TextureAtlas atlas) {
@@ -40,16 +29,6 @@ public class RecreationalArea implements Interactable {
         GameManager.getInstance().incrementTime(recreationDuration);
 
         applyRecreationalEffect(player);
-    }
-
-    @Override
-    public Rectangle getCollider() {
-        return collider;
-    }
-
-    @Override
-    public TextureRegion getImage() {
-        return image;
     }
 
     private void applyRecreationalEffect(Player player) {

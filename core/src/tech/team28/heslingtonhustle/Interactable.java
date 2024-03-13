@@ -1,12 +1,11 @@
 package tech.team28.heslingtonhustle;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public interface Interactable {
-    void interact(Player player);
+public abstract class Interactable extends Entity {
+    public Interactable(Sprite sprite, float spawnPosX, float spawnPosY) {
+        super(sprite, spawnPosX, spawnPosY);
+    }
 
-    Rectangle getCollider();
-
-    TextureRegion getImage();
+    abstract void interact(Player player);
 }

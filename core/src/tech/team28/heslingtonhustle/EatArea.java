@@ -1,15 +1,11 @@
 package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 
-public class EatArea implements Interactable {
+public class EatArea extends Interactable {
 
     private final float eatDuration;
     private final float eatEnergyGain;
-    private final Rectangle collider;
-    private final TextureRegion image;
 
     public EatArea(
             TextureAtlas atlas,
@@ -17,16 +13,9 @@ public class EatArea implements Interactable {
             float eatEnergyGain,
             float spawnPosX,
             float spawnPosY) {
+        super(atlas.createSprite("Green512x512"), spawnPosX, spawnPosY);
         this.eatDuration = eatDuration;
         this.eatEnergyGain = eatEnergyGain;
-
-        this.collider = new Rectangle();
-        this.collider.width = 512;
-        this.collider.height = 512;
-        this.collider.x = spawnPosX;
-        this.collider.y = spawnPosY;
-
-        this.image = atlas.findRegion("Green512x512");
     }
 
     public EatArea(TextureAtlas atlas) {
@@ -38,16 +27,6 @@ public class EatArea implements Interactable {
         GameManager.getInstance().incrementTime(eatDuration);
 
         applyEatEffect(player);
-    }
-
-    @Override
-    public Rectangle getCollider() {
-        return collider;
-    }
-
-    @Override
-    public TextureRegion getImage() {
-        return image;
     }
 
     private void applyEatEffect(Player player) {

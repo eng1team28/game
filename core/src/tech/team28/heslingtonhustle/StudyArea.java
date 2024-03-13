@@ -1,15 +1,11 @@
 package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 
-public class StudyArea implements Interactable {
+public class StudyArea extends Interactable {
 
     private final float studyDuration;
     private final float studyEnergyCost;
-    private final Rectangle collider;
-    private final TextureRegion image;
 
     public StudyArea(
             TextureAtlas atlas,
@@ -17,16 +13,9 @@ public class StudyArea implements Interactable {
             float studyEnergyCost,
             float spawnPosX,
             float spawnPosY) {
+        super(atlas.createSprite("Blue512x512"), spawnPosX, spawnPosY);
         this.studyDuration = studyDuration;
         this.studyEnergyCost = studyEnergyCost;
-
-        this.collider = new Rectangle();
-        this.collider.width = 512;
-        this.collider.height = 512;
-        this.collider.x = spawnPosX;
-        this.collider.y = spawnPosY;
-
-        this.image = atlas.findRegion("Blue512x512");
     }
 
     public StudyArea(TextureAtlas atlas) {
@@ -40,16 +29,6 @@ public class StudyArea implements Interactable {
             return;
         }
         applyStudyEffect(player);
-    }
-
-    @Override
-    public Rectangle getCollider() {
-        return collider;
-    }
-
-    @Override
-    public TextureRegion getImage() {
-        return image;
     }
 
     private void applyStudyEffect(Player player) {
