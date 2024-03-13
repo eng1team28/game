@@ -94,8 +94,10 @@ public class GameScreen implements Screen {
         cameraPosition.add(playerCollider.width / 2, playerCollider.height / 2);
         float xBorder = camera.viewportWidth / 2;
         float yBorder = camera.viewportHeight / 2;
-        cameraPosition.x = MathUtils.clamp(cameraPosition.x, xBorder, GameManager.GAME_WIDTH - xBorder);
-        cameraPosition.y = MathUtils.clamp(cameraPosition.y, yBorder, GameManager.GAME_HEIGHT - yBorder);
+        cameraPosition.x =
+                MathUtils.clamp(cameraPosition.x, xBorder, GameManager.GAME_WIDTH - xBorder);
+        cameraPosition.y =
+                MathUtils.clamp(cameraPosition.y, yBorder, GameManager.GAME_HEIGHT - yBorder);
         camera.position.set(cameraPosition, 0);
 
         camera.update();

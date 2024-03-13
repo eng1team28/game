@@ -70,7 +70,7 @@ public class Player {
         this.energy = MathUtils.clamp(energy, 0, maxEnergy);
     }
 
-    String getEnergyFormatted(){
+    String getEnergyFormatted() {
         return String.format("Energy: %s", getEnergy());
     }
 
@@ -82,7 +82,7 @@ public class Player {
         this.intelligence = MathUtils.clamp(intelligence, 0, maxIntelligence);
     }
 
-    String getIntelligenceFormatted(){
+    String getIntelligenceFormatted() {
         return String.format("Intelligence: %s", getIntelligence());
     }
 
@@ -94,7 +94,7 @@ public class Player {
         this.happiness = MathUtils.clamp(happiness, 0, maxHappiness);
     }
 
-    String getHappinessFormatted(){
+    String getHappinessFormatted() {
         return String.format("Happiness: %s", getHappiness());
     }
 
@@ -108,7 +108,8 @@ public class Player {
         // Clamp player to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.GAME_WIDTH - collider.width);
         collider.y = MathUtils.clamp(collider.y, 0, GameManager.GAME_HEIGHT - collider.height);
-        interactCollider.setPosition(collider.x - interactRange / 2, collider.y - interactRange / 2);
+        interactCollider.setPosition(
+                collider.x - interactRange / 2, collider.y - interactRange / 2);
 
         // Player Interact
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {

@@ -31,12 +31,7 @@ public class SleepArea implements Interactable {
     }
 
     public SleepArea(TextureAtlas atlas) {
-        this(
-                atlas,
-                8,
-                100,
-                GameManager.GAME_WIDTH / 100,
-                GameManager.GAME_HEIGHT / 2);
+        this(atlas, 8, 100, GameManager.GAME_WIDTH / 100, GameManager.GAME_HEIGHT / 2);
     }
 
     @Override

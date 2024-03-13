@@ -9,7 +9,7 @@ public class EatArea implements Interactable {
     private final float eatDuration;
     private final float eatEnergyGain;
     private final Rectangle collider;
-    private final TextureAtlas.AtlasRegion image;
+    private final TextureRegion image;
 
     public EatArea(
             TextureAtlas atlas,
@@ -30,13 +30,9 @@ public class EatArea implements Interactable {
     }
 
     public EatArea(TextureAtlas atlas) {
-        this(
-                atlas,
-                1,
-                10,
-                GameManager.GAME_WIDTH / 100,
-                GameManager.GAME_HEIGHT / 100);
+        this(atlas, 1, 10, GameManager.GAME_WIDTH / 100, GameManager.GAME_HEIGHT / 100);
     }
+
     @Override
     public void interact(Player player) {
         GameManager.getInstance().incrementTime(eatDuration);
@@ -50,7 +46,7 @@ public class EatArea implements Interactable {
     }
 
     @Override
-    public TextureAtlas.AtlasRegion getImage() {
+    public TextureRegion getImage() {
         return image;
     }
 

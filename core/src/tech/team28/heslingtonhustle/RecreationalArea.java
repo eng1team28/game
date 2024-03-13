@@ -32,13 +32,7 @@ public class RecreationalArea implements Interactable {
     }
 
     public RecreationalArea(TextureAtlas atlas) {
-        this(
-                atlas,
-                1,
-                0.3,
-                10,
-                GameManager.GAME_WIDTH / 2,
-                GameManager.GAME_HEIGHT / 100);
+        this(atlas, 1, 0.3, 10, GameManager.GAME_WIDTH / 2, GameManager.GAME_HEIGHT / 100);
     }
 
     @Override

@@ -30,12 +30,7 @@ public class StudyArea implements Interactable {
     }
 
     public StudyArea(TextureAtlas atlas) {
-        this(
-                atlas,
-                1,
-                10,
-                GameManager.GAME_WIDTH / 2,
-                GameManager.GAME_HEIGHT / 2);
+        this(atlas, 1, 10, GameManager.GAME_WIDTH / 2, GameManager.GAME_HEIGHT / 2);
     } // Overriding Constructor for default values
 
     @Override
