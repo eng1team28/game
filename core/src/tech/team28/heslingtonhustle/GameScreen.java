@@ -14,12 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameScreen implements Screen {
 
     final HeslingtonHustle game;
     private final OrthographicCamera camera;
+    private final Viewport viewport;
     private final Player player;
     private Sprite map;
     private Stage stage;
@@ -36,7 +38,8 @@ public class GameScreen implements Screen {
 
         // Camera
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, getCameraWidth(), getCameraHeight());
+        viewport = new ExtendViewport(0, GameManager.VIEW_HEIGHT, camera);
+        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Player and interactables
         player = new Player(game.atlas);
@@ -50,26 +53,23 @@ public class GameScreen implements Screen {
         map.setSize(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT);
 
         // Scene2D stage and UI
-        stage = new Stage(new ScreenViewport(camera), game.batch);
+        stage = new Stage();
+        Table table = new Table();
+        table.setFillParent(true);
+        table.top().left();
+
         Label.LabelStyle sillyStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
         dayLabel = new Label("", sillyStyle);
         timeLabel = new Label("", sillyStyle);
         energyLabel = new Label("", sillyStyle);
         happinessLabel = new Label("", sillyStyle);
         intelligenceLabel = new Label("", sillyStyle);
-        Table table = new Table();
-        table.setFillParent(true);
-        table.top().left();
-        table.row();
-        table.add(timeLabel);
-        table.row();
-        table.add(dayLabel);
-        table.row();
-        table.add(energyLabel);
-        table.row();
-        table.add(happinessLabel);
-        table.row();
-        table.add(intelligenceLabel);
+        for (Label label :
+                new Label[] {dayLabel, timeLabel, energyLabel, happinessLabel, intelligenceLabel}) {
+            table.row().left();
+            table.add(label);
+        }
+
         stage.addActor(table);
     }
 
@@ -129,23 +129,9 @@ public class GameScreen implements Screen {
         stage.draw();
     }
 
-    float getAspectRatio() {
-        return (float) Gdx.graphics.getWidth() / Gdx.graphics.getHeight();
-    }
-
-    float getCameraHeight() {
-        return GameManager.VIEW_HEIGHT;
-    }
-
-    float getCameraWidth() {
-        return getCameraHeight() * getAspectRatio();
-    }
-
     @Override
     public void resize(int width, int height) {
-        camera.viewportHeight = getCameraHeight();
-        camera.viewportWidth = getCameraWidth();
-        camera.update();
+        viewport.update(width, height);
     }
 
     @Override
