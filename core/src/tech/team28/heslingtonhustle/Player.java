@@ -3,19 +3,18 @@ package tech.team28.heslingtonhustle;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player {
+public class Player extends Entity {
 
     // TEXTURES
     private static final String PLAYER_TEXTURE = "player";
-    private final TextureRegion playerImage;
 
     // COLLIDERS
-    private final Rectangle collider;
+    private float width = 32;
+    private float height = 64;
     private final Rectangle interactCollider;
 
     // COMPONENTS
@@ -35,6 +34,13 @@ public class Player {
     private float interactRange = 150;
 
     public Player(TextureAtlas atlas) {
+        super(
+                atlas.createSprite(PLAYER_TEXTURE),
+                GameManager.GAME_WIDTH / 2,
+                GameManager.GAME_HEIGHT / 2);
+        // todo make this work properly with inheritance
+        // I'm too used to python and it works differently
+        setSize(width, height);
         energy = 100;
         maxEnergy = 100;
         intelligence = 0;
@@ -44,22 +50,7 @@ public class Player {
 
         moveComponent = new MoveComponent(playerAcceleration, playerSpeed);
 
-        playerImage = atlas.findRegion(PLAYER_TEXTURE);
-        collider = new Rectangle();
-        collider.x = GameManager.GAME_WIDTH / 2 - collider.width / 2;
-        collider.y = GameManager.GAME_HEIGHT / 2 - collider.height / 2;
-        collider.width = 32;
-        collider.height = 64;
-
         interactCollider = new Rectangle(0, 0, interactRange, interactRange);
-    }
-
-    public TextureRegion getPlayerImage() {
-        return playerImage;
-    }
-
-    public Rectangle getCollider() {
-        return collider;
     }
 
     public float getEnergy() {
@@ -100,16 +91,19 @@ public class Player {
 
     // Runs every frame
     void update(float delta) {
+        Rectangle collider = getCollider();
         Vector2 inputVector = getNormalizedInputVector();
 
-        // Move Player using moveComponent
+        // Move collider using moveComponent
         moveComponent.moveTowards(inputVector, collider, delta);
 
-        // Clamp player to screen
+        // Clamp collider to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.GAME_WIDTH - collider.width);
         collider.y = MathUtils.clamp(collider.y, 0, GameManager.GAME_HEIGHT - collider.height);
         interactCollider.setPosition(
                 collider.x - interactRange / 2, collider.y - interactRange / 2);
+        // Move player
+        setPosition(collider.x, collider.y);
 
         // Player Interact
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {

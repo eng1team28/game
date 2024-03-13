@@ -112,7 +112,7 @@ public class GameScreen implements Screen {
         }
 
         // Draw player on top of world
-        game.batch.draw(player.getPlayerImage(), player.getCollider().x, player.getCollider().y);
+        player.draw(game.batch);
 
         game.batch.end();
 
@@ -122,7 +122,7 @@ public class GameScreen implements Screen {
         energyLabel.setText(player.getEnergyFormatted());
         happinessLabel.setText(player.getHappinessFormatted());
         intelligenceLabel.setText(player.getIntelligenceFormatted());
-        stage.act();
+        stage.act(delta);
         stage.draw();
     }
 
