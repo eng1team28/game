@@ -1,14 +1,14 @@
 
-pack7.png
-size: 1440, 2560
+pack8.png
+size: 2048, 2048
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 placeholder_map
   rotate: false
   xy: 2, 2
-  size: 1440, 2560
-  orig: 720, 1280
+  size: 1280, 720
+  orig: 1280, 720
   offset: 0, 0
   index: -1
 
