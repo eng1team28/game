@@ -107,28 +107,39 @@ public class Player extends Entity {
 
         // Player Interact
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            Interactable closestInteractable = null;
-            float closestDistance = Float.MAX_VALUE;
-
-            for (Interactable interactable : GameManager.getInstance().getInteractables()) {
-                float distance =
-                        Vector2.dst(
-                                collider.x + this.getWidth() / 2,
-                                collider.y + this.getHeight() / 2,
-                                interactable.getX() + interactable.getWidth() / 2,
-                                interactable.getY() + interactable.getHeight() / 2);
-                if (distance < closestDistance
-                        && interactCollider.overlaps(interactable.getCollider())) {
-                    closestDistance = distance;
-                    closestInteractable = interactable;
-                }
-            }
+            Interactable closestInteractable = getInteractableTouched();
 
             if (closestInteractable != null) {
                 closestInteractable.interact(this);
                 Gdx.app.log("MyTag", closestInteractable.toString());
             }
         }
+    }
+
+    Interactable getInteractableTouched() {
+        // Returns the interactable that will be activated if E is pressed
+        // Or null is none available
+        Interactable closestInteractable = null;
+        float closestDistance = Float.MAX_VALUE;
+        Rectangle collider = getCollider();
+        float x1Centre = collider.x + getWidth() / 2;
+        float y1Centre = collider.y + getHeight() / 2;
+
+        for (Interactable interactable : GameManager.getInstance().getInteractables()) {
+            float distance =
+                    Vector2.dst(
+                            x1Centre,
+                            y1Centre,
+                            interactable.getX() + interactable.getWidth() / 2,
+                            interactable.getY() + interactable.getHeight() / 2);
+            if (distance < closestDistance
+                    && interactCollider.overlaps(interactable.getCollider())) {
+                closestDistance = distance;
+                closestInteractable = interactable;
+            }
+        }
+
+        return closestInteractable;
     }
 
     private Vector2 getNormalizedInputVector() {
