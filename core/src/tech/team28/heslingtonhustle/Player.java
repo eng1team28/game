@@ -103,13 +103,12 @@ public class Player {
         Vector2 inputVector = getNormalizedInputVector();
 
         // Move Player using moveComponent
-        moveComponent.MoveTowards(inputVector, collider, delta);
-        interactCollider.setPosition(
-                new Vector2(collider.x - interactRange / 2, collider.y - interactRange / 2));
+        moveComponent.moveTowards(inputVector, collider, delta);
 
         // Clamp player to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.GAME_WIDTH - collider.width);
         collider.y = MathUtils.clamp(collider.y, 0, GameManager.GAME_HEIGHT - collider.height);
+        interactCollider.setPosition(collider.x - interactRange / 2, collider.y - interactRange / 2);
 
         // Player Interact
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
