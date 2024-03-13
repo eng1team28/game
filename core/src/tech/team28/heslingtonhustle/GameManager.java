@@ -33,7 +33,8 @@ public class GameManager {
         Thursday,
         Friday,
         Saturday,
-        Sunday
+        Sunday,
+        ExamDay
     }
 
     private Day day;
@@ -89,14 +90,19 @@ public class GameManager {
     }
 
     Day incrementDay() {
-        // TODO - What happens after Sunday? does index need to wrap around array?
-        time = 0; // reset time of day
+        if (this.day == Day.Sunday){
+            TakeExam();
+            day = Day.values()[7];//This should always return ExamDay
+            return day;
+        }else{
+            time = 0; // reset time of day
 
-        Day[] days = Day.values(); // get an array of all the enum constants
-        int index = day.ordinal(); // get the index of the current day in the array
-        index = (index + 1) % days.length; // add one to the index and wrap around the array
-        day = days[index]; // get the new enum value and assign it to the day variable
-        return day;
+            Day[] days = Day.values(); // get an array of all the enum constants
+            int index = day.ordinal(); // get the index of the current day in the array
+            index = (index + 1) % days.length; // add one to the index and wrap around the array
+            day = days[index]; // get the new enum value and assign it to the day variable
+            return day;
+        }
     }
 
     private void TakeExam() {
