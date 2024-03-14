@@ -6,10 +6,10 @@ public class GameManager {
     // Size of the game region in arbitrary units
     // This is not the size of the window in pixels
     // The game region is scaled by the camera
-    static final float GAME_WIDTH = 2568;
-    static final float GAME_HEIGHT = 1424f;
+    public static final float GAME_WIDTH = 2568;
+    public static final float GAME_HEIGHT = 1424f;
     // View width is dynamically determined by window aspect ratio
-    static final float VIEW_HEIGHT = 712f;
+    public static final float VIEW_HEIGHT = 712f;
 
     public void setPlayer(Player player) {
         this.player = player;
@@ -57,7 +57,7 @@ public class GameManager {
         return instance;
     }
 
-    boolean incrementTime(float amount) {
+    public boolean incrementTime(float amount) {
         float newTime = time + amount;
         if (newTime >= dayDuration) {
             incrementDay();

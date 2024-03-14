@@ -16,6 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import tech.team28.heslingtonhustle.areas.EatArea;
+import tech.team28.heslingtonhustle.areas.RecreationalArea;
+import tech.team28.heslingtonhustle.areas.SleepArea;
+import tech.team28.heslingtonhustle.areas.StudyArea;
 
 public class GameScreen implements Screen {
 

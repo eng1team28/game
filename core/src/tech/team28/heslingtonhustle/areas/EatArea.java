@@ -1,6 +1,9 @@
-package tech.team28.heslingtonhustle;
+package tech.team28.heslingtonhustle.areas;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import tech.team28.heslingtonhustle.GameManager;
+import tech.team28.heslingtonhustle.Interactable;
+import tech.team28.heslingtonhustle.Player;
 
 public class EatArea extends Interactable {
 
