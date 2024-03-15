@@ -132,10 +132,6 @@ public class GameScreen implements Screen {
         viewport.update(width, height);
     }
 
-    public HeslingtonHustle getGame(){
-
-    }
-
     @Override
     public void show() {}
 
