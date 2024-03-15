@@ -34,7 +34,8 @@ public class GameScreen implements Screen {
 
     public GameScreen(final HeslingtonHustle game) {
         this.game = game;
-        gameManager = GameManager.getInstance(game);
+        gameManager = GameManager.getInstance();
+        gameManager.SetGame(game);
 
         // Camera
         camera = new OrthographicCamera();
@@ -129,6 +130,10 @@ public class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
+    }
+
+    public HeslingtonHustle getGame(){
+
     }
 
     @Override
