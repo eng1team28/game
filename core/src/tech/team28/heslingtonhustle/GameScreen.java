@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(final HeslingtonHustle game) {
         this.game = game;
-        gameManager = GameManager.getInstance();
+        gameManager = GameManager.getInstance(game);
 
         // Camera
         camera = new OrthographicCamera();

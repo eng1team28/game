@@ -11,6 +11,8 @@ public class GameManager {
     // View width is dynamically determined by window aspect ratio
     static final float VIEW_HEIGHT = 712f;
 
+    HeslingtonHustle currentGame;
+
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -44,16 +46,17 @@ public class GameManager {
 
     private Array<Interactable> interactables;
 
-    private GameManager() {
+    private GameManager(HeslingtonHustle game) {
         day = Day.Monday;
         time = 0;
         dayDuration = 24;
         interactables = new Array<Interactable>(4);
+        currentGame = game;
     }
 
-    public static GameManager getInstance() {
+    public static GameManager getInstance(HeslingtonHustle game) {
         if (instance == null) {
-            instance = new GameManager();
+            instance = new GameManager(game);
         }
         return instance;
     }
@@ -113,5 +116,9 @@ public class GameManager {
         } else {
             // TODO - Lose Game and fail the exam
         }
+        boolean examWin;
+        examWin = player.getIntelligence() >= 60;
+        game.examCutscene(examWin);
+        
     }
 }
