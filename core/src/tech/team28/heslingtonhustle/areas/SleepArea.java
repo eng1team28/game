@@ -9,6 +9,7 @@ public class SleepArea extends Interactable {
 
     private final float sleepDuration;
     private final float sleepEnergyRecovery;
+    private final GameManager gameManager;
 
     public SleepArea(
             TextureAtlas atlas,
@@ -19,6 +20,7 @@ public class SleepArea extends Interactable {
         super(atlas.createSprite("Red512x512"), spawnPosX, spawnPosY);
         this.sleepDuration = sleepDuration;
         this.sleepEnergyRecovery = sleepEnergyRecovery;
+        this.gameManager = GameManager.getInstance();
     }
 
     public SleepArea(TextureAtlas atlas) {
@@ -27,7 +29,10 @@ public class SleepArea extends Interactable {
 
     @Override
     public void interact(Player player) {
-        GameManager.getInstance().incrementTime(sleepDuration);
+        gameManager.incrementTime(sleepDuration);
+        gameManager
+                .getAreaCounter()
+                .setSleepAreaCounter(gameManager.getAreaCounter().getSleepAreaCounter() + 1);
 
         applySleepEffect(player);
     }

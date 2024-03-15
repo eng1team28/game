@@ -9,6 +9,7 @@ public class StudyArea extends Interactable {
 
     private final float studyDuration;
     private final float studyEnergyCost;
+    private final GameManager gameManager;
 
     public StudyArea(
             TextureAtlas atlas,
@@ -19,6 +20,7 @@ public class StudyArea extends Interactable {
         super(atlas.createSprite("Blue512x512"), spawnPosX, spawnPosY);
         this.studyDuration = studyDuration;
         this.studyEnergyCost = studyEnergyCost;
+        this.gameManager = GameManager.getInstance();
     }
 
     public StudyArea(TextureAtlas atlas) {
@@ -27,10 +29,12 @@ public class StudyArea extends Interactable {
 
     @Override
     public void interact(Player player) {
-        if (player.getEnergy() < studyEnergyCost
-                || !GameManager.getInstance().incrementTime(studyDuration)) {
+        if (player.getEnergy() < studyEnergyCost || !gameManager.incrementTime(studyDuration)) {
             return;
         }
+        gameManager
+                .getAreaCounter()
+                .setStudyAreaCounter(gameManager.getAreaCounter().getStudyAreaCounter() + 1);
         applyStudyEffect(player);
     }
 

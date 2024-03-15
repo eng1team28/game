@@ -40,6 +40,7 @@ public class GameManager {
     private float time;
     private final float dayDuration;
     private Player player;
+    public final AreaCounter areaCounter = new AreaCounter();
 
     private Array<Interactable> interactables;
 
@@ -82,6 +83,10 @@ public class GameManager {
 
     Day getDay() {
         return day;
+    }
+
+    public AreaCounter getAreaCounter() {
+        return areaCounter;
     }
 
     String getDayFormatted() {
