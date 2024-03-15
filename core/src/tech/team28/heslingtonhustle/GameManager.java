@@ -28,13 +28,32 @@ public class GameManager {
     private final AreaCounter areaCounter = new AreaCounter();
     private Array<Interactable> interactables;
 
+    /**
+     * Setter for the player
+     *
+     * @return The player entity.
+     */
+
     public void setPlayer(Player player) {
         this.player = player;
     }
 
+
+    /**
+     * Getter for the Interactables
+     *
+     * @return The array of interactables.
+     */
+
     public Array<Interactable> getInteractables() {
         return interactables;
     }
+
+    /**
+     * Adds an interactable to the array of interactables.
+     *
+     * @return True if the interactable was added successfully.
+     */
 
     public boolean addInteractable(Interactable newInteractable) {
         interactables.add(newInteractable);
@@ -43,12 +62,25 @@ public class GameManager {
 
     private static GameManager instance;
 
+    /**
+     * Constructor for the GameManager class. Initializes the day, time, and interactables.
+     *
+     *
+     */
+
     private GameManager() {
         day = Day.Monday;
         time = 0;
         dayDuration = 24;
         interactables = new Array<Interactable>(4);
     }
+
+
+    /**
+     * Returns the instance of the GameManager class. If the instance does not exist, it is created.
+     *
+     * @return The instance of the GameManager class.
+     */
 
     public static GameManager getInstance() {
         if (instance == null) {
@@ -57,11 +89,19 @@ public class GameManager {
         return instance;
     }
 
+    /**
+     * Increments the time by the given amount. If the time exceeds the day duration, the day is
+     * incremented and the time is reset to 0. If the day is Sunday, the player takes an exam.
+     *
+     * @param amount The amount of time to increment by.
+     */
+
     public boolean incrementTime(float amount) {
         float newTime = time + amount;
         if (newTime >= dayDuration) {
             incrementDay();
             if (day == Day.Sunday && newTime > dayDuration) {
+                TakeExam();
                 day = Day.Monday;
             }
         } else {
@@ -70,16 +110,37 @@ public class GameManager {
         return true;
     }
 
+    /**
+     * Formats the time with two digits, zero-padded, no decimal point.
+     * I.E. as 24hr format
+     *
+     *
+     * @return The formatted time.
+     */
+
     String getTimeFormatted() {
         // Formats time with two digits, zero-padded, no decimal point
         // I.E. as 24hr format
         return String.format("Time: %02.0f:00", getTime());
     }
 
+    /**
+     * Getter for the current time
+     *
+     * @return The current time of day in arbitrary units.
+     *
+     */
+
     float getTime() {
         return time;
     }
 
+
+    /**
+     * Getter for the current day
+     *
+     * @return The current day of the week.
+     */
     Day getDay() {
         return day;
     }
@@ -92,6 +153,12 @@ public class GameManager {
         return String.format("Day: %s", getDay());
     }
 
+
+    /**
+     * Increments the day by one. If the day is Sunday, the day is reset to Monday.
+     *
+     * @return The new day of the week.
+     */
     Day incrementDay() {
         // TODO - What happens after Sunday? does index need to wrap around array?
         time = 0; // reset time of day
