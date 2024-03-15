@@ -11,21 +11,6 @@ public class GameManager {
     // View width is dynamically determined by window aspect ratio
     public static final float VIEW_HEIGHT = 712f;
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public Array<Interactable> getInteractables() {
-        return interactables;
-    }
-
-    public boolean addInteractable(Interactable newInteractable) {
-        interactables.add(newInteractable);
-        return true;
-    }
-
-    private static GameManager instance;
-
     enum Day {
         Monday,
         Tuesday,
@@ -40,9 +25,23 @@ public class GameManager {
     private float time;
     private final float dayDuration;
     private Player player;
-    public final AreaCounter areaCounter = new AreaCounter();
-
+    private final AreaCounter areaCounter = new AreaCounter();
     private Array<Interactable> interactables;
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Array<Interactable> getInteractables() {
+        return interactables;
+    }
+
+    public boolean addInteractable(Interactable newInteractable) {
+        interactables.add(newInteractable);
+        return true;
+    }
+
+    private static GameManager instance;
 
     private GameManager() {
         day = Day.Monday;
@@ -105,12 +104,7 @@ public class GameManager {
     }
 
     private void TakeExam() {
-        // TODO - Exam Logic
-
-        if (player.getIntelligence() >= 60) {
-            // TODO - Win Game and give a grade
-        } else {
-            // TODO - Lose Game and fail the exam
-        }
+        ExamManager examManager = new ExamManager(player, 60);
+        examManager.TakeExam();
     }
 }
