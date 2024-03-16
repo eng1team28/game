@@ -96,7 +96,7 @@ size: 256, 256
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-win_placeholder
+win
   rotate: false
   xy: 2, 2
   size: 232, 231
@@ -109,7 +109,7 @@ size: 512, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-lose_placeholder
+lose
   rotate: false
   xy: 2, 2
   size: 334, 393

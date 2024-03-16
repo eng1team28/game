@@ -118,16 +118,10 @@ public class GameManager {
     }
 
     private void TakeExam() {
-        // TODO - Exam Logic
-
-        if (player.getIntelligence() >= 60) {
-            // TODO - Win Game and give a grade
-        } else {
-            // TODO - Lose Game and fail the exam
-        }
 
         boolean examWin;
         examWin = player.getIntelligence() >= 60;
+        player.setPosition(0, 0);//Move player into a position so they can see the result
         this.game.examCutscene(examWin);
         
     }

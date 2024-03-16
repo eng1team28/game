@@ -1,16 +1,10 @@
 package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -18,6 +12,7 @@ public class ExamPresenter implements Screen{
     final HeslingtonHustle game;
     private Stage stage;
     private Sprite result;
+	private ExamImage resultImage;
 	
 	public ExamPresenter(HeslingtonHustle hustleGame, boolean winBool){
 		game = hustleGame;
@@ -26,13 +21,18 @@ public class ExamPresenter implements Screen{
 		stage = new Stage(new ScreenViewport());
 		Gdx.input.setInputProcessor(stage);
 
+
         if (winBool){
-            result = game.atlas.createSprite("win_placeholder");
+            result = game.atlas.createSprite("win");
+			//resultImage = new ExamImage(game.atlas, 0, 0, "win");
         }else {
-            result = game.atlas.createSprite("lose_placeholder");
+			result = game.atlas.createSprite("lose");
+            //resultImage = new ExamImage(game.atlas, 0, 0, "lose");
         }
+
+		
         
-        result.setSize(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT);
+        result.setSize(512, 512);
 	}
  
 	@Override
@@ -50,7 +50,9 @@ public class ExamPresenter implements Screen{
         // Clear screen ready for new frame
         ScreenUtils.clear(Color.BLACK);
 
+
         this.result.draw(game.batch);
+		//this.resultImage.draw(game.batch);
 
 		game.batch.end();
 
