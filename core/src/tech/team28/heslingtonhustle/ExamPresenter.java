@@ -40,16 +40,22 @@ public class ExamPresenter implements Screen{
 
 	@Override
 	public void render(float delta) {
+		game.batch.begin();
 		// Fast quit keybinding
-        if (Util.allKeysPressed(Input.Keys.CONTROL_LEFT, Input.Keys.Q)
-                || Util.allKeysPressed(Input.Keys.CONTROL_RIGHT, Input.Keys.Q)) {
-            Gdx.app.exit();
-        }
+        //if (Util.allKeysPressed(Input.Keys.CONTROL_LEFT, Input.Keys.Q)
+        //        || Util.allKeysPressed(Input.Keys.CONTROL_RIGHT, Input.Keys.Q)) {
+        //    Gdx.app.exit();
+        //}
 
         // Clear screen ready for new frame
         ScreenUtils.clear(Color.BLACK);
 
         this.result.draw(game.batch);
+
+		game.batch.end();
+
+		stage.act(delta);
+        stage.draw();
 	}
  
 	@Override

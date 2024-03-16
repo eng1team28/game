@@ -114,6 +114,12 @@ public class Player extends Entity {
                 }
             }
         }
+
+        //FOR TESTING
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            GameManager.getInstance().setEndDay();
+        }
+
     }
 
     private Vector2 getNormalizedInputVector() {

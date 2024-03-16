@@ -112,6 +112,11 @@ public class GameManager {
         }
     }
 
+    public void setEndDay(){
+        this.day = Day.values()[6];
+        this.incrementDay();
+    }
+
     private void TakeExam() {
         // TODO - Exam Logic
 
