@@ -120,7 +120,7 @@ public class GameManager {
      *
      */
 
-    float getTime() {
+    public float getTime() {
         return time;
     }
 
@@ -137,15 +137,21 @@ public class GameManager {
     }
 
     Day incrementDay() {
-        // TODO - What happens after Sunday? does index need to wrap around array?
         time = 0; // reset time of day
-
-            Day[] days = Day.values(); // get an array of all the enum constants
+        Day[] days = Day.values(); // get an array of all the enum constants
+        if (this.day.equals(days[6])){
+            this.TakeExam();
+            return days[7];
+        }
+        else{
+        
             int index = day.ordinal(); // get the index of the current day in the array
             index = (index + 1) % days.length; // add one to the index and wrap around the array
             day = days[index]; // get the new enum value and assign it to the day variable
             return day;
         }
+        
+        
     }
 
     public void setEndDay(){
@@ -157,7 +163,7 @@ public class GameManager {
 
         boolean examWin;
         examWin = player.getIntelligence() >= 60;
-        player.setPosition(0, 0);//Move player into a position so they can see the result
+        player.setPosition(150, 0);//Move player into a position so they can see the result
         this.game.examCutscene(examWin);
 
     }

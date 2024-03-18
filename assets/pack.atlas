@@ -99,8 +99,8 @@ repeat: none
 win
   rotate: false
   xy: 2, 2
-  size: 232, 231
-  orig: 232, 231
+  size: 243, 185
+  orig: 243, 185
   offset: 0, 0
   index: -1
 
@@ -112,7 +112,7 @@ repeat: none
 lose
   rotate: false
   xy: 2, 2
-  size: 334, 393
-  orig: 334, 393
+  size: 476, 476
+  orig: 476, 476
   offset: 0, 0
   index: -1
