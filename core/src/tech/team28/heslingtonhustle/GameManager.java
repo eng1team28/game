@@ -11,6 +11,8 @@ public class GameManager {
     // View width is dynamically determined by window aspect ratio
     public static final float VIEW_HEIGHT = 712f;
 
+    HeslingtonHustle game;
+
     enum Day {
         Monday,
         Tuesday,
@@ -18,7 +20,8 @@ public class GameManager {
         Thursday,
         Friday,
         Saturday,
-        Sunday
+        Sunday,
+        ExamDay
     }
 
     private Day day; //Current day respective to the game
@@ -62,10 +65,16 @@ public class GameManager {
      */
     private GameManager() {
         day = Day.Monday;
-        time = 0;
-        dayDuration = 24;
+        time = 7;
+        dayDuration = 23;
         interactables = new Array<Interactable>(4);
     }
+
+
+    public void SetGame(HeslingtonHustle currentGame){
+        this.game = currentGame;
+    }
+
 
     /**
      * Retrieves the singleton instance of the GameManager.
@@ -104,6 +113,13 @@ public class GameManager {
         return String.format("Time: %02.0f:00", getTime());
     }
 
+    /**
+     * Getter for the current time
+     *
+     * @return The current time of day in arbitrary units.
+     *
+     */
+
     float getTime() {
         return time;
     }
@@ -121,17 +137,28 @@ public class GameManager {
     }
 
     Day incrementDay() {
+        // TODO - What happens after Sunday? does index need to wrap around array?
         time = 0; // reset time of day
 
-        Day[] days = Day.values(); // get an array of all the enum constants
-        int index = day.ordinal(); // get the index of the current day in the array
-        index = (index + 1) % days.length; // add one to the index and wrap around the array
-        day = days[index]; // get the new enum value and assign it to the day variable
-        return day;
+            Day[] days = Day.values(); // get an array of all the enum constants
+            int index = day.ordinal(); // get the index of the current day in the array
+            index = (index + 1) % days.length; // add one to the index and wrap around the array
+            day = days[index]; // get the new enum value and assign it to the day variable
+            return day;
+        }
+    }
+
+    public void setEndDay(){
+        this.day = Day.values()[6];
+        this.incrementDay();
     }
 
     private void TakeExam() {
-        ExamManager examManager = new ExamManager(player, 60);
-        examManager.TakeExam();
+
+        boolean examWin;
+        examWin = player.getIntelligence() >= 60;
+        player.setPosition(0, 0);//Move player into a position so they can see the result
+        this.game.examCutscene(examWin);
+
     }
 }

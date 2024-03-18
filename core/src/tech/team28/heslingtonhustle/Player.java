@@ -141,6 +141,10 @@ public class Player extends Entity {
         return String.format("Happiness: %s", getHappiness());
     }
 
+    //public void setPosition(int pos_x, int pos_y){
+    //    setPosition(pos_x, pos_y);
+    //}
+
     // Runs every frame
     /**
      * Updates the player's position and handles interactions.
@@ -171,6 +175,24 @@ public class Player extends Entity {
                 Gdx.app.log("MyTag", closestInteractable.toString());
             }
         }
+
+        //FOR TESTING, TRIGGERS END OF WEEK
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            GameManager.getInstance().setEndDay();
+        }
+
+        //FOR TESTING, TRIGGERS END OF WEEK, WITH WINNING
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            this.intelligence = 70;
+            GameManager.getInstance().setEndDay();
+        }
+
+        //FOR TESTING, TRIGGERS END OF WEEK, WITH FAILING
+        if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
+            this.intelligence = 45;
+            GameManager.getInstance().setEndDay();
+        }
+
     }
 
     /**
