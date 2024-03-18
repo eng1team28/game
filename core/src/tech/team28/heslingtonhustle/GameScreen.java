@@ -86,11 +86,9 @@ public class GameScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         table.top().left();
+        table.pad(10f);
 
-        BitmapFont currentFont = new BitmapFont();
-
-        currentFont.getData().setScale(3f, 3f);
-
+        BitmapFont currentFont = game.font;
         Label.LabelStyle sillyStyle = new Label.LabelStyle(currentFont, Color.WHITE);
         // The next couple of lines initialises labels for displaying game information
         dayLabel = new Label("", sillyStyle);
@@ -109,6 +107,7 @@ public class GameScreen implements Screen {
         Table lowerTable = new Table();
         // todo make this right-aligned?
         lowerTable.bottom().left();
+        lowerTable.pad(10f);
         lowerTable.row().left();
         lowerTable.add(disclaimerLabel);
 

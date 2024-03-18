@@ -3,6 +3,7 @@ package tech.team28.heslingtonhustle;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -12,8 +13,10 @@ public class HeslingtonHustle extends Game {
     public AssetManager manager;
     public SpriteBatch batch;
     public TextureAtlas atlas;
+    public BitmapFont font;
     public static final String ATLAS_NAME = "textures/pack.atlas";
     public static final String MAP_NAME = "map/map.tmx";
+    public static final String FONT_NAME = "lsans-32.fnt";
 
     @Override
     public void create() {
@@ -23,11 +26,13 @@ public class HeslingtonHustle extends Game {
         manager.load(ATLAS_NAME, TextureAtlas.class);
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(MAP_NAME, TiledMap.class);
+        manager.load(FONT_NAME, BitmapFont.class);
         manager.finishLoading();
 
         // Create shared resources
         batch = new SpriteBatch();
         atlas = manager.get(ATLAS_NAME);
+        font = manager.get(FONT_NAME);
         this.setScreen(new GameScreen(this));
     }
 
