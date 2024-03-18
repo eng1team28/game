@@ -6,7 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -31,8 +32,11 @@ public class GameScreen implements Screen {
     private final OrthographicCamera camera; //Camera for rendering
     private final Viewport viewport; //Viewport for rendering
     private final Player player; //Player Character
-    private Sprite map; //Sprite for representing game map
+    private TiledMap map; //Sprite for representing game map
+    private OrthogonalTiledMapRenderer mapRenderer;
     private Stage stage; //Stage for UI
+    // We have many labels
+    // Could move these into some other class for UI?
     private Label dayLabel; //Label for displaying the day 
     private Label timeLabel; //Label for displaying the time
     private Label energyLabel; //Label for displaying the player's energy
@@ -76,8 +80,8 @@ public class GameScreen implements Screen {
         /**
          * This is the map setup
          */
-        map = game.atlas.createSprite("placeholder_map");
-        map.setSize(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT);
+        map = game.manager.get(HeslingtonHustle.MAP_NAME);
+        mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         // Scene2D stage and UI
         stage = new Stage();
@@ -147,9 +151,11 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
+        mapRenderer.setView(camera);
+        mapRenderer.render();
+
         game.batch.begin();
         //Draw the map
-        map.draw(game.batch);
         //Draw interactables
         for (Interactable interactable : GameManager.getInstance().getInteractables()) {
             interactable.draw(game.batch);
@@ -199,5 +205,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        mapRenderer.dispose();
     }
 }

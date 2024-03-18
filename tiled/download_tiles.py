@@ -26,15 +26,21 @@ from PIL import Image
 # https://imagemagick.org/Usage/crop/#crop_spaced
 
 ZOOM = 19
-START_X = 260632
-START_Y = 168460
-# END_X = 260657
-# END_Y = 168470
-TILES_X = 25
-TILES_Y = 15
+
+# Full campus east area
+# START_X = 260632
+# START_Y = 168460
+# TILES_X = 25
+# TILES_Y = 15
+# Smaller game area
+START_X = 260640
+START_Y = 168464
+TILES_X = 8
+TILES_Y = 8
+
 TILE_SIZE = 256
 URL_FORMAT = "https://tile.openstreetmap.org/{zoom}/{x}/{y}.png"
-FILE_NAME_FORMAT = "tile_{x},{y}.png"
+FILE_NAME_FORMAT = "tile_{y},{x}.png"
 HEADERS = {"User-Agent": "team28/heslingtonhustle/0.0.1"}
 DIRECTORY = Path("dl/")
 OUT_FILE = "out.png"
@@ -65,7 +71,7 @@ for y in range(y_tiles):
             with BytesIO(response.content) as fp:
                 tile_image = Image.open(fp, formats=IMAGE_FORMATS)
                 tile_image.load()
-                tile_image.save(file_name)
-            out_image.paste(tile_image, (TILE_SIZE * x, TILE_SIZE * y))
+            tile_image.save(file_name)
+        out_image.paste(tile_image, (TILE_SIZE * x, TILE_SIZE * y))
 
 out_image.save(OUT_FILE)
