@@ -16,6 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import tech.team28.heslingtonhustle.areas.EatArea;
+import tech.team28.heslingtonhustle.areas.RecreationalArea;
+import tech.team28.heslingtonhustle.areas.SleepArea;
+import tech.team28.heslingtonhustle.areas.StudyArea;
 
 public class GameScreen implements Screen {
 
@@ -49,6 +53,15 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(new SleepArea(game.atlas));
         gameManager.addInteractable(new RecreationalArea(game.atlas));
         gameManager.addInteractable(new EatArea(game.atlas));
+
+        // For Debugging Interaction
+        gameManager.addInteractable(
+                new EatArea(
+                        game.atlas,
+                        1f,
+                        1f,
+                        GameManager.GAME_WIDTH / 2.6f,
+                        GameManager.GAME_HEIGHT / 100));
 
         map = game.atlas.createSprite("placeholder_map");
         map.setSize(GameManager.GAME_WIDTH, GameManager.GAME_HEIGHT);

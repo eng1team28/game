@@ -7,5 +7,5 @@ public abstract class Interactable extends Entity {
         super(sprite, spawnPosX, spawnPosY);
     }
 
-    abstract void interact(Player player);
+    public abstract void interact(Player player);
 }
