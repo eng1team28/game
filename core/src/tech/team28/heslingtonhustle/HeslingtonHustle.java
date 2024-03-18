@@ -11,8 +11,11 @@ public class HeslingtonHustle extends Game {
     public TextureAtlas atlas;
     private static final String ATLAS_NAME = "pack.atlas";
 
+
     @Override
     public void create() {
+        
+
         // Asset manager loading
         manager = new AssetManager();
         manager.load(ATLAS_NAME, TextureAtlas.class);
@@ -24,10 +27,16 @@ public class HeslingtonHustle extends Game {
         this.setScreen(new GameScreen(this));
     }
 
+    public void examCutscene(boolean winBool){
+        this.setScreen(new ExamPresenter(this, winBool));
+    }
+
     @Override
     public void dispose() {
         batch.dispose();
         // Disposing of the manager disposes of all its assets
         manager.dispose();
     }
+
+
 }

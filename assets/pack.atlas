@@ -90,3 +90,29 @@ Yellow512x512
   orig: 512, 512
   offset: 0, 0
   index: -1
+
+pack9.png
+size: 256, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+win
+  rotate: false
+  xy: 2, 2
+  size: 232, 231
+  orig: 232, 231
+  offset: 0, 0
+  index: -1
+
+pack10.png
+size: 512, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+lose
+  rotate: false
+  xy: 2, 2
+  size: 334, 393
+  orig: 334, 393
+  offset: 0, 0
+  index: -1
