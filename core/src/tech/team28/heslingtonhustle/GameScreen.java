@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -61,12 +63,16 @@ public class GameScreen implements Screen {
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Player and interactables
+        Array<Sprite> animationFrames = new Array<Sprite>(1);
+        animationFrames.add(game.atlas.createSprite("player-moving"));
         player =
                 new Player(
                         game.atlas.createSprite(Player.PLAYER_TEXTURE),
+                        animationFrames,
                         GameManager.GAME_WIDTH / 4.8f,
                         GameManager.GAME_WIDTH / 1.6f);
         gameManager.setPlayer(player);
+
         // The next couple of lines adds interactables to the game manager
         gameManager.addInteractable(
                 new StudyArea(
@@ -186,7 +192,13 @@ public class GameScreen implements Screen {
         }
 
         // Draw player on top of world
-        player.draw(game.batch);
+        if (player.isMoving) {
+            // If moving, draw current frame of animation
+            player.getMovingFrame().draw(game.batch);
+        } else {
+            // If not moving, draw regular Player sprite
+            player.draw(game.batch);
+        }
 
         game.batch.end();
 

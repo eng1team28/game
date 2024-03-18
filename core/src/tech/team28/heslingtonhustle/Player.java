@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 /** Represents the player entity in the game. Extends the {@link Entity} class. */
 public class Player extends Entity {
@@ -35,11 +36,15 @@ public class Player extends Entity {
     public boolean isFacingRight = true;
     public boolean isMoving = false;
     private float interactRange = 150;
+    private Sprite movingSprite;
 
     /** Constructor for the Player class. Initializes player attributes and components. */
-    public Player(Sprite sprite, float spawnPosX, float spawnPosY) {
+    public Player(Sprite sprite, Array<Sprite> animationFrames, float spawnPosX, float spawnPosY) {
         // could give the player a name?
         super(sprite, spawnPosX, spawnPosY);
+
+        movingSprite = animationFrames.first();
+
         setSize(width, height);
         energy = 100;
         maxEnergy = 100;
@@ -149,7 +154,7 @@ public class Player extends Entity {
         }
         setFlip(!isFacingRight, false);
 
-        isMoving = !moveComponent.velocity.isZero();
+        isMoving = !moveComponent.velocity.isZero(1f);
 
         // Clamp collider to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.GAME_WIDTH - collider.width);
@@ -185,6 +190,12 @@ public class Player extends Entity {
             this.intelligence = 45;
             GameManager.getInstance().setEndDay();
         }
+    }
+
+    public Sprite getMovingFrame() {
+        movingSprite.setPosition(getX(), getY());
+        movingSprite.setFlip(isFlipX(), false);
+        return movingSprite;
     }
 
     /**
