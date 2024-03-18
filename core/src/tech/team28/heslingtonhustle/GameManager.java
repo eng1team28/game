@@ -73,8 +73,8 @@ public class GameManager {
 
     private GameManager() {
         day = Day.Monday;
-        time = 0;
-        dayDuration = 24;
+        time = 7;
+        dayDuration = 23;
         interactables = new Array<Interactable>(4);
     }
 
@@ -139,7 +139,7 @@ public class GameManager {
      *
      */
 
-    float getTime() {
+    public float getTime() {
         return time;
     }
 
@@ -173,7 +173,7 @@ public class GameManager {
             day = Day.values()[7];//This should always return ExamDay. Also this might be a terrible way of doing this
             return day;
         }else{
-            time = 0; // reset time of day
+            time = 7; // reset time of day
 
             Day[] days = Day.values(); // get an array of all the enum constants
             int index = day.ordinal(); // get the index of the current day in the array
@@ -194,6 +194,6 @@ public class GameManager {
         examWin = player.getIntelligence() >= 60;
         player.setPosition(0, 0);//Move player into a position so they can see the result
         this.game.examCutscene(examWin);
-        
+
     }
 }
