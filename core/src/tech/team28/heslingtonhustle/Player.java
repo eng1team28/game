@@ -32,6 +32,8 @@ public class Player extends Entity {
     // Not final as they can change (maybe)
     private float playerSpeed = 1000;
     private float playerAcceleration = 25;
+    public boolean isFacingRight = true;
+    public boolean isMoving = false;
     private float interactRange = 150;
 
     /** Constructor for the Player class. Initializes player attributes and components. */
@@ -139,6 +141,16 @@ public class Player extends Entity {
 
         // Move collider using moveComponent
         moveComponent.moveTowards(inputVector, collider, delta);
+
+        if (moveComponent.velocity.x < 0) {
+            isFacingRight = false;
+        } else if (moveComponent.velocity.x > 0) {
+            isFacingRight = true;
+        }
+        setFlip(!isFacingRight, false);
+
+        isMoving = !moveComponent.velocity.isZero();
+
 
         // Clamp collider to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.GAME_WIDTH - collider.width);

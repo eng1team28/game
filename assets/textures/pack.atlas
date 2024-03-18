@@ -18,6 +18,13 @@ player
   orig: 32, 64
   offset: 0, 0
   index: -1
+player-moving
+  rotate: false
+  xy: 626, 612
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
 
 pack2.png
 size: 1024, 1024
