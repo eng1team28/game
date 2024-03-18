@@ -18,7 +18,7 @@ buildscript {
 allprojects {
     apply plugin: "idea"
 
-    version = '0.0.1'
+    version = '0.0.2'
     ext {
         appName = "Heslington Hustle"
         gdxVersion = '1.12.1'
