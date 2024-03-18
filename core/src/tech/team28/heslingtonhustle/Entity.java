@@ -7,7 +7,6 @@
 package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Rectangle;
 
 /**
  * Represents an abstract entity in the game, extending the sprite import. All entities in the game
@@ -28,14 +27,5 @@ public abstract class Entity extends Sprite {
         float height = 256;
         setSize(width, height);
         setPosition(spawnPosX, spawnPosY);
-    }
-
-    /**
-     * Returns a {@code Rectangle} with the same dimensions as the {@code Sprite}
-     *
-     * @return returns the bounding rectangle
-     */
-    Rectangle getCollider() {
-        return getBoundingRectangle();
     }
 }

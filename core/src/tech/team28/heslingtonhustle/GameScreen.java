@@ -161,7 +161,7 @@ public class GameScreen implements Screen {
 
         // Camera follows player
         Vector2 cameraPosition = new Vector2();
-        Rectangle playerCollider = player.getCollider();
+        Rectangle playerCollider = player.getBoundingRectangle();
         playerCollider.getPosition(cameraPosition);
         cameraPosition.add(playerCollider.width / 2, playerCollider.height / 2);
         float xBorder = camera.viewportWidth / 2;

@@ -136,7 +136,7 @@ public class Player extends Entity {
      * @param delta The time elapsed since the last update.
      */
     void update(float delta) {
-        Rectangle collider = getCollider();
+        Rectangle collider = getBoundingRectangle();
         Vector2 inputVector = getNormalizedInputVector();
 
         // Move collider using moveComponent
@@ -150,7 +150,6 @@ public class Player extends Entity {
         setFlip(!isFacingRight, false);
 
         isMoving = !moveComponent.velocity.isZero();
-
 
         // Clamp collider to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.GAME_WIDTH - collider.width);
@@ -196,7 +195,7 @@ public class Player extends Entity {
     Interactable getInteractableTouched() {
         Interactable closestInteractable = null;
         float closestDistance = Float.MAX_VALUE;
-        Rectangle collider = getCollider();
+        Rectangle collider = getBoundingRectangle();
         float x1Centre = collider.x + getWidth() / 2;
         float y1Centre = collider.y + getHeight() / 2;
 
@@ -208,7 +207,7 @@ public class Player extends Entity {
                             interactable.getX() + interactable.getWidth() / 2,
                             interactable.getY() + interactable.getHeight() / 2);
             if (distance < closestDistance
-                    && interactCollider.overlaps(interactable.getCollider())) {
+                    && interactCollider.overlaps(interactable.getBoundingRectangle())) {
                 closestDistance = distance;
                 closestInteractable = interactable;
             }
