@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+
 /**
  * Represents the player entity in the game.
  * Extends the {@link Entity} class.
@@ -134,6 +135,8 @@ public class Player extends Entity {
      */
 
     public void setHappiness(double happiness) {
+        happiness = Math.round(happiness * 10);
+        happiness = happiness / 10;
         this.happiness = MathUtils.clamp(happiness, 0, maxHappiness);
     }
 
