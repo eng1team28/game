@@ -187,7 +187,7 @@ public class Player extends Entity {
             GameManager.getInstance().setEndDay();
         }
 
-        //FOR TESTING, TRIGGERS END OF WEEK, WITH WINNING
+        //FOR TESTING, TRIGGERS END OF WEEK, WITH FAILING
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             this.intelligence = 45;
             GameManager.getInstance().setEndDay();
