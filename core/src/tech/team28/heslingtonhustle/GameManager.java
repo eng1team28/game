@@ -21,53 +21,45 @@ public class GameManager {
         Sunday
     }
 
-    private Day day;
-    private float time;
-    private final float dayDuration;
-    private Player player;
+    private Day day; //Current day respective to the game
+    private float time; //Current time
+    private final float dayDuration; //Duration of a day in the game
+    private Player player; //The player 
+    //Counter for different areas in the game
     private final AreaCounter areaCounter = new AreaCounter();
-    private Array<Interactable> interactables;
+    private Array<Interactable> interactables; //Array of interactable objects in the game
 
-    /**
-     * Setter for the player
-     *
-     * @return The player entity.
+    
+    /** 
+     * Determines the player
+     * @param player The player that's playing
      */
-
     public void setPlayer(Player player) {
         this.player = player;
     }
 
-
-    /**
-     * Getter for the Interactables
-     *
-     * @return The array of interactables.
-     */
-
+    //Retrieves the list of interactable objects and returns them in an array
     public Array<Interactable> getInteractables() {
         return interactables;
     }
 
     /**
-     * Adds an interactable to the array of interactables.
-     *
-     * @return True if the interactable was added successfully.
+     * Adds a new interactable object to the game.
+     * @param newInteractable The new interactable object to add.
+     * @return True if the interactable was successfully added, False otherwise.
      */
-
     public boolean addInteractable(Interactable newInteractable) {
         interactables.add(newInteractable);
         return true;
     }
 
+    //Singleton instance of the GameManager
     private static GameManager instance;
 
     /**
-     * Constructor for the GameManager class. Initializes the day, time, and interactables.
-     *
-     *
+     * Private constructor to prevent instantiation from outside the class.
+     * Initializes default values for day, time, and interactables.
      */
-
     private GameManager() {
         day = Day.Monday;
         time = 0;
@@ -75,13 +67,11 @@ public class GameManager {
         interactables = new Array<Interactable>(4);
     }
 
-
     /**
-     * Returns the instance of the GameManager class. If the instance does not exist, it is created.
-     *
-     * @return The instance of the GameManager class.
+     * Retrieves the singleton instance of the GameManager.
+     * If the instance does not exist, creates a new one.
+     * @return The GameManager instance.
      */
-
     public static GameManager getInstance() {
         if (instance == null) {
             instance = new GameManager();
@@ -90,18 +80,16 @@ public class GameManager {
     }
 
     /**
-     * Increments the time by the given amount. If the time exceeds the day duration, the day is
-     * incremented and the time is reset to 0. If the day is Sunday, the player takes an exam.
-     *
-     * @param amount The amount of time to increment by.
+     * Increments the time in the game by the specified amount.
+     * If the time exceeds a day's duration, increments the day.
+     * @param amount The amount by which to increment the time.
+     * @return True if the time was successfully incremented, False otherwise.
      */
-
     public boolean incrementTime(float amount) {
         float newTime = time + amount;
         if (newTime >= dayDuration) {
             incrementDay();
             if (day == Day.Sunday && newTime > dayDuration) {
-                TakeExam();
                 day = Day.Monday;
             }
         } else {
@@ -110,37 +98,16 @@ public class GameManager {
         return true;
     }
 
-    /**
-     * Formats the time with two digits, zero-padded, no decimal point.
-     * I.E. as 24hr format
-     *
-     *
-     * @return The formatted time.
-     */
-
     String getTimeFormatted() {
         // Formats time with two digits, zero-padded, no decimal point
         // I.E. as 24hr format
         return String.format("Time: %02.0f:00", getTime());
     }
 
-    /**
-     * Getter for the current time
-     *
-     * @return The current time of day in arbitrary units.
-     *
-     */
-
     float getTime() {
         return time;
     }
 
-
-    /**
-     * Getter for the current day
-     *
-     * @return The current day of the week.
-     */
     Day getDay() {
         return day;
     }
@@ -153,14 +120,7 @@ public class GameManager {
         return String.format("Day: %s", getDay());
     }
 
-
-    /**
-     * Increments the day by one. If the day is Sunday, the day is reset to Monday.
-     *
-     * @return The new day of the week.
-     */
     Day incrementDay() {
-        // TODO - What happens after Sunday? does index need to wrap around array?
         time = 0; // reset time of day
 
         Day[] days = Day.values(); // get an array of all the enum constants
