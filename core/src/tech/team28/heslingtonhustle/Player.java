@@ -2,7 +2,7 @@ package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends Entity {
 
     // TEXTURES
-    private static final String PLAYER_TEXTURE = "player";
+    public static final String PLAYER_TEXTURE = "player";
 
     // COLLIDERS
     private float width = 32;
@@ -35,11 +35,9 @@ public class Player extends Entity {
     private float interactRange = 150;
 
     /** Constructor for the Player class. Initializes player attributes and components. */
-    public Player(TextureAtlas atlas) {
-        super(
-                atlas.createSprite(PLAYER_TEXTURE),
-                GameManager.GAME_WIDTH / 2,
-                GameManager.GAME_HEIGHT / 2);
+    public Player(Sprite sprite, float spawnPosX, float spawnPosY) {
+        // could give the player a name?
+        super(sprite, spawnPosX, spawnPosY);
         setSize(width, height);
         energy = 100;
         maxEnergy = 100;

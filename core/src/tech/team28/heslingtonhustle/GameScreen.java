@@ -61,7 +61,11 @@ public class GameScreen implements Screen {
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Player and interactables
-        player = new Player(game.atlas);
+        player =
+                new Player(
+                        game.atlas.createSprite(Player.PLAYER_TEXTURE),
+                        GameManager.GAME_WIDTH / 4.8f,
+                        GameManager.GAME_WIDTH / 1.6f);
         gameManager.setPlayer(player);
         // The next couple of lines adds interactables to the game manager
         gameManager.addInteractable(
@@ -69,29 +73,29 @@ public class GameScreen implements Screen {
                         "Computer Science Building",
                         game.manager.get(HeslingtonHustle.SOUND_STUDY),
                         game.atlas.createSprite("Blue512x512"),
-                        GameManager.GAME_WIDTH / 2,
-                        GameManager.GAME_HEIGHT / 2));
+                        GameManager.GAME_WIDTH / 4.5f,
+                        GameManager.GAME_HEIGHT / 100f));
         gameManager.addInteractable(
                 new SleepArea(
-                        "A College",
+                        "Goodricke College",
                         game.manager.get(HeslingtonHustle.SOUND_SLEEP),
                         game.atlas.createSprite("Red512x512"),
-                        GameManager.GAME_WIDTH / 100,
-                        GameManager.GAME_HEIGHT / 2));
+                        GameManager.GAME_WIDTH / 5f,
+                        GameManager.GAME_HEIGHT / 1.8f));
         gameManager.addInteractable(
                 new RecreationalArea(
                         "Duck Pond",
                         game.manager.get(HeslingtonHustle.SOUND_QUACK),
                         game.atlas.createSprite("Yellow512x512"),
-                        GameManager.GAME_WIDTH / 2,
-                        GameManager.GAME_HEIGHT / 100));
+                        GameManager.GAME_WIDTH / 2f,
+                        GameManager.GAME_HEIGHT / 5f));
         gameManager.addInteractable(
                 new EatArea(
                         "Pizza Building",
                         game.manager.get(HeslingtonHustle.SOUND_EATING),
                         game.atlas.createSprite("Green512x512"),
-                        GameManager.GAME_WIDTH / 100,
-                        GameManager.GAME_HEIGHT / 100));
+                        GameManager.GAME_WIDTH / 1.3f,
+                        GameManager.GAME_HEIGHT / 4f));
 
         // This is the map setup
         map = game.manager.get(HeslingtonHustle.MAP_NAME);
