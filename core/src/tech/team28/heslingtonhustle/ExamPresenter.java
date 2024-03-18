@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -11,8 +12,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class ExamPresenter implements Screen{
     final HeslingtonHustle game;
     private Stage stage;
-    private Sprite result;
-	private ExamImage resultImage;
+    private Sprite resultSprite;
 	
 	public ExamPresenter(HeslingtonHustle hustleGame, boolean winBool){
 		game = hustleGame;
@@ -23,16 +23,15 @@ public class ExamPresenter implements Screen{
 
 
         if (winBool){
-            result = game.atlas.createSprite("win");
-			//resultImage = new ExamImage(game.atlas, 0, 0, "win");
+            resultSprite = game.atlas.createSprite("win");
         }else {
-			result = game.atlas.createSprite("lose");
-            //resultImage = new ExamImage(game.atlas, 0, 0, "lose");
+			resultSprite = game.atlas.createSprite("lose");
         }
 
 		
         
-        result.setSize(512, 512);
+        resultSprite.setSize(512, 512);
+		centreResult();
 	}
  
 	@Override
@@ -50,20 +49,27 @@ public class ExamPresenter implements Screen{
         // Clear screen ready for new frame
         ScreenUtils.clear(Color.BLACK);
 
-
-        this.result.draw(game.batch);
-		//this.resultImage.draw(game.batch);
+        this.resultSprite.draw(game.batch);
 
 		game.batch.end();
 
 		stage.act(delta);
         stage.draw();
 	}
- 
+
+	private void centreResult() {
+		float x = (float) stage.getViewport().getScreenWidth() / 2;
+		float y = (float) stage.getViewport().getScreenHeight() / 2;
+		x -= resultSprite.getWidth() / 2;
+		y -= resultSprite.getHeight() / 2;
+		resultSprite.setPosition(x, y);
+	}
+
 	@Override
 	public void resize(int width, int height) {
 		// change the stage's viewport when teh screen size is changed
 		stage.getViewport().update(width, height, true);
+		centreResult();
 	}
  
 	@Override
