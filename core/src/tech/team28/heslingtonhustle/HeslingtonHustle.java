@@ -12,7 +12,7 @@ public class HeslingtonHustle extends Game {
     public AssetManager manager;
     public SpriteBatch batch;
     public TextureAtlas atlas;
-    public static final String ATLAS_NAME = "pack.atlas";
+    public static final String ATLAS_NAME = "textures/pack.atlas";
     public static final String MAP_NAME = "map/map.tmx";
 
 
