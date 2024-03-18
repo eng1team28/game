@@ -85,7 +85,11 @@ public class GameScreen implements Screen {
         table.setFillParent(true);
         table.top().left();
 
-        Label.LabelStyle sillyStyle = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        BitmapFont currentFont = new BitmapFont();
+
+        currentFont.getData().setScale(3f, 3f);
+
+        Label.LabelStyle sillyStyle = new Label.LabelStyle(currentFont, Color.WHITE);
         /**
          * The next couple of lines initialises labels for displaying game information
          */
