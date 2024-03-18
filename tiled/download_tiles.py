@@ -12,6 +12,17 @@ from PIL import Image
 # https://mc.bbbike.org/mc
 # josm
 
+# for finer control of area:
+# download excess
+# crop to desired size in gnu image
+# size should be power of 2 for tiles
+# can view offset in gnu image
+# X: -2096
+# Y: -1100
+# then re-split for sprites with imagemagick:
+# convert map.png -crop 5x4@ map-%d.png
+# https://imagemagick.org/Usage/crop/#crop_spaced
+
 ZOOM = 19
 START_X = 260632
 START_Y = 168460
