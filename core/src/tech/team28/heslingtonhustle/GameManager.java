@@ -70,8 +70,8 @@ public class GameManager {
 
     private GameManager() {
         day = Day.Monday;
-        time = 0;
-        dayDuration = 24;
+        time = 7;
+        dayDuration = 23;
         interactables = new Array<Interactable>(4);
     }
 
@@ -131,7 +131,7 @@ public class GameManager {
      *
      */
 
-    float getTime() {
+    public float getTime() {
         return time;
     }
 
@@ -161,7 +161,7 @@ public class GameManager {
      */
     Day incrementDay() {
         // TODO - What happens after Sunday? does index need to wrap around array?
-        time = 0; // reset time of day
+        time = 7; // reset time of day
 
         Day[] days = Day.values(); // get an array of all the enum constants
         int index = day.ordinal(); // get the index of the current day in the array

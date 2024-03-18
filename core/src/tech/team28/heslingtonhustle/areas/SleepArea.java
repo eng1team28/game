@@ -24,12 +24,11 @@ public class SleepArea extends Interactable {
     }
 
     public SleepArea(TextureAtlas atlas) {
-        this(atlas, 8, 100, GameManager.GAME_WIDTH / 100, GameManager.GAME_HEIGHT / 2);
+        this(atlas, 5, 100, GameManager.GAME_WIDTH / 100, GameManager.GAME_HEIGHT / 2);
     }
 
     @Override
     public void interact(Player player) {
-        gameManager.incrementTime(sleepDuration);
         gameManager
                 .getAreaCounter()
                 .setSleepAreaCounter(gameManager.getAreaCounter().getSleepAreaCounter() + 1);
@@ -39,5 +38,16 @@ public class SleepArea extends Interactable {
 
     private void applySleepEffect(Player player) {
         player.setEnergy(player.getEnergy() + sleepEnergyRecovery);
+        float current_time = gameManager.getTime();
+
+        if (current_time <= 12 && current_time >= 7){
+            gameManager.incrementTime(sleepDuration);
+        }
+        else if (current_time < 7){
+            gameManager.incrementTime(7 - current_time);
+        }
+        else {
+            gameManager.incrementTime(30 - current_time);
+        }
     }
 }
