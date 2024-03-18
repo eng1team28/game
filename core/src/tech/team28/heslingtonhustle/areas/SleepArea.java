@@ -40,13 +40,11 @@ public class SleepArea extends Interactable {
         player.setEnergy(player.getEnergy() + sleepEnergyRecovery);
         float current_time = gameManager.getTime();
 
-        if (current_time <= 12 && current_time >= 7){
+        if (current_time <= 12 && current_time >= 7) {
             gameManager.incrementTime(sleepDuration);
-        }
-        else if (current_time < 7){
+        } else if (current_time < 7) {
             gameManager.incrementTime(7 - current_time);
-        }
-        else {
+        } else {
             gameManager.incrementTime(30 - current_time);
         }
     }

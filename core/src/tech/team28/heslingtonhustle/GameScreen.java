@@ -23,30 +23,31 @@ import tech.team28.heslingtonhustle.areas.SleepArea;
 import tech.team28.heslingtonhustle.areas.StudyArea;
 
 /**
- * Represents the main game screen where the game logic and rendering occur.
- * Implements the {@link com.badlogic.gdx.Screen} interface.
+ * Represents the main game screen where the game logic and rendering occur. Implements the {@link
+ * com.badlogic.gdx.Screen} interface.
  */
 public class GameScreen implements Screen {
 
     final HeslingtonHustle game; // Reference to the main game instance
-    private final OrthographicCamera camera; //Camera for rendering
-    private final Viewport viewport; //Viewport for rendering
-    private final Player player; //Player Character
-    private TiledMap map; //Sprite for representing game map
+    private final OrthographicCamera camera; // Camera for rendering
+    private final Viewport viewport; // Viewport for rendering
+    private final Player player; // Player Character
+    private TiledMap map; // Sprite for representing game map
     private OrthogonalTiledMapRenderer mapRenderer;
-    private Stage stage; //Stage for UI
+    private Stage stage; // Stage for UI
     // We have many labels
     // Could move these into some other class for UI?
-    private Label dayLabel; //Label for displaying the day 
-    private Label timeLabel; //Label for displaying the time
-    private Label energyLabel; //Label for displaying the player's energy
-    private Label intelligenceLabel; //Label for displaying the player's intellignece
-    private Label happinessLabel; //Label for displaying the player's happiness
-    private Label disclaimerLabel;  //Label for copyright notice
-    private final GameManager gameManager; //Instance of game manager
+    private Label dayLabel; // Label for displaying the day
+    private Label timeLabel; // Label for displaying the time
+    private Label energyLabel; // Label for displaying the player's energy
+    private Label intelligenceLabel; // Label for displaying the player's intellignece
+    private Label happinessLabel; // Label for displaying the player's happiness
+    private Label disclaimerLabel; // Label for copyright notice
+    private final GameManager gameManager; // Instance of game manager
 
     /**
      * Constructs a new GameScreen instance with the specified game.
+     *
      * @param game The main game instance.
      */
     public GameScreen(final HeslingtonHustle game) {
@@ -62,9 +63,7 @@ public class GameScreen implements Screen {
         // Player and interactables
         player = new Player(game.atlas);
         gameManager.setPlayer(player);
-        /**
-         *The next couple of lines adds interactables to the game manager
-         */
+        // The next couple of lines adds interactables to the game manager
         gameManager.addInteractable(new StudyArea(game.atlas));
         gameManager.addInteractable(new SleepArea(game.atlas));
         gameManager.addInteractable(new RecreationalArea(game.atlas));
@@ -78,9 +77,7 @@ public class GameScreen implements Screen {
                         1f,
                         GameManager.GAME_WIDTH / 2.6f,
                         GameManager.GAME_HEIGHT / 100));
-        /**
-         * This is the map setup
-         */
+        // This is the map setup
         map = game.manager.get(HeslingtonHustle.MAP_NAME);
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
@@ -95,9 +92,7 @@ public class GameScreen implements Screen {
         currentFont.getData().setScale(3f, 3f);
 
         Label.LabelStyle sillyStyle = new Label.LabelStyle(currentFont, Color.WHITE);
-        /**
-         * The next couple of lines initialises labels for displaying game information
-         */
+        // The next couple of lines initialises labels for displaying game information
         dayLabel = new Label("", sillyStyle);
         timeLabel = new Label("", sillyStyle);
         energyLabel = new Label("", sillyStyle);
@@ -117,18 +112,18 @@ public class GameScreen implements Screen {
         lowerTable.row().left();
         lowerTable.add(disclaimerLabel);
 
-        /**
-         * Adds a UI element represented by a table to the stage
-         * a Table is a LibGDX feature which organises and layouts UI elements 
-         * in a structured manner
-         * All UI elements within the table will be rendered and managed by stage
-         */
+        /*
+         Adds a UI element represented by a table to the stage a Table is a LibGDX feature which
+         organises and layouts UI elements in a structured manner All UI elements within the table
+         will be rendered and managed by stage
+        */
         stage.addActor(table);
         stage.addActor(lowerTable);
     }
 
-     /**
+    /**
      * Renders the game screen.
+     *
      * @param delta The time elapsed since the last frame.
      */
     @Override
@@ -165,8 +160,8 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         game.batch.begin();
-        //Draw the map
-        //Draw interactables
+        // Draw the map
+        // Draw interactables
         for (Interactable interactable : GameManager.getInstance().getInteractables()) {
             interactable.draw(game.batch);
         }
@@ -209,9 +204,7 @@ public class GameScreen implements Screen {
     @Override
     public void resume() {}
 
-    /**
-     * Gets rid of resources when the screen is no longer needed.
-     */
+    /** Gets rid of resources when the screen is no longer needed. */
     @Override
     public void dispose() {
         stage.dispose();

@@ -15,10 +15,8 @@ public class HeslingtonHustle extends Game {
     public static final String ATLAS_NAME = "textures/pack.atlas";
     public static final String MAP_NAME = "map/map.tmx";
 
-
     @Override
     public void create() {
-        
 
         // Asset manager loading
         manager = new AssetManager();
@@ -33,7 +31,7 @@ public class HeslingtonHustle extends Game {
         this.setScreen(new GameScreen(this));
     }
 
-    public void examCutscene(boolean winBool){
+    public void examCutscene(boolean winBool) {
         this.setScreen(new ExamPresenter(this, winBool));
     }
 
@@ -43,6 +41,4 @@ public class HeslingtonHustle extends Game {
         // Disposing of the manager disposes of all its assets
         manager.dispose();
     }
-
-
 }

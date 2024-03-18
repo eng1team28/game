@@ -11,11 +11,11 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class MoveComponent {
 
-    private Vector2 velocity;
-    private Vector2 targetVelocity;
+    private final Vector2 velocity;
+    private final Vector2 targetVelocity;
 
-    private float maxSpeed;
-    private float acceleration;
+    private final float maxSpeed;
+    private final float acceleration;
 
     /**
      * Constructs a new {@code MoveComponent} with specified acceleration and maximum speed.

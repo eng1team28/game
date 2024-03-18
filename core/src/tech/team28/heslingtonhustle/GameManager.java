@@ -24,30 +24,31 @@ public class GameManager {
         ExamDay
     }
 
-    private Day day; //Current day respective to the game
-    private float time; //Current time
-    private final float dayDuration; //Duration of a day in the game
-    private Player player; //The player 
-    //Counter for different areas in the game
+    private Day day; // Current day respective to the game
+    private float time; // Current time
+    private final float dayDuration; // Duration of a day in the game
+    private Player player; // The player
+    // Counter for different areas in the game
     private final AreaCounter areaCounter = new AreaCounter();
-    private Array<Interactable> interactables; //Array of interactable objects in the game
+    private Array<Interactable> interactables; // Array of interactable objects in the game
 
-    
-    /** 
+    /**
      * Determines the player
+     *
      * @param player The player that's playing
      */
     public void setPlayer(Player player) {
         this.player = player;
     }
 
-    //Retrieves the list of interactable objects and returns them in an array
+    // Retrieves the list of interactable objects and returns them in an array
     public Array<Interactable> getInteractables() {
         return interactables;
     }
 
     /**
      * Adds a new interactable object to the game.
+     *
      * @param newInteractable The new interactable object to add.
      * @return True if the interactable was successfully added, False otherwise.
      */
@@ -56,12 +57,12 @@ public class GameManager {
         return true;
     }
 
-    //Singleton instance of the GameManager
+    // Singleton instance of the GameManager
     private static GameManager instance;
 
     /**
-     * Private constructor to prevent instantiation from outside the class.
-     * Initializes default values for day, time, and interactables.
+     * Private constructor to prevent instantiation from outside the class. Initializes default
+     * values for day, time, and interactables.
      */
     private GameManager() {
         day = Day.Monday;
@@ -70,15 +71,14 @@ public class GameManager {
         interactables = new Array<Interactable>(4);
     }
 
-
-    public void SetGame(HeslingtonHustle currentGame){
+    public void SetGame(HeslingtonHustle currentGame) {
         this.game = currentGame;
     }
 
-
     /**
-     * Retrieves the singleton instance of the GameManager.
-     * If the instance does not exist, creates a new one.
+     * Retrieves the singleton instance of the GameManager. If the instance does not exist, creates
+     * a new one.
+     *
      * @return The GameManager instance.
      */
     public static GameManager getInstance() {
@@ -89,8 +89,9 @@ public class GameManager {
     }
 
     /**
-     * Increments the time in the game by the specified amount.
-     * If the time exceeds a day's duration, increments the day.
+     * Increments the time in the game by the specified amount. If the time exceeds a day's
+     * duration, increments the day.
+     *
      * @param amount The amount by which to increment the time.
      * @return True if the time was successfully incremented, False otherwise.
      */
@@ -117,9 +118,7 @@ public class GameManager {
      * Getter for the current time
      *
      * @return The current time of day in arbitrary units.
-     *
      */
-
     public float getTime() {
         return time;
     }
@@ -139,22 +138,19 @@ public class GameManager {
     Day incrementDay() {
         time = 0; // reset time of day
         Day[] days = Day.values(); // get an array of all the enum constants
-        if (this.day.equals(days[6])){
+        if (this.day.equals(days[6])) {
             this.TakeExam();
             return days[7];
-        }
-        else{
-        
+        } else {
+
             int index = day.ordinal(); // get the index of the current day in the array
             index = (index + 1) % days.length; // add one to the index and wrap around the array
             day = days[index]; // get the new enum value and assign it to the day variable
             return day;
         }
-        
-        
     }
 
-    public void setEndDay(){
+    public void setEndDay() {
         this.day = Day.values()[6];
         this.incrementDay();
     }
@@ -163,8 +159,7 @@ public class GameManager {
 
         boolean examWin;
         examWin = player.getIntelligence() >= 60;
-        player.setPosition(150, 0);//Move player into a position so they can see the result
+        player.setPosition(150, 0); // Move player into a position, so they can see the result
         this.game.examCutscene(examWin);
-
     }
 }
