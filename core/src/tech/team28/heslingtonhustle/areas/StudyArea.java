@@ -1,6 +1,7 @@
 package tech.team28.heslingtonhustle.areas;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import tech.team28.heslingtonhustle.GameManager;
 import tech.team28.heslingtonhustle.Interactable;
 import tech.team28.heslingtonhustle.Player;
@@ -12,19 +13,21 @@ public class StudyArea extends Interactable {
     private final GameManager gameManager;
 
     public StudyArea(
-            TextureAtlas atlas,
-            float studyDuration,
-            float studyEnergyCost,
+            String name,
+            Sound sound,
+            Sprite sprite,
             float spawnPosX,
-            float spawnPosY) {
-        super(atlas.createSprite("Blue512x512"), spawnPosX, spawnPosY);
+            float spawnPosY,
+            float studyDuration,
+            float studyEnergyCost) {
+        super(name, sound, sprite, spawnPosX, spawnPosY);
         this.studyDuration = studyDuration;
         this.studyEnergyCost = studyEnergyCost;
         this.gameManager = GameManager.getInstance();
     }
 
-    public StudyArea(TextureAtlas atlas) {
-        this(atlas, 1, 10, GameManager.GAME_WIDTH / 2, GameManager.GAME_HEIGHT / 2);
+    public StudyArea(String name, Sound sound, Sprite sprite, float spawnPosX, float spawnPosY) {
+        this(name, sound, sprite, spawnPosX, spawnPosY, 1, 10);
     } // Overriding Constructor for default values
 
     @Override
@@ -36,6 +39,7 @@ public class StudyArea extends Interactable {
                 .getAreaCounter()
                 .setStudyAreaCounter(gameManager.getAreaCounter().getStudyAreaCounter() + 1);
         applyStudyEffect(player);
+        interactSound.play();
     }
 
     private void applyStudyEffect(Player player) {

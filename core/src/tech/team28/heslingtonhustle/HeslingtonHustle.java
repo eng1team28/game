@@ -3,6 +3,7 @@ package tech.team28.heslingtonhustle;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,6 +18,10 @@ public class HeslingtonHustle extends Game {
     public static final String ATLAS_NAME = "textures/pack.atlas";
     public static final String MAP_NAME = "map/map.tmx";
     public static final String FONT_NAME = "lsans-32.fnt";
+    public static final String SOUND_QUACK = "sound/duck-quacking.mp3";
+    public static final String SOUND_EATING = "sound/eating.mp3";
+    public static final String SOUND_STUDY = "sound/library-environment.mp3";
+    public static final String SOUND_SLEEP = "sound/sleep.mp3";
 
     @Override
     public void create() {
@@ -27,6 +32,10 @@ public class HeslingtonHustle extends Game {
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load(MAP_NAME, TiledMap.class);
         manager.load(FONT_NAME, BitmapFont.class);
+        manager.load(SOUND_EATING, Sound.class);
+        manager.load(SOUND_QUACK, Sound.class);
+        manager.load(SOUND_STUDY, Sound.class);
+        manager.load(SOUND_SLEEP, Sound.class);
         manager.finishLoading();
 
         // Create shared resources

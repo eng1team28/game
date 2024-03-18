@@ -1,6 +1,7 @@
 package tech.team28.heslingtonhustle.areas;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import tech.team28.heslingtonhustle.GameManager;
 import tech.team28.heslingtonhustle.Interactable;
 import tech.team28.heslingtonhustle.Player;
@@ -12,19 +13,21 @@ public class SleepArea extends Interactable {
     private final GameManager gameManager;
 
     public SleepArea(
-            TextureAtlas atlas,
-            float sleepDuration,
-            float sleepEnergyRecovery,
+            String name,
+            Sound sound,
+            Sprite sprite,
             float spawnPosX,
-            float spawnPosY) {
-        super(atlas.createSprite("Red512x512"), spawnPosX, spawnPosY);
+            float spawnPosY,
+            float sleepDuration,
+            float sleepEnergyRecovery) {
+        super(name, sound, sprite, spawnPosX, spawnPosY);
         this.sleepDuration = sleepDuration;
         this.sleepEnergyRecovery = sleepEnergyRecovery;
         this.gameManager = GameManager.getInstance();
     }
 
-    public SleepArea(TextureAtlas atlas) {
-        this(atlas, 5, 100, GameManager.GAME_WIDTH / 100, GameManager.GAME_HEIGHT / 2);
+    public SleepArea(String name, Sound sound, Sprite sprite, float spawnPosX, float spawnPosY) {
+        this(name, sound, sprite, spawnPosX, spawnPosY, 5, 100);
     }
 
     @Override
@@ -34,6 +37,7 @@ public class SleepArea extends Interactable {
                 .setSleepAreaCounter(gameManager.getAreaCounter().getSleepAreaCounter() + 1);
 
         applySleepEffect(player);
+        interactSound.play();
     }
 
     private void applySleepEffect(Player player) {

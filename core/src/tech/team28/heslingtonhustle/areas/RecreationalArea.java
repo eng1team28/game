@@ -1,6 +1,7 @@
 package tech.team28.heslingtonhustle.areas;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import tech.team28.heslingtonhustle.GameManager;
 import tech.team28.heslingtonhustle.Interactable;
 import tech.team28.heslingtonhustle.Player;
@@ -13,21 +14,24 @@ public class RecreationalArea extends Interactable {
     private final GameManager gameManager;
 
     public RecreationalArea(
-            TextureAtlas atlas,
+            String name,
+            Sound sound,
+            Sprite sprite,
+            float spawnPosX,
+            float spawnPosY,
             float recreationDuration,
             double recreationHappinessGain,
-            float recreationEnergyCost,
-            float spawnPosX,
-            float spawnPosY) {
-        super(atlas.createSprite("Yellow512x512"), spawnPosX, spawnPosY);
+            float recreationEnergyCost) {
+        super(name, sound, sprite, spawnPosX, spawnPosY);
         this.recreationDuration = recreationDuration;
         this.recreationHappinessGain = recreationHappinessGain;
         this.recreationEnergyCost = recreationEnergyCost;
         this.gameManager = GameManager.getInstance();
     }
 
-    public RecreationalArea(TextureAtlas atlas) {
-        this(atlas, 1, 0.3, 10, GameManager.GAME_WIDTH / 2, GameManager.GAME_HEIGHT / 100);
+    public RecreationalArea(
+            String name, Sound sound, Sprite sprite, float spawnPosX, float spawnPosY) {
+        this(name, sound, sprite, spawnPosX, spawnPosY, 1, 0.3, 10);
     }
 
     @Override
@@ -39,6 +43,7 @@ public class RecreationalArea extends Interactable {
                         gameManager.getAreaCounter().getRecreationalAreaCounter() + 1);
 
         applyRecreationalEffect(player);
+        interactSound.play();
     }
 
     private void applyRecreationalEffect(Player player) {

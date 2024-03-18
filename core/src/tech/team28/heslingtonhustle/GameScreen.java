@@ -64,19 +64,35 @@ public class GameScreen implements Screen {
         player = new Player(game.atlas);
         gameManager.setPlayer(player);
         // The next couple of lines adds interactables to the game manager
-        gameManager.addInteractable(new StudyArea(game.atlas));
-        gameManager.addInteractable(new SleepArea(game.atlas));
-        gameManager.addInteractable(new RecreationalArea(game.atlas));
-        gameManager.addInteractable(new EatArea(game.atlas));
-
-        // For Debugging Interaction
+        gameManager.addInteractable(
+                new StudyArea(
+                        "Computer Science Building",
+                        game.manager.get(HeslingtonHustle.SOUND_STUDY),
+                        game.atlas.createSprite("Blue512x512"),
+                        GameManager.GAME_WIDTH / 2,
+                        GameManager.GAME_HEIGHT / 2));
+        gameManager.addInteractable(
+                new SleepArea(
+                        "A College",
+                        game.manager.get(HeslingtonHustle.SOUND_SLEEP),
+                        game.atlas.createSprite("Red512x512"),
+                        GameManager.GAME_WIDTH / 100,
+                        GameManager.GAME_HEIGHT / 2));
+        gameManager.addInteractable(
+                new RecreationalArea(
+                        "Duck Pond",
+                        game.manager.get(HeslingtonHustle.SOUND_QUACK),
+                        game.atlas.createSprite("Yellow512x512"),
+                        GameManager.GAME_WIDTH / 2,
+                        GameManager.GAME_HEIGHT / 100));
         gameManager.addInteractable(
                 new EatArea(
-                        game.atlas,
-                        1f,
-                        1f,
-                        GameManager.GAME_WIDTH / 2.6f,
+                        "Pizza Building",
+                        game.manager.get(HeslingtonHustle.SOUND_EATING),
+                        game.atlas.createSprite("Green512x512"),
+                        GameManager.GAME_WIDTH / 100,
                         GameManager.GAME_HEIGHT / 100));
+
         // This is the map setup
         map = game.manager.get(HeslingtonHustle.MAP_NAME);
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);

@@ -1,5 +1,6 @@
 package tech.team28.heslingtonhustle;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
@@ -7,6 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * entities are objects with which the player can interact.
  */
 public abstract class Interactable extends Entity {
+    protected String name;
+    protected Sound interactSound;
+
     /**
      * Constructs an Interactable entity with the specified sprite and spawn position.
      *
@@ -14,8 +18,10 @@ public abstract class Interactable extends Entity {
      * @param spawnPosX The X coordinate of the spawn position.
      * @param spawnPosY The Y coordinate of the spawn position.
      */
-    public Interactable(Sprite sprite, float spawnPosX, float spawnPosY) {
+    public Interactable(String name, Sound sound, Sprite sprite, float spawnPosX, float spawnPosY) {
         super(sprite, spawnPosX, spawnPosY);
+        this.name = name;
+        this.interactSound = sound;
     }
 
     /**
