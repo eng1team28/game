@@ -42,6 +42,7 @@ public class GameScreen implements Screen {
     private Label energyLabel; //Label for displaying the player's energy
     private Label intelligenceLabel; //Label for displaying the player's intellignece
     private Label happinessLabel; //Label for displaying the player's happiness
+    private Label disclaimerLabel;  //Label for copyright notice
     private final GameManager gameManager; //Instance of game manager
 
     /**
@@ -108,6 +109,14 @@ public class GameScreen implements Screen {
             table.row().left();
             table.add(label);
         }
+
+        disclaimerLabel = new Label("Map background (c) OpenStreetMap contributors", sillyStyle);
+        Table lowerTable = new Table();
+        // todo make this right-aligned?
+        lowerTable.bottom().left();
+        lowerTable.row().left();
+        lowerTable.add(disclaimerLabel);
+
         /**
          * Adds a UI element represented by a table to the stage
          * a Table is a LibGDX feature which organises and layouts UI elements 
@@ -115,6 +124,7 @@ public class GameScreen implements Screen {
          * All UI elements within the table will be rendered and managed by stage
          */
         stage.addActor(table);
+        stage.addActor(lowerTable);
     }
 
      /**
