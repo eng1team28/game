@@ -81,7 +81,7 @@ public class GameScreen implements Screen {
          * This is the map setup
          */
         map = game.manager.get(HeslingtonHustle.MAP_NAME);
-        mapRenderer = new OrthogonalTiledMapRenderer(map);
+        mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
         // Scene2D stage and UI
         stage = new Stage();

@@ -6,10 +6,10 @@ public class GameManager {
     // Size of the game region in arbitrary units
     // This is not the size of the window in pixels
     // The game region is scaled by the camera
-    public static final float GAME_WIDTH = 2568;
-    public static final float GAME_HEIGHT = 1424f;
+    public static final float GAME_WIDTH = 2048f;
+    public static final float GAME_HEIGHT = 2048f;
     // View width is dynamically determined by window aspect ratio
-    public static final float VIEW_HEIGHT = 712f;
+    public static final float VIEW_HEIGHT = 512f;
 
     HeslingtonHustle game;
 
