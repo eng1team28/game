@@ -10,8 +10,8 @@ public class ExamManager {
     private float passMark = 60;
     /**
      * Constructs an ExamManager with the specified player and pass mark.
-     * @param player    The player taking the exam.
-     * @param passMark  The pass mark required to pass the exam.
+     * @param player The player taking the exam.
+     * @param passMark The pass mark required to pass the exam.
      */
     public ExamManager(Player player, float passMark) {
         this.player = player;

@@ -21,7 +21,7 @@ public abstract class Entity extends Sprite {
 
     /**
      * Constructs an entity with the provided sprite and spawn position.
-     * @param sprite     The sprite representing the entity.
+     * @param sprite The sprite representing the entity.
      * @param spawnPosX, @param spawnPoxY The X and Y coordinate of the spawn position.
      */
     public Entity(Sprite sprite, float spawnPosX, float spawnPosY) {

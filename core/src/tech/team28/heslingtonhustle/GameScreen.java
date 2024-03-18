@@ -168,7 +168,7 @@ public class GameScreen implements Screen {
     /**
      * Updates the viewport when the screen is resized.
      *
-     * @param width  The new width of the screen.
+     * @param width The new width of the screen.
      * @param height The new height of the screen.
      */
     @Override
