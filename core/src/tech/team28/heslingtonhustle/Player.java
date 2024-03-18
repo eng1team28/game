@@ -2,6 +2,7 @@ package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -36,14 +37,15 @@ public class Player extends Entity {
     public boolean isFacingRight = true;
     public boolean isMoving = false;
     private float interactRange = 150;
-    private Sprite movingSprite;
+    private Animation<Sprite> walkAnimation;
+    private float walkDelta = 0f;
 
     /** Constructor for the Player class. Initializes player attributes and components. */
     public Player(Sprite sprite, Array<Sprite> animationFrames, float spawnPosX, float spawnPosY) {
         // could give the player a name?
         super(sprite, spawnPosX, spawnPosY);
 
-        movingSprite = animationFrames.first();
+        walkAnimation = new Animation<>(0.1f, animationFrames, Animation.PlayMode.LOOP);
 
         setSize(width, height);
         energy = 100;
@@ -155,6 +157,11 @@ public class Player extends Entity {
         setFlip(!isFacingRight, false);
 
         isMoving = !moveComponent.velocity.isZero(1f);
+        if (isMoving) {
+            walkDelta += delta;
+        } else {
+            walkDelta = 0f;
+        }
 
         // Clamp collider to screen
         collider.x = MathUtils.clamp(collider.x, 0, GameManager.GAME_WIDTH - collider.width);
@@ -193,6 +200,7 @@ public class Player extends Entity {
     }
 
     public Sprite getMovingFrame() {
+        Sprite movingSprite = walkAnimation.getKeyFrame(walkDelta);
         movingSprite.setPosition(getX(), getY());
         movingSprite.setFlip(isFlipX(), false);
         return movingSprite;
