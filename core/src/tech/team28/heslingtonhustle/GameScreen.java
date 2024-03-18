@@ -116,6 +116,7 @@ public class GameScreen implements Screen {
 
         BitmapFont currentFont = game.font;
         Label.LabelStyle sillyStyle = new Label.LabelStyle(currentFont, Color.WHITE);
+        sillyStyle.font.getData().setScale(0.4f);
         // The next couple of lines initialises labels for displaying game information
         dayLabel = new Label("", sillyStyle);
         timeLabel = new Label("", sillyStyle);
