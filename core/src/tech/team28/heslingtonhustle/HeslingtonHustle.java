@@ -48,7 +48,7 @@ public class HeslingtonHustle extends Game {
     }
 
     public void examCutscene(boolean winBool) {
-        this.setScreen(new ExamPresenter(this, winBool));
+        this.setScreen(new ResultScreen(this, winBool));
     }
 
     @Override

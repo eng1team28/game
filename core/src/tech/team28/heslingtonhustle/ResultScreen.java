@@ -8,12 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class ExamPresenter implements Screen {
+public class ResultScreen implements Screen {
     final HeslingtonHustle game;
     private final Stage stage;
     private final Sprite resultSprite;
 
-    public ExamPresenter(HeslingtonHustle hustleGame, boolean winBool) {
+    public ResultScreen(HeslingtonHustle hustleGame, boolean winBool) {
         game = hustleGame;
 
         /// create stage and set it as input processor
