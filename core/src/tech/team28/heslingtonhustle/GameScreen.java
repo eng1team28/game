@@ -78,34 +78,40 @@ public class GameScreen implements Screen {
         gameManager.setPlayer(player);
 
         // The next couple of lines adds interactables to the game manager
-        gameManager.addInteractable(
-                new StudyArea(
+        StudyArea studyArea = new StudyArea(
                         "Computer Science Building",
                         game.manager.get(HeslingtonHustle.SOUND_STUDY),
-                        game.atlas.createSprite("Blue512x512"),
-                        GameManager.GAME_WIDTH * 0.22f,
-                        GameManager.GAME_HEIGHT * 0.01f));
-        gameManager.addInteractable(
-                new SleepArea(
+                        game.atlas.createSprite("buildings/cs"),
+                        GameManager.GAME_WIDTH * 0.10f,
+                        GameManager.GAME_HEIGHT * 0.01f);
+        studyArea.setScale(0.5f);
+        gameManager.addInteractable(studyArea);
+        SleepArea sleepArea = new SleepArea(
                         "Goodricke College",
                         game.manager.get(HeslingtonHustle.SOUND_SLEEP),
-                        game.atlas.createSprite("Red512x512"),
+                        game.atlas.createSprite("buildings/college"),
                         GameManager.GAME_WIDTH * 0.2f,
-                        GameManager.GAME_HEIGHT * 0.55f));
-        gameManager.addInteractable(
-                new RecreationalArea(
+                        GameManager.GAME_HEIGHT * 0.55f);
+        gameManager.addInteractable(sleepArea
+                );
+        RecreationalArea feedTheDucks = new RecreationalArea(
                         "Duck Pond",
                         game.manager.get(HeslingtonHustle.SOUND_QUACK),
-                        game.atlas.createSprite("Yellow512x512"),
+                        game.atlas.createSprite("ducks"),
                         GameManager.GAME_WIDTH * 0.5f,
-                        GameManager.GAME_HEIGHT * 0.2f));
-        gameManager.addInteractable(
-                new EatArea(
+                        GameManager.GAME_HEIGHT * 0.2f);
+        feedTheDucks.setScale(0.4f);
+        gameManager.addInteractable(feedTheDucks
+                );
+        EatArea eatArea = new EatArea(
                         "Pizza Building",
                         game.manager.get(HeslingtonHustle.SOUND_EATING),
-                        game.atlas.createSprite("Green512x512"),
-                        GameManager.GAME_WIDTH * 0.77f,
-                        GameManager.GAME_HEIGHT * 0.25f));
+                        game.atlas.createSprite("buildings/piazza"),
+                        GameManager.GAME_WIDTH * 0.60f,
+                        GameManager.GAME_HEIGHT * 0.30f);
+        eatArea.setScale(0.6f);
+        gameManager.addInteractable(eatArea
+                );
 
         // This is the map setup
         map = game.manager.get(HeslingtonHustle.MAP_NAME);

@@ -23,8 +23,8 @@ public abstract class Entity extends Sprite {
     public Entity(Sprite sprite, float spawnPosX, float spawnPosY) {
         super();
         set(sprite);
-        float width = 256;
-        float height = 256;
+        float width = sprite.getWidth();
+        float height = sprite.getHeight();
         setSize(width, height);
         setPosition(spawnPosX, spawnPosY);
     }

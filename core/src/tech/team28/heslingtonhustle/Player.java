@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Array;
 /** Represents the player entity in the game. Extends the {@link Entity} class. */
 public class Player extends Entity {
     // COLLIDERS
-    private float width = 32;
+    private float width = 64;
     private float height = 64;
     private final Rectangle interactCollider;
 

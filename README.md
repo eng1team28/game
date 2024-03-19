@@ -8,6 +8,7 @@ run:
 - GPL3 `LICENSE` applies to all project code
 - Map tiles © OpenStreetMap contributors, license disclaimer shown in-game
 - Player sprites royalty-free from https://youtu.be/IFNZrRSBNSw via https://spelunky.fyi/mods/m/jerma985-spelunker/
+- Ducks - CC-2.0 Rolf Brecher, https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_(mixed_pair)_(32428014687).jpg
 
 ### Sounds
 - Duck quacking.mp3 by DigPro120 -- https://freesound.org/s/558858/ -- License: Creative Commons 0
