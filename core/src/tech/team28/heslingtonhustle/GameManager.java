@@ -50,11 +50,9 @@ public class GameManager {
      * Adds a new interactable object to the game.
      *
      * @param newInteractable The new interactable object to add.
-     * @return True if the interactable was successfully added, False otherwise.
      */
-    public boolean addInteractable(Interactable newInteractable) {
+    public void addInteractable(Interactable newInteractable) {
         interactables.add(newInteractable);
-        return true;
     }
 
     // Singleton instance of the GameManager
@@ -68,7 +66,7 @@ public class GameManager {
         day = Day.Monday;
         time = 7;
         dayDuration = 24;
-        interactables = new Array<Interactable>(4);
+        interactables = new Array<>(4);
     }
 
     public void SetGame(HeslingtonHustle currentGame) {

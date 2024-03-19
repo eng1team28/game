@@ -33,17 +33,15 @@ public class GameScreen implements Screen {
     private final OrthographicCamera camera; // Camera for rendering
     private final Viewport viewport; // Viewport for rendering
     private final Player player; // Player Character
-    private TiledMap map; // Sprite for representing game map
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private Stage stage; // Stage for UI
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final Stage stage; // Stage for UI
     // We have many labels
     // Could move these into some other class for UI?
-    private Label dayLabel; // Label for displaying the day
-    private Label timeLabel; // Label for displaying the time
-    private Label energyLabel; // Label for displaying the player's energy
-    private Label intelligenceLabel; // Label for displaying the player's intellignece
-    private Label happinessLabel; // Label for displaying the player's happiness
-    private Label disclaimerLabel; // Label for copyright notice
+    private final Label dayLabel; // Label for displaying the day
+    private final Label timeLabel; // Label for displaying the time
+    private final Label energyLabel; // Label for displaying the player's energy
+    private final Label intelligenceLabel; // Label for displaying the player's intelligence
+    private final Label happinessLabel; // Label for displaying the player's happiness
     private final GameManager gameManager; // Instance of game manager
 
     /**
@@ -62,7 +60,7 @@ public class GameScreen implements Screen {
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Player and interactables
-        Array<Sprite> animationFrames = new Array<Sprite>(8);
+        Array<Sprite> animationFrames = new Array<>(8);
         for (int spriteNum = 1; spriteNum <= 8; spriteNum++) {
             Sprite frameSprite =
                     game.atlas.createSprite(String.format("player/player%d", spriteNum));
@@ -116,7 +114,7 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(feedTheDucks);
 
         // This is the map setup
-        map = game.manager.get(HeslingtonHustle.MAP_NAME);
+        TiledMap map = game.manager.get(HeslingtonHustle.MAP_NAME);
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
         // Scene2D stage and UI
@@ -141,7 +139,8 @@ public class GameScreen implements Screen {
             table.add(label);
         }
 
-        disclaimerLabel = new Label("Map background (c) OpenStreetMap contributors", sillyStyle);
+        // Label for copyright notice
+        Label disclaimerLabel = new Label("Map background (c) OpenStreetMap contributors", sillyStyle);
         Table lowerTable = new Table();
         // todo make this right-aligned?
         lowerTable.bottom().left();
