@@ -37,10 +37,7 @@ public class RecreationalArea extends Interactable {
     @Override
     public void interact(Player player) {
         gameManager.incrementTime(recreationDuration);
-        gameManager
-                .getAreaCounter()
-                .setRecreationalAreaCounter(
-                        gameManager.getAreaCounter().getRecreationalAreaCounter() + 1);
+        gameManager.getAreaCounter().incrementRecreationAreaCounter();
 
         applyRecreationalEffect(player);
         interactSound.play();

@@ -35,9 +35,7 @@ public class StudyArea extends Interactable {
         if (player.getEnergy() < studyEnergyCost || !gameManager.incrementTime(studyDuration)) {
             return;
         }
-        gameManager
-                .getAreaCounter()
-                .setStudyAreaCounter(gameManager.getAreaCounter().getStudyAreaCounter() + 1);
+        gameManager.getAreaCounter().incrementStudyAreaCounter();
         applyStudyEffect(player);
         interactSound.play();
     }

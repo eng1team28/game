@@ -34,9 +34,7 @@ public class EatArea extends Interactable {
     @Override
     public void interact(Player player) {
         gameManager.incrementTime(eatDuration);
-        gameManager
-                .getAreaCounter()
-                .setEatAreaCounter(gameManager.getAreaCounter().getEatAreaCounter() + 1);
+        gameManager.getAreaCounter().incrementEatAreaCounter();
 
         applyEatEffect(player);
         interactSound.play();

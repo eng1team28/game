@@ -140,7 +140,8 @@ public class GameScreen implements Screen {
         }
 
         // Label for copyright notice
-        Label disclaimerLabel = new Label("Map background (c) OpenStreetMap contributors", sillyStyle);
+        Label disclaimerLabel =
+                new Label("Map background (c) OpenStreetMap contributors", sillyStyle);
         Table lowerTable = new Table();
         // todo make this right-aligned?
         lowerTable.bottom().left();

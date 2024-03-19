@@ -32,9 +32,7 @@ public class SleepArea extends Interactable {
 
     @Override
     public void interact(Player player) {
-        gameManager
-                .getAreaCounter()
-                .setSleepAreaCounter(gameManager.getAreaCounter().getSleepAreaCounter() + 1);
+        gameManager.getAreaCounter().incrementSleepAreaCounter();
 
         applySleepEffect(player);
         interactSound.play();
