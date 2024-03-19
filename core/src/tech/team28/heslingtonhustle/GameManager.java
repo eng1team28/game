@@ -12,19 +12,19 @@ public class GameManager {
     public static final float VIEW_HEIGHT = 512f;
 
     enum Day {
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,
-        Sunday,
+        MONDAY,
+        TUESDAY,
+        WEDNESDAY,
+        THURSDAY,
+        FRIDAY,
+        SATURDAY,
+        SUNDAY,
     }
 
     private Day currentDay; // Current day respective to the game
     private float time; // Current time
-    private final static float dayDuration = 24; // Duration of a day in the game
-    private final static float dayStartTime = 7;
+    private final static float DAY_DURATION = 24; // Duration of a day in the game
+    private final static float DAY_START_TIME = 8;
     // Counters for different areas in the game
     private final AreaCounter areaCounter = new AreaCounter();
     private Array<Interactable> interactables; // Array of interactable objects in the game
@@ -36,8 +36,8 @@ public class GameManager {
      * values for day, time, and interactables.
      */
     private GameManager() {
-        currentDay = Day.Monday;
-        time = GameManager.dayStartTime;
+        currentDay = Day.MONDAY;
+        time = GameManager.DAY_START_TIME;
         interactables = new Array<>(4);
     }
 
@@ -84,6 +84,10 @@ public class GameManager {
         this.game = currentGame;
     }
 
+    public void resetTime() {
+        time = GameManager.DAY_START_TIME;
+    }
+
     /**
      * Increments the time in the game by the specified amount. If the time exceeds a day's
      * duration, increments the day.
@@ -93,7 +97,7 @@ public class GameManager {
      */
     public boolean incrementTime(float amount) {
         float newTime = time + amount;
-        if (newTime < 0 || newTime >= dayDuration) {
+        if (newTime < 0 || newTime >= DAY_DURATION) {
             return false;
         } else {
             time = newTime;
@@ -128,18 +132,15 @@ public class GameManager {
         return String.format("Day: %s", getCurrentDay());
     }
 
-    Day incrementDay() {
-        time = 0; // reset time of day
-        Day[] days = Day.values(); // get an array of all the enum constants
-        if (this.currentDay.equals(days[6])) {
-            this.takeExam();
-            return days[7];
+    boolean incrementDay() {
+        if (currentDay == Day.SUNDAY) {
+            return false;
         } else {
-
+            Day[] days = Day.values(); // get an array of all the enum constants
             int index = currentDay.ordinal(); // get the index of the current day in the array
-            index = (index + 1) % days.length; // add one to the index and wrap around the array
+            index++; // increment the index
             currentDay = days[index]; // get the new enum value and assign it to the day variable
-            return currentDay;
+            return true;
         }
     }
 
