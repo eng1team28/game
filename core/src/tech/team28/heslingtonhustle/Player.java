@@ -35,6 +35,7 @@ public class Player extends Entity {
     private float interactRange = 150;
     private Animation<Sprite> walkAnimation;
     private float walkDelta = 0f;
+    private float walkFrameTime = 0.01f;
 
     /** Constructor for the Player class. Initializes player attributes and components. */
     public Player(Sprite sprite, Array<Sprite> animationFrames, float spawnPosX, float spawnPosY) {
@@ -44,7 +45,7 @@ public class Player extends Entity {
         for (Sprite frameSprite : animationFrames) {
             frameSprite.setSize(width, height);
         }
-        walkAnimation = new Animation<>(0.1f, animationFrames, Animation.PlayMode.LOOP);
+        walkAnimation = new Animation<>(walkFrameTime, animationFrames, Animation.PlayMode.LOOP);
 
         setSize(width, height);
         energy = 100;
