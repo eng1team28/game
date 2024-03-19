@@ -1,3 +1,8 @@
+# Map tile editing
+tiled/dl/
+*.tiled-session
+
+
 ## Java
 
 *.class

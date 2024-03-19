@@ -11,11 +11,11 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class MoveComponent {
 
-    private Vector2 velocity;
-    private Vector2 targetVelocity;
+    public final Vector2 velocity;
+    private final Vector2 targetVelocity;
 
-    private float maxSpeed;
-    private float acceleration;
+    private final float maxSpeed;
+    private final float acceleration;
 
     /**
      * Constructs a new {@code MoveComponent} with specified acceleration and maximum speed.
@@ -38,7 +38,7 @@ public class MoveComponent {
      * @param collider The collider representing the object's bounds in the game world.
      * @param delta The time elapsed since the last frame, used for frame rate independent movement.
      */
-    public void MoveTowards(Vector2 direction, Rectangle collider, float delta) {
+    public void moveTowards(Vector2 direction, Rectangle collider, float delta) {
         // Set the target velocity based on the direction and maximum speed
         targetVelocity.set(direction).scl(maxSpeed);
 

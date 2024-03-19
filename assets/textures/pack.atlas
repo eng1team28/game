@@ -1,0 +1,155 @@
+
+pack.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+sigil
+  rotate: false
+  xy: 2, 2
+  size: 798, 862
+  orig: 798, 862
+  offset: 0, 0
+  index: -1
+
+pack2.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+ducks
+  rotate: false
+  xy: 2, 2
+  size: 640, 479
+  orig: 640, 479
+  offset: 0, 0
+  index: -1
+lose
+  rotate: false
+  xy: 245, 483
+  size: 474, 474
+  orig: 474, 474
+  offset: 0, 0
+  index: -1
+win
+  rotate: false
+  xy: 2, 773
+  size: 241, 184
+  orig: 241, 184
+  offset: 0, 0
+  index: -1
+
+pack3.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+logo
+  rotate: false
+  xy: 2, 2
+  size: 622, 608
+  orig: 622, 608
+  offset: 0, 0
+  index: -1
+
+pack4.png
+size: 512, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+player/player0
+  rotate: false
+  xy: 2, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player1
+  rotate: false
+  xy: 2, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player2
+  rotate: false
+  xy: 132, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player3
+  rotate: false
+  xy: 2, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player4
+  rotate: false
+  xy: 132, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player5
+  rotate: false
+  xy: 262, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player6
+  rotate: false
+  xy: 132, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player7
+  rotate: false
+  xy: 262, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player8
+  rotate: false
+  xy: 262, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+
+pack5.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+buildings/cs
+  rotate: false
+  xy: 2, 341
+  size: 1000, 411
+  orig: 1000, 411
+  offset: 0, 0
+  index: -1
+buildings/piazza
+  rotate: false
+  xy: 2, 2
+  size: 1000, 337
+  orig: 1000, 337
+  offset: 0, 0
+  index: -1
+
+pack6.png
+size: 1024, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+buildings/college
+  rotate: false
+  xy: 2, 2
+  size: 568, 322
+  orig: 568, 322
+  offset: 0, 0
+  index: -1
