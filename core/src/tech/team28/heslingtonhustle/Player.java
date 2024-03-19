@@ -41,7 +41,7 @@ public class Player extends Entity {
         // could give the player a name?
         super(sprite, spawnPosX, spawnPosY);
 
-        for (Sprite frameSprite: animationFrames) {
+        for (Sprite frameSprite : animationFrames) {
             frameSprite.setSize(width, height);
         }
         walkAnimation = new Animation<>(0.1f, animationFrames, Animation.PlayMode.LOOP);
