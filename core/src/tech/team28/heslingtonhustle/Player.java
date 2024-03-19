@@ -11,10 +11,6 @@ import com.badlogic.gdx.utils.Array;
 
 /** Represents the player entity in the game. Extends the {@link Entity} class. */
 public class Player extends Entity {
-
-    // TEXTURES
-    public static final String PLAYER_TEXTURE = "player";
-
     // COLLIDERS
     private float width = 32;
     private float height = 64;
@@ -45,6 +41,9 @@ public class Player extends Entity {
         // could give the player a name?
         super(sprite, spawnPosX, spawnPosY);
 
+        for (Sprite frameSprite: animationFrames) {
+            frameSprite.setSize(width, height);
+        }
         walkAnimation = new Animation<>(0.1f, animationFrames, Animation.PlayMode.LOOP);
 
         setSize(width, height);
