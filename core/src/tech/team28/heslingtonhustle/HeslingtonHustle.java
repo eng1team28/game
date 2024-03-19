@@ -1,6 +1,8 @@
 package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Sound;
@@ -47,6 +49,16 @@ public class HeslingtonHustle extends Game {
 
     public void examCutscene(boolean winBool) {
         this.setScreen(new ExamPresenter(this, winBool));
+    }
+
+    @Override
+    public void render() {
+        super.render();
+        // Fast quit keybinding
+        if (Util.allKeysPressed(Input.Keys.CONTROL_LEFT, Input.Keys.Q)
+                || Util.allKeysPressed(Input.Keys.CONTROL_RIGHT, Input.Keys.Q)) {
+            Gdx.app.exit();
+        }
     }
 
     @Override
