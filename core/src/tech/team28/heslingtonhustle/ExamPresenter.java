@@ -35,18 +35,10 @@ public class ExamPresenter implements Screen {
 
     @Override
     public void render(float delta) {
-        game.batch.begin();
-        // Fast quit keybinding
-        // if (Util.allKeysPressed(Input.Keys.CONTROL_LEFT, Input.Keys.Q)
-        //        || Util.allKeysPressed(Input.Keys.CONTROL_RIGHT, Input.Keys.Q)) {
-        //    Gdx.app.exit();
-        // }
-
-        // Clear screen ready for new frame
         ScreenUtils.clear(Color.BLACK);
 
+        game.batch.begin();
         this.resultSprite.draw(game.batch);
-
         game.batch.end();
 
         stage.act(delta);
@@ -54,6 +46,7 @@ public class ExamPresenter implements Screen {
     }
 
     private void centreResult() {
+        // todo fix
         float x = (float) stage.getViewport().getScreenWidth() / 2;
         float y = (float) stage.getViewport().getScreenHeight() / 2;
         x -= resultSprite.getWidth() / 2;
