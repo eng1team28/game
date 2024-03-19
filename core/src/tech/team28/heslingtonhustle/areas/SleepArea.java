@@ -6,6 +6,7 @@ import tech.team28.heslingtonhustle.GameManager;
 import tech.team28.heslingtonhustle.Interactable;
 import tech.team28.heslingtonhustle.Player;
 
+/** Represents a type of interactable where the player will sleep to gain energy. */
 public class SleepArea extends Interactable {
 
     private final float sleepDuration;

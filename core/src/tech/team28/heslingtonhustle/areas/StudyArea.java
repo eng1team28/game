@@ -6,6 +6,10 @@ import tech.team28.heslingtonhustle.GameManager;
 import tech.team28.heslingtonhustle.Interactable;
 import tech.team28.heslingtonhustle.Player;
 
+/**
+ * Represents a type of interactable where the player will expend energy and happiness to gain
+ * intelligence.
+ */
 public class StudyArea extends Interactable {
 
     private final float studyDuration;

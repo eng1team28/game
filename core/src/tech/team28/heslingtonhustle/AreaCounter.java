@@ -5,7 +5,7 @@ package tech.team28.heslingtonhustle;
  * interactable.
  */
 public class AreaCounter {
-    // Field for counting each kind of interaction event.
+    // Fields for counting each kind of interaction event.
     private int eatAreaCounter = 0;
     private int recreationAreaCounter = 0;
     private int sleepAreaCounter = 0;

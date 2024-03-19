@@ -6,9 +6,11 @@ import tech.team28.heslingtonhustle.GameManager;
 import tech.team28.heslingtonhustle.Interactable;
 import tech.team28.heslingtonhustle.Player;
 
+/** Represents a type of interactable where the player will eat to gain energy. */
 public class EatArea extends Interactable {
-
+    /** */
     private final float eatDuration;
+
     private final float eatEnergyGain;
 
     private final GameManager gameManager;

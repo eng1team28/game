@@ -11,6 +11,9 @@ public abstract class Interactable extends Entity {
     protected String name;
     protected Sound interactSound;
 
+    // todo add base duration field all interactables will override
+    // protected float interactDuration;
+
     /**
      * Constructs an Interactable entity with the specified sprite and spawn position.
      *
