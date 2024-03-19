@@ -7,6 +7,7 @@ run:
 ## Copyright
 - GPL3 `LICENSE` applies to all project code
 - Map tiles © OpenStreetMap contributors, license disclaimer shown in-game
+- Player sprites royalty-free from https://youtu.be/IFNZrRSBNSw via https://spelunky.fyi/mods/m/jerma985-spelunker/
 
 ### Sounds
 - Duck quacking.mp3 by DigPro120 -- https://freesound.org/s/558858/ -- License: Creative Commons 0

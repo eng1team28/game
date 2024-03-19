@@ -79,27 +79,70 @@ Yellow512x512
   index: -1
 
 pack6.png
-size: 256, 256
-format: RGBA8888
-filter: Nearest, Nearest
-repeat: none
-win
-  rotate: false
-  xy: 2, 2
-  size: 241, 184
-  orig: 241, 184
-  offset: 0, 0
-  index: -1
-
-pack7.png
 size: 512, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-win
+player/player0
+  rotate: false
+  xy: 2, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player1
+  rotate: false
+  xy: 2, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player2
+  rotate: false
+  xy: 132, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player3
   rotate: false
   xy: 2, 2
-  size: 474, 474
-  orig: 474, 474
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player4
+  rotate: false
+  xy: 132, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player5
+  rotate: false
+  xy: 262, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player6
+  rotate: false
+  xy: 132, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player7
+  rotate: false
+  xy: 262, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+player/player8
+  rotate: false
+  xy: 262, 2
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1

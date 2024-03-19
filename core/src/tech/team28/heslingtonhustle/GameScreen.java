@@ -63,11 +63,15 @@ public class GameScreen implements Screen {
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Player and interactables
-        Array<Sprite> animationFrames = new Array<Sprite>(1);
-        animationFrames.add(game.atlas.createSprite("player-moving"));
+        Array<Sprite> animationFrames = new Array<Sprite>(8);
+        for (int spriteNum = 1; spriteNum <= 8; spriteNum++) {
+            Sprite frameSprite = game.atlas.createSprite(String.format("player/player%d", spriteNum));
+
+            animationFrames.add(frameSprite);
+        }
         player =
                 new Player(
-                        game.atlas.createSprite(Player.PLAYER_TEXTURE),
+                        game.atlas.createSprite("player/player0"),
                         animationFrames,
                         GameManager.GAME_WIDTH / 4.8f,
                         GameManager.GAME_WIDTH / 1.6f);
