@@ -79,7 +79,7 @@ public class GameScreen implements Screen {
         StudyArea studyArea =
                 new StudyArea(
                         "Computer Science Building",
-                        game.manager.get(HeslingtonHustle.SOUND_STUDY),
+                        game.manager.get(AssetNames.SOUND_STUDY),
                         game.atlas.createSprite("buildings/cs"),
                         GameManager.GAME_WIDTH * 0.10f,
                         GameManager.GAME_HEIGHT * 0.01f);
@@ -87,14 +87,14 @@ public class GameScreen implements Screen {
         SleepArea sleepArea =
                 new SleepArea(
                         "Goodricke College",
-                        game.manager.get(HeslingtonHustle.SOUND_SLEEP),
+                        game.manager.get(AssetNames.SOUND_SLEEP),
                         game.atlas.createSprite("buildings/college"),
                         GameManager.GAME_WIDTH * 0.2f,
                         GameManager.GAME_HEIGHT * 0.55f);
         RecreationalArea feedTheDucks =
                 new RecreationalArea(
                         "Duck Pond",
-                        game.manager.get(HeslingtonHustle.SOUND_QUACK),
+                        game.manager.get(AssetNames.SOUND_QUACK),
                         game.atlas.createSprite("ducks"),
                         GameManager.GAME_WIDTH * 0.5f,
                         GameManager.GAME_HEIGHT * 0.2f);
@@ -102,7 +102,7 @@ public class GameScreen implements Screen {
         EatArea eatArea =
                 new EatArea(
                         "Pizza Building",
-                        game.manager.get(HeslingtonHustle.SOUND_EATING),
+                        game.manager.get(AssetNames.SOUND_EATING),
                         game.atlas.createSprite("buildings/piazza"),
                         GameManager.GAME_WIDTH * 0.60f,
                         GameManager.GAME_HEIGHT * 0.30f);
@@ -114,7 +114,7 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(feedTheDucks);
 
         // This is the map setup
-        TiledMap map = game.manager.get(HeslingtonHustle.MAP_NAME);
+        TiledMap map = game.manager.get(AssetNames.TILE_MAP);
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
         // Scene2D stage and UI

@@ -17,33 +17,26 @@ public class HeslingtonHustle extends Game {
     public SpriteBatch batch;
     public TextureAtlas atlas;
     public BitmapFont font;
-    public static final String ATLAS_NAME = "textures/pack.atlas";
-    public static final String MAP_NAME = "map/map.tmx";
-    public static final String FONT_NAME = "lsans-32.fnt";
-    public static final String SOUND_QUACK = "sound/duck-quacking.mp3";
-    public static final String SOUND_EATING = "sound/eating.mp3";
-    public static final String SOUND_STUDY = "sound/library-environment.mp3";
-    public static final String SOUND_SLEEP = "sound/sleep.mp3";
 
     @Override
     public void create() {
 
         // Asset manager loading
         manager = new AssetManager();
-        manager.load(ATLAS_NAME, TextureAtlas.class);
+        manager.load(AssetNames.TEXTURE_ATLAS, TextureAtlas.class);
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        manager.load(MAP_NAME, TiledMap.class);
-        manager.load(FONT_NAME, BitmapFont.class);
-        manager.load(SOUND_EATING, Sound.class);
-        manager.load(SOUND_QUACK, Sound.class);
-        manager.load(SOUND_STUDY, Sound.class);
-        manager.load(SOUND_SLEEP, Sound.class);
+        manager.load(AssetNames.TILE_MAP, TiledMap.class);
+        manager.load(AssetNames.BITMAP_FONT, BitmapFont.class);
+        manager.load(AssetNames.SOUND_EATING, Sound.class);
+        manager.load(AssetNames.SOUND_QUACK, Sound.class);
+        manager.load(AssetNames.SOUND_STUDY, Sound.class);
+        manager.load(AssetNames.SOUND_SLEEP, Sound.class);
         manager.finishLoading();
 
         // Create shared resources
         batch = new SpriteBatch();
-        atlas = manager.get(ATLAS_NAME);
-        font = manager.get(FONT_NAME);
+        atlas = manager.get(AssetNames.TEXTURE_ATLAS);
+        font = manager.get(AssetNames.BITMAP_FONT);
         this.setScreen(new GameScreen(this));
     }
 
