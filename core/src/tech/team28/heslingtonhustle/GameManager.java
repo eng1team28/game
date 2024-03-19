@@ -151,7 +151,7 @@ public class GameManager {
     private void takeExam() {
         boolean examWin;
         examWin = player.getIntelligence() >= 60;
-        player.setPosition(150, 0); // Move player into a position, so they can see the result
+        player.setPosition(950, 500); // Move player into a position, so they can see the result
         this.game.examCutscene(examWin);
     }
 }
