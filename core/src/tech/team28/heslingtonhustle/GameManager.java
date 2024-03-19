@@ -67,7 +67,7 @@ public class GameManager {
     private GameManager() {
         day = Day.Monday;
         time = 7;
-        dayDuration = 23;
+        dayDuration = 24;
         interactables = new Array<Interactable>(4);
     }
 
@@ -99,6 +99,7 @@ public class GameManager {
         float newTime = time + amount;
         if (newTime >= dayDuration) {
             incrementDay();
+            incrementTime(newTime - 24);
             if (day == Day.Sunday && newTime > dayDuration) {
                 day = Day.Monday;
             }

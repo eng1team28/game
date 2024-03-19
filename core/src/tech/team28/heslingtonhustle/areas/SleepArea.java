@@ -49,7 +49,7 @@ public class SleepArea extends Interactable {
         } else if (current_time < 7) {
             gameManager.incrementTime(7 - current_time);
         } else {
-            gameManager.incrementTime(30 - current_time);
+            gameManager.incrementTime(31 - current_time);
         }
     }
 }
