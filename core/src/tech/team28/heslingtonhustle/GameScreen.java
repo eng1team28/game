@@ -87,7 +87,6 @@ public class GameScreen implements Screen {
                         GameManager.GAME_WIDTH * 0.10f,
                         GameManager.GAME_HEIGHT * 0.01f);
         studyArea.setScale(0.5f);
-        gameManager.addInteractable(studyArea);
         SleepArea sleepArea =
                 new SleepArea(
                         "Goodricke College",
@@ -95,7 +94,6 @@ public class GameScreen implements Screen {
                         game.atlas.createSprite("buildings/college"),
                         GameManager.GAME_WIDTH * 0.2f,
                         GameManager.GAME_HEIGHT * 0.55f);
-        gameManager.addInteractable(sleepArea);
         RecreationalArea feedTheDucks =
                 new RecreationalArea(
                         "Duck Pond",
@@ -104,7 +102,6 @@ public class GameScreen implements Screen {
                         GameManager.GAME_WIDTH * 0.5f,
                         GameManager.GAME_HEIGHT * 0.2f);
         feedTheDucks.setScale(0.4f);
-        gameManager.addInteractable(feedTheDucks);
         EatArea eatArea =
                 new EatArea(
                         "Pizza Building",
@@ -113,7 +110,11 @@ public class GameScreen implements Screen {
                         GameManager.GAME_WIDTH * 0.60f,
                         GameManager.GAME_HEIGHT * 0.30f);
         eatArea.setScale(0.6f);
+
+        gameManager.addInteractable(studyArea);
+        gameManager.addInteractable(sleepArea);
         gameManager.addInteractable(eatArea);
+        gameManager.addInteractable(feedTheDucks);
 
         // This is the map setup
         map = game.manager.get(HeslingtonHustle.MAP_NAME);
