@@ -26,7 +26,7 @@ public class GameManager {
 
     private Day day; // Current day respective to the game
     private float time; // Current time
-    private final float dayDuration; // Duration of a day in the game
+    private final static float dayDuration = 24; // Duration of a day in the game
     private Player player; // The player
     // Counter for different areas in the game
     private final AreaCounter areaCounter = new AreaCounter();
@@ -65,7 +65,6 @@ public class GameManager {
     private GameManager() {
         day = Day.Monday;
         time = 7;
-        dayDuration = 24;
         interactables = new Array<>(4);
     }
 
