@@ -96,7 +96,7 @@ size: 512, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-win
+lose
   rotate: false
   xy: 2, 2
   size: 474, 474
