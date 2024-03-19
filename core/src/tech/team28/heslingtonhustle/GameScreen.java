@@ -126,12 +126,8 @@ public class GameScreen implements Screen {
         table.top().left();
         table.pad(10f);
 
-        BitmapFont currentFont = new BitmapFont();
-
-        currentFont.getData().setScale(3f, 3f);
-
+        BitmapFont currentFont = game.font;
         Label.LabelStyle sillyStyle = new Label.LabelStyle(currentFont, Color.WHITE);
-        sillyStyle.font.getData().setScale(0.4f);
         // The next couple of lines initialises labels for displaying game information
         dayLabel = new Label("", sillyStyle);
         timeLabel = new Label("", sillyStyle);
