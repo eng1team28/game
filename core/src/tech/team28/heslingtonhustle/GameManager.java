@@ -11,8 +11,6 @@ public class GameManager {
     // View width is dynamically determined by window aspect ratio
     public static final float VIEW_HEIGHT = 512f;
 
-    HeslingtonHustle game;
-
     enum Day {
         Monday,
         Tuesday,
@@ -21,16 +19,40 @@ public class GameManager {
         Friday,
         Saturday,
         Sunday,
-        ExamDay
     }
 
-    private Day day; // Current day respective to the game
+    private Day currentDay; // Current day respective to the game
     private float time; // Current time
     private final static float dayDuration = 24; // Duration of a day in the game
-    private Player player; // The player
-    // Counter for different areas in the game
+    private final static float dayStartTime = 7;
+    // Counters for different areas in the game
     private final AreaCounter areaCounter = new AreaCounter();
     private Array<Interactable> interactables; // Array of interactable objects in the game
+    private HeslingtonHustle game;
+    private Player player; // The player
+
+    /**
+     * Private constructor to prevent instantiation from outside the class. Initializes default
+     * values for day, time, and interactables.
+     */
+    private GameManager() {
+        currentDay = Day.Monday;
+        time = GameManager.dayStartTime;
+        interactables = new Array<>(4);
+    }
+
+    /**
+     * Retrieves the singleton instance of the GameManager. If the instance does not exist, creates
+     * a new one.
+     *
+     * @return The GameManager instance.
+     */
+    public static GameManager getInstance() {
+        if (instance == null) {
+            instance = new GameManager();
+        }
+        return instance;
+    }
 
     /**
      * Determines the player
@@ -58,31 +80,8 @@ public class GameManager {
     // Singleton instance of the GameManager
     private static GameManager instance;
 
-    /**
-     * Private constructor to prevent instantiation from outside the class. Initializes default
-     * values for day, time, and interactables.
-     */
-    private GameManager() {
-        day = Day.Monday;
-        time = 7;
-        interactables = new Array<>(4);
-    }
-
-    public void SetGame(HeslingtonHustle currentGame) {
+    public void setGame(HeslingtonHustle currentGame) {
         this.game = currentGame;
-    }
-
-    /**
-     * Retrieves the singleton instance of the GameManager. If the instance does not exist, creates
-     * a new one.
-     *
-     * @return The GameManager instance.
-     */
-    public static GameManager getInstance() {
-        if (instance == null) {
-            instance = new GameManager();
-        }
-        return instance;
     }
 
     /**
@@ -94,16 +93,12 @@ public class GameManager {
      */
     public boolean incrementTime(float amount) {
         float newTime = time + amount;
-        if (newTime >= dayDuration) {
-            incrementDay();
-            incrementTime(newTime - 24);
-            if (day == Day.Sunday && newTime > dayDuration) {
-                day = Day.Monday;
-            }
+        if (newTime < 0 || newTime >= dayDuration) {
+            return false;
         } else {
             time = newTime;
+            return true;
         }
-        return true;
     }
 
     String getTimeFormatted() {
@@ -121,8 +116,8 @@ public class GameManager {
         return time;
     }
 
-    Day getDay() {
-        return day;
+    Day getCurrentDay() {
+        return currentDay;
     }
 
     public AreaCounter getAreaCounter() {
@@ -130,31 +125,30 @@ public class GameManager {
     }
 
     String getDayFormatted() {
-        return String.format("Day: %s", getDay());
+        return String.format("Day: %s", getCurrentDay());
     }
 
     Day incrementDay() {
         time = 0; // reset time of day
         Day[] days = Day.values(); // get an array of all the enum constants
-        if (this.day.equals(days[6])) {
-            this.TakeExam();
+        if (this.currentDay.equals(days[6])) {
+            this.takeExam();
             return days[7];
         } else {
 
-            int index = day.ordinal(); // get the index of the current day in the array
+            int index = currentDay.ordinal(); // get the index of the current day in the array
             index = (index + 1) % days.length; // add one to the index and wrap around the array
-            day = days[index]; // get the new enum value and assign it to the day variable
-            return day;
+            currentDay = days[index]; // get the new enum value and assign it to the day variable
+            return currentDay;
         }
     }
 
     public void setEndDay() {
-        this.day = Day.values()[6];
+        this.currentDay = Day.values()[6];
         this.incrementDay();
     }
 
-    private void TakeExam() {
-
+    private void takeExam() {
         boolean examWin;
         examWin = player.getIntelligence() >= 60;
         player.setPosition(150, 0); // Move player into a position, so they can see the result
