@@ -21,11 +21,7 @@ public class Player extends Entity {
 
     // PLAYER STATS
     private float energy;
-    private final float maxEnergy;
-    private double intelligence;
-    private final double maxIntelligence;
-    private double happiness;
-    private final double maxHappiness;
+    private static final float MAX_ENERGY = 100;
 
     // Not final as they can change (maybe)
     private float playerSpeed = 1000;
@@ -49,11 +45,6 @@ public class Player extends Entity {
 
         setSize(width, height);
         energy = 100;
-        maxEnergy = 100;
-        intelligence = 0;
-        maxIntelligence = 100;
-        happiness = 1.5;
-        maxHappiness = 1.5;
 
         moveComponent = new MoveComponent(playerAcceleration, playerSpeed);
 
@@ -72,10 +63,19 @@ public class Player extends Entity {
     /**
      * Sets the energy level of the player.
      *
-     * @param energy The energy level to set.
      */
-    public void setEnergy(float energy) {
-        this.energy = MathUtils.clamp(energy, 0, maxEnergy);
+    public void resetEnergy() {
+        energy = MAX_ENERGY;
+    }
+
+    public boolean spendEnergy(float cost) {
+        float newEnergy = energy - cost;
+        if (newEnergy < 0 || newEnergy > MAX_ENERGY) {
+            return false;
+        } else {
+            energy = newEnergy;
+            return true;
+        }
     }
 
     /**
@@ -86,54 +86,6 @@ public class Player extends Entity {
      */
     String getEnergyFormatted() {
         return String.format("Energy: %s", getEnergy());
-    }
-
-    /** Getter for intelligence */
-    public double getIntelligence() {
-        return intelligence;
-    }
-
-    /**
-     * Sets the intelligence level of the player.
-     *
-     * @param intelligence The intelligence level to set.
-     */
-    public void setIntelligence(double intelligence) {
-        this.intelligence = MathUtils.clamp(intelligence, 0, maxIntelligence);
-    }
-
-    /**
-     * Retrieves a formatted string representation of the player's energy level. by formatting with
-     * the word "Intelligence:" followed by the current energy level.
-     *
-     * @return A string representing the formatted energy level
-     */
-    String getIntelligenceFormatted() {
-        return String.format("Intelligence: %s", getIntelligence());
-    }
-
-    /**
-     * Gets the current happiness level of the player.
-     *
-     * @return The happiness level as a double value.
-     */
-    public double getHappiness() {
-        return happiness;
-    }
-
-    /**
-     * Sets the happiness level of the player.
-     *
-     * @param happiness The happiness level to set.
-     */
-    public void setHappiness(double happiness) {
-        happiness = Math.round(happiness * 10);
-        happiness = happiness / 10;
-        this.happiness = MathUtils.clamp(happiness, 0, maxHappiness);
-    }
-
-    String getHappinessFormatted() {
-        return String.format("Happiness: %s", getHappiness());
     }
 
     // Runs every frame
@@ -188,13 +140,13 @@ public class Player extends Entity {
 
         // FOR TESTING, TRIGGERS END OF WEEK, WITH WINNING
         if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
-            this.intelligence = 70;
+            //            this.intelligence = 70;
             GameManager.getInstance().setEndDay();
         }
 
         // FOR TESTING, TRIGGERS END OF WEEK, WITH FAILING
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
-            this.intelligence = 45;
+            //            this.intelligence = 45;
             GameManager.getInstance().setEndDay();
         }
     }

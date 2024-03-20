@@ -33,4 +33,10 @@ public class Util {
         }
         return false;
     }
+
+    static String capitaliseString(String str) {
+        String firstLetter = str.substring(0, 1);
+        String remainder = str.substring(1);
+        return firstLetter.toUpperCase() + remainder.toLowerCase();
+    }
 }

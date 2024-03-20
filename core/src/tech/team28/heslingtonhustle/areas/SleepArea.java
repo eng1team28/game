@@ -8,47 +8,19 @@ import tech.team28.heslingtonhustle.Player;
 
 /** Represents a type of interactable where the player will sleep to gain energy. */
 public class SleepArea extends Interactable {
-
-    private final float sleepDuration;
-    private final float sleepEnergyRecovery;
-    private final GameManager gameManager;
-
-    public SleepArea(
-            String name,
-            Sound sound,
-            Sprite sprite,
-            float spawnPosX,
-            float spawnPosY,
-            float sleepDuration,
-            float sleepEnergyRecovery) {
-        super(name, sound, sprite, spawnPosX, spawnPosY);
-        this.sleepDuration = sleepDuration;
-        this.sleepEnergyRecovery = sleepEnergyRecovery;
-        this.gameManager = GameManager.getInstance();
-    }
-
     public SleepArea(String name, Sound sound, Sprite sprite, float spawnPosX, float spawnPosY) {
-        this(name, sound, sprite, spawnPosX, spawnPosY, 5, 100);
+        super(name, sound, sprite, spawnPosX, spawnPosY, 0, 0);
     }
 
     @Override
-    public void interact(Player player) {
+    public void interactEffect(Player player) {
+        GameManager gameManager = GameManager.getInstance();
         gameManager.getAreaCounter().incrementSleepAreaCounter();
 
-        applySleepEffect(player);
-        interactSound.play();
-    }
-
-    private void applySleepEffect(Player player) {
-        player.setEnergy(player.getEnergy() + sleepEnergyRecovery);
-        float current_time = gameManager.getTime();
-
-        if (current_time <= 12 && current_time >= 7) {
-            gameManager.incrementTime(sleepDuration);
-        } else if (current_time < 7) {
-            gameManager.incrementTime(7 - current_time);
-        } else {
-            gameManager.incrementTime(31 - current_time);
+        boolean sleepSuccess = gameManager.incrementDay();
+        if (sleepSuccess) {
+            gameManager.resetTime();
+            player.resetEnergy();
         }
     }
 }

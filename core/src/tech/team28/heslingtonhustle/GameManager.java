@@ -23,11 +23,11 @@ public class GameManager {
 
     private Day currentDay; // Current day respective to the game
     private float time; // Current time
-    private final static float DAY_DURATION = 24; // Duration of a day in the game
-    private final static float DAY_START_TIME = 8;
+    private static final float DAY_DURATION = 24; // Duration of a day in the game
+    private static final float DAY_START_TIME = 8;
     // Counters for different areas in the game
     private final AreaCounter areaCounter = new AreaCounter();
-    private Array<Interactable> interactables; // Array of interactable objects in the game
+    private final Array<Interactable> interactables; // Array of interactable objects in the game
     private HeslingtonHustle game;
     private Player player; // The player
 
@@ -129,11 +129,13 @@ public class GameManager {
     }
 
     String getDayFormatted() {
-        return String.format("Day: %s", getCurrentDay());
+        String dayCapitalised = Util.capitaliseString(getCurrentDay().name());
+        return String.format("Day: %s", dayCapitalised);
     }
 
-    boolean incrementDay() {
+    public boolean incrementDay() {
         if (currentDay == Day.SUNDAY) {
+            takeExam();
             return false;
         } else {
             Day[] days = Day.values(); // get an array of all the enum constants
@@ -151,8 +153,17 @@ public class GameManager {
 
     private void takeExam() {
         boolean examWin;
-        examWin = player.getIntelligence() >= 60;
+        examWin = areaCounter.getStudyAreaCounter() >= 8;
         player.setPosition(950, 500); // Move player into a position, so they can see the result
         this.game.examCutscene(examWin);
+    }
+
+    public String getCountersFormatted() {
+        return String.format(
+                "EAT: %d\nREC: %d\nSLP: %d\nSTD: %d",
+                areaCounter.getEatAreaCounter(),
+                areaCounter.getRecreationAreaCounter(),
+                areaCounter.getSleepAreaCounter(),
+                areaCounter.getStudyAreaCounter());
     }
 }

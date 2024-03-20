@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import tech.team28.heslingtonhustle.areas.EatArea;
-import tech.team28.heslingtonhustle.areas.RecreationalArea;
+import tech.team28.heslingtonhustle.areas.RecreationArea;
 import tech.team28.heslingtonhustle.areas.SleepArea;
 import tech.team28.heslingtonhustle.areas.StudyArea;
 
@@ -40,8 +40,7 @@ public class GameScreen implements Screen {
     private final Label dayLabel; // Label for displaying the day
     private final Label timeLabel; // Label for displaying the time
     private final Label energyLabel; // Label for displaying the player's energy
-    private final Label intelligenceLabel; // Label for displaying the player's intelligence
-    private final Label happinessLabel; // Label for displaying the player's happiness
+    private final Label counterLabel; // Label for displaying the counter values
     private final GameManager gameManager; // Instance of game manager
 
     /**
@@ -91,8 +90,8 @@ public class GameScreen implements Screen {
                         game.atlas.createSprite("buildings/college"),
                         GameManager.GAME_WIDTH * 0.2f,
                         GameManager.GAME_HEIGHT * 0.55f);
-        RecreationalArea feedTheDucks =
-                new RecreationalArea(
+        RecreationArea feedTheDucks =
+                new RecreationArea(
                         "Duck Pond",
                         game.manager.get(AssetNames.SOUND_QUACK),
                         game.atlas.createSprite("ducks"),
@@ -130,11 +129,10 @@ public class GameScreen implements Screen {
         dayLabel = new Label("", sillyStyle);
         timeLabel = new Label("", sillyStyle);
         energyLabel = new Label("", sillyStyle);
-        happinessLabel = new Label("", sillyStyle);
-        intelligenceLabel = new Label("", sillyStyle);
+        counterLabel = new Label("", sillyStyle);
         // Add labels to the table(the UI layout)
         for (Label label :
-                new Label[] {dayLabel, timeLabel, energyLabel, happinessLabel, intelligenceLabel}) {
+                new Label[] {dayLabel, timeLabel, energyLabel, counterLabel,}) {
             table.row().left();
             table.add(label);
         }
@@ -212,8 +210,7 @@ public class GameScreen implements Screen {
         dayLabel.setText(gameManager.getDayFormatted());
         timeLabel.setText(gameManager.getTimeFormatted());
         energyLabel.setText(player.getEnergyFormatted());
-        happinessLabel.setText(player.getHappinessFormatted());
-        intelligenceLabel.setText(player.getIntelligenceFormatted());
+        counterLabel.setText(gameManager.getCountersFormatted());
         stage.act(delta);
         stage.draw();
     }
