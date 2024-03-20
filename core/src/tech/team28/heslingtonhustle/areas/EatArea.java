@@ -13,7 +13,6 @@ public class EatArea extends Interactable {
 
     private final float eatEnergyGain;
 
-    private final GameManager gameManager;
 
     public EatArea(
             String name,
@@ -26,7 +25,6 @@ public class EatArea extends Interactable {
         super(name, sound, sprite, spawnPosX, spawnPosY);
         this.eatDuration = eatDuration;
         this.eatEnergyGain = eatEnergyGain;
-        this.gameManager = GameManager.getInstance();
     }
 
     public EatArea(String name, Sound sound, Sprite sprite, float spawnPosX, float spawnPosY) {
@@ -35,6 +33,7 @@ public class EatArea extends Interactable {
 
     @Override
     public void interact(Player player) {
+        GameManager gameManager = GameManager.getInstance();
         gameManager.incrementTime(eatDuration);
         gameManager.getAreaCounter().incrementEatAreaCounter();
 

@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public abstract class Interactable extends Entity {
     protected String name;
     protected Sound interactSound;
+    final float interactTimeDuration = 1f;
+    final float interactEnergyCost = 10f;
 
     // todo add base duration field all interactables will override
     // protected float interactDuration;
