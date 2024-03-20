@@ -60,10 +60,7 @@ public class Player extends Entity {
         return energy;
     }
 
-    /**
-     * Sets the energy level of the player.
-     *
-     */
+    /** Sets the energy level of the player. */
     public void resetEnergy() {
         energy = MAX_ENERGY;
     }

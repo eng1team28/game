@@ -132,7 +132,9 @@ public class GameScreen implements Screen {
         counterLabel = new Label("", sillyStyle);
         // Add labels to the table(the UI layout)
         for (Label label :
-                new Label[] {dayLabel, timeLabel, energyLabel, counterLabel,}) {
+                new Label[] {
+                    dayLabel, timeLabel, energyLabel, counterLabel,
+                }) {
             table.row().left();
             table.add(label);
         }

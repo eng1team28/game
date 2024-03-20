@@ -1,33 +1,35 @@
 package tech.team28.heslingtonhustle;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class ResultScreen implements Screen {
     final HeslingtonHustle game;
+    private final Viewport viewport;
     private final Stage stage;
-    private final Sprite resultSprite;
 
-    public ResultScreen(HeslingtonHustle hustleGame, boolean winBool) {
-        game = hustleGame;
+    public ResultScreen(HeslingtonHustle game, boolean winBool) {
+        this.game = game;
 
-        /// create stage and set it as input processor
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        // Create stage
+        viewport = new ScreenViewport();
+        stage = new Stage(viewport, game.batch);
 
-        if (winBool) {
-            resultSprite = game.atlas.createSprite("win");
-        } else {
-            resultSprite = game.atlas.createSprite("lose");
-        }
+        String resultSpriteName = (winBool) ? "win" : "lose";
+        Image resultImage = new Image(game.atlas.findRegion(resultSpriteName));
 
-        resultSprite.setSize(512, 512);
-        centreResult();
+        Table table = new Table();
+        table.setFillParent(true);
+        table.center();
+        table.add(resultImage);
+
+        stage.addActor(table);
     }
 
     @Override
@@ -37,51 +39,28 @@ public class ResultScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
 
-        game.batch.begin();
-        this.resultSprite.draw(game.batch);
-        game.batch.end();
-
         stage.act(delta);
         stage.draw();
     }
 
-    private void centreResult() {
-        // todo fix
-        float x = (float) stage.getViewport().getScreenWidth() / 2;
-        float y = (float) stage.getViewport().getScreenHeight() / 2;
-        x -= resultSprite.getWidth() / 2;
-        y -= resultSprite.getHeight() / 2;
-        resultSprite.setPosition(x, y);
-    }
-
     @Override
     public void resize(int width, int height) {
-        // change the stage's viewport when teh screen size is changed
-        stage.getViewport().update(width, height, true);
-        centreResult();
+        // change the stage's viewport when the screen size is changed
+        viewport.update(width, height, true);
     }
 
     @Override
-    public void pause() {
-        // TODO Auto-generated method stub
-
-    }
+    public void pause() {}
 
     @Override
-    public void resume() {
-        // TODO Auto-generated method stub
-
-    }
+    public void resume() {}
 
     @Override
-    public void hide() {
-        // TODO Auto-generated method stub
-
-    }
+    public void hide() {}
 
     @Override
     public void dispose() {
-        // dispose of assets when not needed anymore
+        // dispose of assets when not needed any more
         stage.dispose();
     }
 }
