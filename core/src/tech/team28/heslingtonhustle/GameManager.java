@@ -2,15 +2,27 @@ package tech.team28.heslingtonhustle;
 
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Singleton class for holding and managing the overarching state of the game. This includes play
+ * region width and height, day of the week, and time of day.
+ */
 public class GameManager {
-    // Size of the game region in arbitrary units
-    // This is not the size of the window in pixels
-    // The game region is scaled by the camera
+    /**
+     * Width of the game region in arbitrary units. This is not the size of the window in pixels,
+     * the game region is scaled by the camera.
+     */
     public static final float GAME_WIDTH = 2048f;
+
+    /** Height of the game region in arbitrary units. */
     public static final float GAME_HEIGHT = 2048f;
-    // View width is dynamically determined by window aspect ratio
+
+    /**
+     * Height to apply to the viewport in the same arbitrary units. View width is dynamically
+     * determined by window aspect ratio.
+     */
     public static final float VIEW_HEIGHT = 512f;
 
+    /** Basic enum for days of the week. */
     enum Day {
         MONDAY,
         TUESDAY,
@@ -21,19 +33,36 @@ public class GameManager {
         SUNDAY,
     }
 
-    private Day currentDay; // Current day respective to the game
-    private float time; // Current time
-    private static final float DAY_DURATION = 24; // Duration of a day in the game
+    /** Current day respective to the game. */
+    private Day currentDay;
+
+    /** Current time in hours. */
+    private float time;
+
+    /** Maximum duration of a day in the game, in hours. */
+    private static final float DAY_DURATION = 24;
+
+    /** Hour at which to start a new day after the player sleeps. */
     private static final float DAY_START_TIME = 8;
-    // Counters for different areas in the game
+
+    /** Counters for different areas in the game */
     private final AreaCounter areaCounter = new AreaCounter();
-    private final Array<Interactable> interactables; // Array of interactable objects in the game
+
+    /** Array of interactable objects in the game */
+    private final Array<Interactable> interactables;
+
+    /** Reference to main game instance. */
     private HeslingtonHustle game;
-    private Player player; // The player
+
+    /** The player. */
+    private Player player;
+
+    /** Singleton instance of the GameManager */
+    private static GameManager instance;
 
     /**
      * Private constructor to prevent instantiation from outside the class. Initializes default
-     * values for day, time, and interactables.
+     * values for weekday and time, and creates an empty array for interactables.
      */
     private GameManager() {
         currentDay = Day.MONDAY;
@@ -63,7 +92,7 @@ public class GameManager {
         this.player = player;
     }
 
-    // Retrieves the list of interactable objects and returns them in an array
+    /** Retrieves the list of interactable objects and returns them in an array */
     public Array<Interactable> getInteractables() {
         return interactables;
     }
@@ -74,23 +103,29 @@ public class GameManager {
      * @param newInteractable The new interactable object to add.
      */
     public void addInteractable(Interactable newInteractable) {
+        // Todo manage interactable array size thoroughly>
         interactables.add(newInteractable);
     }
 
-    // Singleton instance of the GameManager
-    private static GameManager instance;
-
+    /**
+     * Set the game attribute.
+     *
+     * @param currentGame The main game instance
+     */
     public void setGame(HeslingtonHustle currentGame) {
         this.game = currentGame;
     }
 
+    /** Reset the time of day to when you wake up. */
     public void resetTime() {
         time = GameManager.DAY_START_TIME;
     }
 
     /**
-     * Increments the time in the game by the specified amount. If the time exceeds a day's
-     * duration, increments the day.
+     * Try to increment the time in the game by the specified amount.
+     *
+     * <p>This will succeed if there's enough time left in the day, and fail if adding the amount
+     * would exceed the day duration.
      *
      * @param amount The amount by which to increment the time.
      * @return True if the time was successfully incremented, False otherwise.
@@ -105,34 +140,61 @@ public class GameManager {
         }
     }
 
+    /**
+     * Formats time with two digits, zero-padded, no decimal point. I.E. as 24hr format.
+     *
+     * @return The formatted String.
+     */
     String getTimeFormatted() {
-        // Formats time with two digits, zero-padded, no decimal point
-        // I.E. as 24hr format
+        //
         return String.format("Time: %02.0f:00", getTime());
     }
 
     /**
-     * Getter for the current time
+     * Getter for the current time.
      *
-     * @return The current time of day in arbitrary units.
+     * @return The current time of day in hours.
      */
     public float getTime() {
         return time;
     }
 
+    /**
+     * Getter for the current day of the week.
+     *
+     * @return the enum value.
+     */
     Day getCurrentDay() {
         return currentDay;
     }
 
+    /**
+     * Getter for the counter instance.
+     *
+     * @return the interact counter.
+     */
     public AreaCounter getAreaCounter() {
         return areaCounter;
     }
 
+    /**
+     * Get the day as a formatted string.
+     *
+     * @return the current day of the week in-game, in title case.
+     */
     String getDayFormatted() {
         String dayCapitalised = Util.capitaliseString(getCurrentDay().name());
         return String.format("Day: %s", dayCapitalised);
     }
 
+    /**
+     * Try to progress to the next day of the week.
+     *
+     * <p>If the current day is Sunday, it won't increment, it will call the method to take the exam
+     * instead.
+     *
+     * @return true if the day was incremented, false otherwise.
+     */
     public boolean incrementDay() {
         if (currentDay == Day.SUNDAY) {
             takeExam();
@@ -146,11 +208,19 @@ public class GameManager {
         }
     }
 
+    /**
+     * Set the current day to the final day and then call the increment method, for testing the end
+     * of the game.
+     */
     public void setEndDay() {
         this.currentDay = Day.values()[6];
         this.incrementDay();
     }
 
+    /**
+     * Determine whether the player passed the exam based on how many times they studied, then tell
+     * the game to play the end cutscene with the appropriate result.
+     */
     private void takeExam() {
         boolean examWin;
         examWin = areaCounter.getStudyAreaCounter() >= 8;
@@ -158,6 +228,11 @@ public class GameManager {
         this.game.examCutscene(examWin);
     }
 
+    /**
+     * Get all the area counters as a single string with abbreviated names and newlines.
+     *
+     * @return the formatted String.
+     */
     public String getCountersFormatted() {
         return String.format(
                 "EAT: %d\nREC: %d\nSLP: %d\nSTD: %d",

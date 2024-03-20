@@ -11,6 +11,8 @@ public class AreaCounter {
     private int sleepAreaCounter = 0;
     private int studyAreaCounter = 0;
 
+    // Todo make Counter a single class, with four instances in this class?
+
     /** Default empty constructor for the AreaCounter class. */
     public AreaCounter() {}
 
