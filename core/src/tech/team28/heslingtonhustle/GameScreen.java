@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -15,14 +14,14 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -168,31 +167,8 @@ public class GameScreen implements Screen {
         stage.addActor(table);
         stage.addActor(lowerTable);
 
-        TextureAtlas.AtlasRegion cristalRegion = game.atlas.findRegion("sigil");
         jingle = Gdx.audio.newSound(Gdx.files.internal("jingle.mp3"));
-        class MyActor extends Actor {
-            public TextureAtlas.AtlasRegion region = cristalRegion;
-
-            @Override
-            public void draw(Batch batch, float parentAlpha) {
-                Color color = getColor();
-                batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-                batch.draw(
-                        region,
-                        getX(),
-                        getY(),
-                        getOriginX(),
-                        getOriginY(),
-                        getWidth(),
-                        getHeight(),
-                        getScaleX(),
-                        getScaleY(),
-                        getRotation());
-                batch.setColor(Color.WHITE);
-            }
-        }
-        hehe = new MyActor();
-        hehe.setSize(cristalRegion.originalWidth, cristalRegion.originalHeight);
+        hehe = new Image(game.atlas.findRegion("sigil"));
         hehe.setOrigin(Align.center);
         hehe.setX((float) 1920 / 2, Align.center);
         hehe.setY((float) 1080 / 2, Align.center);

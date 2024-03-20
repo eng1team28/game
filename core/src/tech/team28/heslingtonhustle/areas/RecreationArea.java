@@ -10,8 +10,14 @@ import tech.team28.heslingtonhustle.Player;
 /** Represents a type of interactable where the player will gain happiness. */
 public class RecreationArea extends Interactable {
     GameScreen gameScreen;
+
     public RecreationArea(
-            String name, Sound sound, Sprite sprite, float spawnPosX, float spawnPosY, GameScreen gameScreen) {
+            String name,
+            Sound sound,
+            Sprite sprite,
+            float spawnPosX,
+            float spawnPosY,
+            GameScreen gameScreen) {
         super(name, sound, sprite, spawnPosX, spawnPosY, 1, 10);
         this.gameScreen = gameScreen;
     }
