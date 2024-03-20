@@ -9,11 +9,18 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+/** A Screen displaying the final result of the play session. */
 public class ResultScreen implements Screen {
     final HeslingtonHustle game;
     private final Viewport viewport;
     private final Stage stage;
 
+    /**
+     * Create the game screen to display victory or defeat.
+     *
+     * @param game the game instance
+     * @param winBool true for victory game over screen, false for defeat
+     */
     public ResultScreen(HeslingtonHustle game, boolean winBool) {
         this.game = game;
 

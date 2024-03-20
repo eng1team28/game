@@ -34,6 +34,12 @@ public class Util {
         return false;
     }
 
+    /**
+     * Makes a single word title case.
+     *
+     * @param str the String to re-case
+     * @return The String with the first character uppercased and the rest lowercased
+     */
     static String capitaliseString(String str) {
         String firstLetter = str.substring(0, 1);
         String remainder = str.substring(1);

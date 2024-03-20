@@ -12,26 +12,53 @@ import com.badlogic.gdx.utils.Array;
 /** Represents the player entity in the game. Extends the {@link Entity} class. */
 public class Player extends Entity {
     // COLLIDERS
+    /** Player width to override the sprite width. */
     private float width = 64;
+
+    /** Player height. */
     private float height = 64;
+
+    /** A larger version of the entity's regular collider, representing the interact range. */
     private final Rectangle interactCollider;
 
     // COMPONENTS
+    /** Component to handle velocity and acceleration during movement. */
     private final MoveComponent moveComponent;
 
     // PLAYER STATS
+    /** Character energy as a percentage, limits the activities that can be taken. */
     private float energy;
+
+    /** Maximum energy bar capacity - 100 as it's a percentage. */
     private static final float MAX_ENERGY = 100;
 
     // Not final as they can change (maybe)
     private float playerSpeed = 1000;
     private float playerAcceleration = 25;
+
+    /**
+     * The character's movement direction, used to determine whether to flip the sprite when
+     * drawing.
+     */
     public boolean isFacingRight = true;
+
+    /**
+     * Whether the character is currently moving or stationary, used to determine whether to draw
+     * the standing sprite or the animation frames.
+     */
     public boolean isMoving = false;
+
+    /** How close the character has to be to an interactable to use it, in arbitrary units. */
     private float interactRange = 150;
+
+    /** Animation used to draw the character when moving. */
     private Animation<Sprite> walkAnimation;
+
+    /** The current time offset in the walkAnimation in seconds. */
     private float walkDelta = 0f;
-    private float walkFrameTime = 0.01f;
+
+    /** How long to halt on an animation frame in seconds. */
+    private static final float WALK_FRAME_TIME = 0.01f;
 
     /** Constructor for the Player class. Initializes player attributes and components. */
     public Player(Sprite sprite, Array<Sprite> animationFrames, float spawnPosX, float spawnPosY) {
@@ -41,7 +68,7 @@ public class Player extends Entity {
         for (Sprite frameSprite : animationFrames) {
             frameSprite.setSize(width, height);
         }
-        walkAnimation = new Animation<>(walkFrameTime, animationFrames, Animation.PlayMode.LOOP);
+        walkAnimation = new Animation<>(WALK_FRAME_TIME, animationFrames, Animation.PlayMode.LOOP);
 
         setSize(width, height);
         energy = 100;
@@ -60,11 +87,19 @@ public class Player extends Entity {
         return energy;
     }
 
-    /** Sets the energy level of the player. */
+    /** Resets the energy level of the player to 100%, to start a new day. */
     public void resetEnergy() {
         energy = MAX_ENERGY;
     }
 
+    /**
+     * Try to decrement the player's energy, as part of taking an action. This succeeds if the
+     * energy cost does not exceed the remaining energy, or take the energy over its maximum value
+     * with a negative cost.
+     *
+     * @param cost amount of energy to remove
+     * @return true if energy has been removed, false if not possible
+     */
     public boolean spendEnergy(float cost) {
         float newEnergy = energy - cost;
         if (newEnergy < 0 || newEnergy > MAX_ENERGY) {
@@ -85,9 +120,9 @@ public class Player extends Entity {
         return String.format("Energy: %s", getEnergy());
     }
 
-    // Runs every frame
     /**
-     * Updates the player's position and handles interactions.
+     * Handles interaction to update the player's position and make interactions. Should be called
+     * every frame in the game screen.
      *
      * @param delta The time elapsed since the last update.
      */
@@ -148,6 +183,12 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Get the current frame of the walking animation. This retrieves the key frame and sets its
+     * position and flip. Updating the stateTime is handled in the update method.
+     *
+     * @return the sprite ready to draw
+     */
     public Sprite getMovingFrame() {
         Sprite movingSprite = walkAnimation.getKeyFrame(walkDelta);
         movingSprite.setPosition(getX(), getY());
@@ -158,7 +199,7 @@ public class Player extends Entity {
     /**
      * Retrieves the interactable object closest to the player's position.
      *
-     * @return The closest interactable object or null if none available.
+     * @return The closest interactable object or null if none is within range.
      */
     Interactable getInteractableTouched() {
         Interactable closestInteractable = null;
