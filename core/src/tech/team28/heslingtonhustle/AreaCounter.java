@@ -6,12 +6,10 @@ package tech.team28.heslingtonhustle;
  */
 public class AreaCounter {
     // Fields for counting each kind of interaction event.
-    private int eatAreaCounter = 0;
-    private int recreationAreaCounter = 0;
-    private int sleepAreaCounter = 0;
-    private int studyAreaCounter = 0;
-
-    // Todo make Counter a single class, with four instances in this class?
+    private final Counter eatAreaCounter = new Counter();
+    private final Counter recreationAreaCounter = new Counter();
+    private final Counter sleepAreaCounter = new Counter();
+    private final Counter studyAreaCounter = new Counter();
 
     /** Default empty constructor for the AreaCounter class. */
     public AreaCounter() {}
@@ -21,13 +19,8 @@ public class AreaCounter {
      *
      * @return The counter for eat areas.
      */
-    public int getEatAreaCounter() {
+    public Counter getEatAreaCounter() {
         return eatAreaCounter;
-    }
-
-    /** Increments the counter for eat areas. */
-    public void incrementEatAreaCounter() {
-        eatAreaCounter++;
     }
 
     /**
@@ -35,13 +28,8 @@ public class AreaCounter {
      *
      * @return The counter for recreational areas.
      */
-    public int getRecreationAreaCounter() {
+    public Counter getRecreationAreaCounter() {
         return recreationAreaCounter;
-    }
-
-    /** Increments the counter for recreational areas. */
-    public void incrementRecreationAreaCounter() {
-        recreationAreaCounter++;
     }
 
     /**
@@ -49,13 +37,8 @@ public class AreaCounter {
      *
      * @return The counter for sleep areas.
      */
-    public int getSleepAreaCounter() {
+    public Counter getSleepAreaCounter() {
         return sleepAreaCounter;
-    }
-
-    /** Increments the counter for sleep areas. */
-    public void incrementSleepAreaCounter() {
-        sleepAreaCounter++;
     }
 
     /**
@@ -63,12 +46,7 @@ public class AreaCounter {
      *
      * @return The counter for study areas.
      */
-    public int getStudyAreaCounter() {
+    public Counter getStudyAreaCounter() {
         return studyAreaCounter;
-    }
-
-    /** Increments the counter for study areas. */
-    public void incrementStudyAreaCounter() {
-        studyAreaCounter++;
     }
 }

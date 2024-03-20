@@ -223,7 +223,7 @@ public class GameManager {
      */
     private void takeExam() {
         boolean examWin;
-        examWin = areaCounter.getStudyAreaCounter() >= 8;
+        examWin = areaCounter.getStudyAreaCounter().getCount() >= 8;
         player.setPosition(950, 500); // Move player into a position, so they can see the result
         this.game.examCutscene(examWin);
     }
@@ -236,9 +236,9 @@ public class GameManager {
     public String getCountersFormatted() {
         return String.format(
                 "EAT: %d\nREC: %d\nSLP: %d\nSTD: %d",
-                areaCounter.getEatAreaCounter(),
-                areaCounter.getRecreationAreaCounter(),
-                areaCounter.getSleepAreaCounter(),
-                areaCounter.getStudyAreaCounter());
+                areaCounter.getEatAreaCounter().getCount(),
+                areaCounter.getRecreationAreaCounter().getCount(),
+                areaCounter.getSleepAreaCounter().getCount(),
+                areaCounter.getStudyAreaCounter().getCount());
     }
 }

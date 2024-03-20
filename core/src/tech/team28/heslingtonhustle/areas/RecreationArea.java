@@ -16,6 +16,6 @@ public class RecreationArea extends Interactable {
     @Override
     public void interactEffect(Player player) {
         GameManager gameManager = GameManager.getInstance();
-        gameManager.getAreaCounter().incrementRecreationAreaCounter();
+        gameManager.getAreaCounter().getRecreationAreaCounter().incrementCount();
     }
 }
