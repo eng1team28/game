@@ -1,16 +1,17 @@
 package tech.team28.heslingtonhustle;
 
-/** Represents a counter for different types of areas in the game. */
+/**
+ * Data holder for counting how many times the player has interacted with different kinds of
+ * interactable.
+ */
 public class AreaCounter {
-
-    /** Represents a counter for different types of areas in the game. */
+    // Fields for counting each kind of interaction event.
     private int eatAreaCounter = 0;
+    private int recreationAreaCounter = 0;
+    private int sleepAreaCounter = 0;
+    private int studyAreaCounter = 0;
 
-    private int RecreationalAreaCounter = 0;
-    private int SleepAreaCounter = 0;
-    private int StudyAreaCounter = 0;
-
-    /** Default constructor for the AreaCounter class. */
+    /** Default empty constructor for the AreaCounter class. */
     public AreaCounter() {}
 
     /**
@@ -22,13 +23,9 @@ public class AreaCounter {
         return eatAreaCounter;
     }
 
-    /**
-     * Sets the counter for eat areas.
-     *
-     * @param eatAreaCounter parameter used for eat areas to set.
-     */
-    public void setEatAreaCounter(int eatAreaCounter) {
-        this.eatAreaCounter = eatAreaCounter;
+    /** Increments the counter for eat areas. */
+    public void incrementEatAreaCounter() {
+        eatAreaCounter++;
     }
 
     /**
@@ -36,17 +33,13 @@ public class AreaCounter {
      *
      * @return The counter for recreational areas.
      */
-    public int getRecreationalAreaCounter() {
-        return RecreationalAreaCounter;
+    public int getRecreationAreaCounter() {
+        return recreationAreaCounter;
     }
 
-    /**
-     * Sets the counter for recreational areas.
-     *
-     * @param recreationalAreaCounter The parameter used for recreational areas to set.
-     */
-    public void setRecreationalAreaCounter(int recreationalAreaCounter) {
-        RecreationalAreaCounter = recreationalAreaCounter;
+    /** Increments the counter for recreational areas. */
+    public void incrementRecreationAreaCounter() {
+        recreationAreaCounter++;
     }
 
     /**
@@ -55,16 +48,12 @@ public class AreaCounter {
      * @return The counter for sleep areas.
      */
     public int getSleepAreaCounter() {
-        return SleepAreaCounter;
+        return sleepAreaCounter;
     }
 
-    /**
-     * Sets the counter for sleep areas.
-     *
-     * @param sleepAreaCounter The parameter used for sleep areas to set.
-     */
-    public void setSleepAreaCounter(int sleepAreaCounter) {
-        SleepAreaCounter = sleepAreaCounter;
+    /** Increments the counter for sleep areas. */
+    public void incrementSleepAreaCounter() {
+        sleepAreaCounter++;
     }
 
     /**
@@ -73,15 +62,11 @@ public class AreaCounter {
      * @return The counter for study areas.
      */
     public int getStudyAreaCounter() {
-        return StudyAreaCounter;
+        return studyAreaCounter;
     }
 
-    /**
-     * Sets the counter for study areas.
-     *
-     * @param studyAreaCounter The parameter used for study areas to set.
-     */
-    public void setStudyAreaCounter(int studyAreaCounter) {
-        StudyAreaCounter = studyAreaCounter;
+    /** Increments the counter for study areas. */
+    public void incrementStudyAreaCounter() {
+        studyAreaCounter++;
     }
 }

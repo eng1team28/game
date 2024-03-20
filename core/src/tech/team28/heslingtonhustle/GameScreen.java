@@ -27,7 +27,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import tech.team28.heslingtonhustle.areas.EatArea;
-import tech.team28.heslingtonhustle.areas.RecreationalArea;
+import tech.team28.heslingtonhustle.areas.RecreationArea;
 import tech.team28.heslingtonhustle.areas.SleepArea;
 import tech.team28.heslingtonhustle.areas.StudyArea;
 
@@ -41,17 +41,14 @@ public class GameScreen implements Screen {
     private final OrthographicCamera camera; // Camera for rendering
     private final Viewport viewport; // Viewport for rendering
     private final Player player; // Player Character
-    private TiledMap map; // Sprite for representing game map
-    private OrthogonalTiledMapRenderer mapRenderer;
-    private Stage stage; // Stage for UI
+    private final OrthogonalTiledMapRenderer mapRenderer;
+    private final Stage stage; // Stage for UI
     // We have many labels
     // Could move these into some other class for UI?
-    private Label dayLabel; // Label for displaying the day
-    private Label timeLabel; // Label for displaying the time
-    private Label energyLabel; // Label for displaying the player's energy
-    private Label intelligenceLabel; // Label for displaying the player's intellignece
-    private Label happinessLabel; // Label for displaying the player's happiness
-    private Label disclaimerLabel; // Label for copyright notice
+    private final Label dayLabel; // Label for displaying the day
+    private final Label timeLabel; // Label for displaying the time
+    private final Label energyLabel; // Label for displaying the player's energy
+    private final Label counterLabel; // Label for displaying the counter values
     private final GameManager gameManager; // Instance of game manager
     Actor hehe;
     Sound jingle;
@@ -64,7 +61,7 @@ public class GameScreen implements Screen {
     public GameScreen(final HeslingtonHustle game) {
         this.game = game;
         gameManager = GameManager.getInstance();
-        gameManager.SetGame(game);
+        gameManager.setGame(game);
 
         // Camera
         camera = new OrthographicCamera();
@@ -72,7 +69,7 @@ public class GameScreen implements Screen {
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Player and interactables
-        Array<Sprite> animationFrames = new Array<Sprite>(8);
+        Array<Sprite> animationFrames = new Array<>(8);
         for (int spriteNum = 1; spriteNum <= 8; spriteNum++) {
             Sprite frameSprite =
                     game.atlas.createSprite(String.format("player/player%d", spriteNum));
@@ -91,7 +88,7 @@ public class GameScreen implements Screen {
         StudyArea studyArea =
                 new StudyArea(
                         "Computer Science Building",
-                        game.manager.get(HeslingtonHustle.SOUND_STUDY),
+                        game.manager.get(AssetNames.SOUND_STUDY),
                         game.atlas.createSprite("buildings/cs"),
                         GameManager.GAME_WIDTH * 0.10f,
                         GameManager.GAME_HEIGHT * 0.01f);
@@ -99,14 +96,14 @@ public class GameScreen implements Screen {
         SleepArea sleepArea =
                 new SleepArea(
                         "Goodricke College",
-                        game.manager.get(HeslingtonHustle.SOUND_SLEEP),
+                        game.manager.get(AssetNames.SOUND_SLEEP),
                         game.atlas.createSprite("buildings/college"),
                         GameManager.GAME_WIDTH * 0.2f,
                         GameManager.GAME_HEIGHT * 0.55f);
-        RecreationalArea feedTheDucks =
-                new RecreationalArea(
+        RecreationArea feedTheDucks =
+                new RecreationArea(
                         "Duck Pond",
-                        game.manager.get(HeslingtonHustle.SOUND_QUACK),
+                        game.manager.get(AssetNames.SOUND_QUACK),
                         game.atlas.createSprite("ducks"),
                         GameManager.GAME_WIDTH * 0.5f,
                         GameManager.GAME_HEIGHT * 0.2f,
@@ -115,7 +112,7 @@ public class GameScreen implements Screen {
         EatArea eatArea =
                 new EatArea(
                         "Pizza Building",
-                        game.manager.get(HeslingtonHustle.SOUND_EATING),
+                        game.manager.get(AssetNames.SOUND_EATING),
                         game.atlas.createSprite("buildings/piazza"),
                         GameManager.GAME_WIDTH * 0.60f,
                         GameManager.GAME_HEIGHT * 0.30f);
@@ -127,7 +124,7 @@ public class GameScreen implements Screen {
         gameManager.addInteractable(feedTheDucks);
 
         // This is the map setup
-        map = game.manager.get(HeslingtonHustle.MAP_NAME);
+        TiledMap map = game.manager.get(AssetNames.TILE_MAP);
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
         // Scene2D stage and UI
@@ -143,16 +140,19 @@ public class GameScreen implements Screen {
         dayLabel = new Label("", sillyStyle);
         timeLabel = new Label("", sillyStyle);
         energyLabel = new Label("", sillyStyle);
-        happinessLabel = new Label("", sillyStyle);
-        intelligenceLabel = new Label("", sillyStyle);
+        counterLabel = new Label("", sillyStyle);
         // Add labels to the table(the UI layout)
         for (Label label :
-                new Label[] {dayLabel, timeLabel, energyLabel, happinessLabel, intelligenceLabel}) {
+                new Label[] {
+                    dayLabel, timeLabel, energyLabel, counterLabel,
+                }) {
             table.row().left();
             table.add(label);
         }
 
-        disclaimerLabel = new Label("Map background (c) OpenStreetMap contributors", sillyStyle);
+        // Label for copyright notice
+        Label disclaimerLabel =
+                new Label("Map background (c) OpenStreetMap contributors", sillyStyle);
         Table lowerTable = new Table();
         // todo make this right-aligned?
         lowerTable.bottom().left();
@@ -269,8 +269,7 @@ public class GameScreen implements Screen {
         dayLabel.setText(gameManager.getDayFormatted());
         timeLabel.setText(gameManager.getTimeFormatted());
         energyLabel.setText(player.getEnergyFormatted());
-        happinessLabel.setText(player.getHappinessFormatted());
-        intelligenceLabel.setText(player.getIntelligenceFormatted());
+        counterLabel.setText(gameManager.getCountersFormatted());
         stage.act(delta);
         stage.draw();
     }

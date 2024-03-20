@@ -11,26 +11,48 @@ public class GameManager {
     // View width is dynamically determined by window aspect ratio
     public static final float VIEW_HEIGHT = 512f;
 
-    HeslingtonHustle game;
-
     enum Day {
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,
-        Sunday,
-        ExamDay
+        MONDAY,
+        TUESDAY,
+        WEDNESDAY,
+        THURSDAY,
+        FRIDAY,
+        SATURDAY,
+        SUNDAY,
     }
 
-    private Day day; // Current day respective to the game
+    private Day currentDay; // Current day respective to the game
     private float time; // Current time
-    private final float dayDuration; // Duration of a day in the game
-    private Player player; // The player
-    // Counter for different areas in the game
+    private static final float DAY_DURATION = 24; // Duration of a day in the game
+    private static final float DAY_START_TIME = 8;
+    // Counters for different areas in the game
     private final AreaCounter areaCounter = new AreaCounter();
-    private Array<Interactable> interactables; // Array of interactable objects in the game
+    private final Array<Interactable> interactables; // Array of interactable objects in the game
+    private HeslingtonHustle game;
+    private Player player; // The player
+
+    /**
+     * Private constructor to prevent instantiation from outside the class. Initializes default
+     * values for day, time, and interactables.
+     */
+    private GameManager() {
+        currentDay = Day.MONDAY;
+        time = GameManager.DAY_START_TIME;
+        interactables = new Array<>(4);
+    }
+
+    /**
+     * Retrieves the singleton instance of the GameManager. If the instance does not exist, creates
+     * a new one.
+     *
+     * @return The GameManager instance.
+     */
+    public static GameManager getInstance() {
+        if (instance == null) {
+            instance = new GameManager();
+        }
+        return instance;
+    }
 
     /**
      * Determines the player
@@ -50,42 +72,20 @@ public class GameManager {
      * Adds a new interactable object to the game.
      *
      * @param newInteractable The new interactable object to add.
-     * @return True if the interactable was successfully added, False otherwise.
      */
-    public boolean addInteractable(Interactable newInteractable) {
+    public void addInteractable(Interactable newInteractable) {
         interactables.add(newInteractable);
-        return true;
     }
 
     // Singleton instance of the GameManager
     private static GameManager instance;
 
-    /**
-     * Private constructor to prevent instantiation from outside the class. Initializes default
-     * values for day, time, and interactables.
-     */
-    private GameManager() {
-        day = Day.Monday;
-        time = 7;
-        dayDuration = 24;
-        interactables = new Array<Interactable>(4);
-    }
-
-    public void SetGame(HeslingtonHustle currentGame) {
+    public void setGame(HeslingtonHustle currentGame) {
         this.game = currentGame;
     }
 
-    /**
-     * Retrieves the singleton instance of the GameManager. If the instance does not exist, creates
-     * a new one.
-     *
-     * @return The GameManager instance.
-     */
-    public static GameManager getInstance() {
-        if (instance == null) {
-            instance = new GameManager();
-        }
-        return instance;
+    public void resetTime() {
+        time = GameManager.DAY_START_TIME;
     }
 
     /**
@@ -97,16 +97,12 @@ public class GameManager {
      */
     public boolean incrementTime(float amount) {
         float newTime = time + amount;
-        if (newTime >= dayDuration) {
-            incrementDay();
-            incrementTime(newTime - 24);
-            if (day == Day.Sunday && newTime > dayDuration) {
-                day = Day.Monday;
-            }
+        if (newTime < 0 || newTime >= DAY_DURATION) {
+            return false;
         } else {
             time = newTime;
+            return true;
         }
-        return true;
     }
 
     String getTimeFormatted() {
@@ -124,8 +120,8 @@ public class GameManager {
         return time;
     }
 
-    Day getDay() {
-        return day;
+    Day getCurrentDay() {
+        return currentDay;
     }
 
     public AreaCounter getAreaCounter() {
@@ -133,34 +129,41 @@ public class GameManager {
     }
 
     String getDayFormatted() {
-        return String.format("Day: %s", getDay());
+        String dayCapitalised = Util.capitaliseString(getCurrentDay().name());
+        return String.format("Day: %s", dayCapitalised);
     }
 
-    Day incrementDay() {
-        time = 0; // reset time of day
-        Day[] days = Day.values(); // get an array of all the enum constants
-        if (this.day.equals(days[6])) {
-            this.TakeExam();
-            return days[7];
+    public boolean incrementDay() {
+        if (currentDay == Day.SUNDAY) {
+            takeExam();
+            return false;
         } else {
-
-            int index = day.ordinal(); // get the index of the current day in the array
-            index = (index + 1) % days.length; // add one to the index and wrap around the array
-            day = days[index]; // get the new enum value and assign it to the day variable
-            return day;
+            Day[] days = Day.values(); // get an array of all the enum constants
+            int index = currentDay.ordinal(); // get the index of the current day in the array
+            index++; // increment the index
+            currentDay = days[index]; // get the new enum value and assign it to the day variable
+            return true;
         }
     }
 
     public void setEndDay() {
-        this.day = Day.values()[6];
+        this.currentDay = Day.values()[6];
         this.incrementDay();
     }
 
-    private void TakeExam() {
-
+    private void takeExam() {
         boolean examWin;
-        examWin = player.getIntelligence() >= 60;
-        player.setPosition(150, 0); // Move player into a position, so they can see the result
+        examWin = areaCounter.getStudyAreaCounter() >= 8;
+        player.setPosition(950, 500); // Move player into a position, so they can see the result
         this.game.examCutscene(examWin);
+    }
+
+    public String getCountersFormatted() {
+        return String.format(
+                "EAT: %d\nREC: %d\nSLP: %d\nSTD: %d",
+                areaCounter.getEatAreaCounter(),
+                areaCounter.getRecreationAreaCounter(),
+                areaCounter.getSleepAreaCounter(),
+                areaCounter.getStudyAreaCounter());
     }
 }

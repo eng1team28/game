@@ -7,7 +7,7 @@ public class Util {
     /**
      * Checks if all specified keys are currently pressed.
      *
-     * @param keys The keys to check.
+     * @param keys The keys to check, from {@link com.badlogic.gdx.Input.Keys}
      * @return True if all keys are pressed, False otherwise.
      */
     static boolean allKeysPressed(int... keys) {
@@ -19,7 +19,12 @@ public class Util {
         return true;
     }
 
-    /** Checks if any of the specified keys are currently pressed. */
+    /**
+     * Checks if any of the specified keys are currently pressed.
+     *
+     * @param keys The keys to check, from {@link com.badlogic.gdx.Input.Keys}
+     * @return True if any one of the keys is pressed, False otherwise.
+     */
     static boolean anyKeyPressed(int... keys) {
         for (int key : keys) {
             if (Gdx.input.isKeyPressed(key)) {
@@ -27,5 +32,11 @@ public class Util {
             }
         }
         return false;
+    }
+
+    static String capitaliseString(String str) {
+        String firstLetter = str.substring(0, 1);
+        String remainder = str.substring(1);
+        return firstLetter.toUpperCase() + remainder.toLowerCase();
     }
 }
