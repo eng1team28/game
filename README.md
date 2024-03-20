@@ -2,13 +2,19 @@
 
 
 run:
-`./gradlew desktop:run`
+- `./gradlew desktop:run`
 
 re-pack textures to include new images you've added to `assets-image`:
-`./gradlew texturePacker`
+- `./gradlew texturePacker`
 
 format the code to a consistent style:
-`./gradlew core:spotlessApply`
+- `./gradlew core:spotlessApply`
+
+Gameplay:
+- Arrow keys or WASD - move
+- E - interact, when near / over a building
+- Ctrl + Q - quit
+- I, O, P - debug helpers
 
 ## Copyright
 - GPL3 `LICENSE` applies to all project code
