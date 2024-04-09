@@ -35,6 +35,21 @@ public class Util {
     }
 
     /**
+     * Checks if any of the specified keys are just pressed.
+     *
+     * @param keys The keys to check, from {@link com.badlogic.gdx.Input.Keys}
+     * @return True if any one of the keys is just pressed, False otherwise.
+     */
+    static boolean anyKeyJustPressed(int... keys) {
+        for (int key : keys) {
+            if (Gdx.input.isKeyJustPressed(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Makes a single word title case.
      *
      * @param str the String to re-case
