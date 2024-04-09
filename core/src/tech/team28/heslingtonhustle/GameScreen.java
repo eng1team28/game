@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import tech.team28.heslingtonhustle.areas.EatArea;
 import tech.team28.heslingtonhustle.areas.RecreationArea;
@@ -141,7 +142,7 @@ public class GameScreen implements Screen {
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
         // Scene2D stage and UI
-        stage = new Stage();
+        stage = new Stage(new ScreenViewport());
         Table table = new Table();
         table.setFillParent(true);
         table.top().left();
@@ -249,6 +250,7 @@ public class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
