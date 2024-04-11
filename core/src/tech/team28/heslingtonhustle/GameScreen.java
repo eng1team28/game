@@ -197,8 +197,6 @@ public class GameScreen implements Screen {
         jingle = Gdx.audio.newSound(Gdx.files.internal("jingle.mp3"));
         hehe = new Image(game.atlas.findRegion("sigil"));
         hehe.setOrigin(Align.center);
-        hehe.setX((float) 1920 / 2, Align.center);
-        hehe.setY((float) 1080 / 2, Align.center);
         hehe.setVisible(false);
         stage.addActor(hehe);
     }
@@ -207,6 +205,8 @@ public class GameScreen implements Screen {
         jingle.stop();
         jingle.play();
         hehe.clearActions();
+        hehe.setX(stage.getWidth() / 2, Align.center);
+        hehe.setY(stage.getHeight() / 2, Align.center);
         hehe.setScale(0.2f, 0.2f);
         hehe.setColor(1, 1, 1, 0);
         hehe.setVisible(true);
