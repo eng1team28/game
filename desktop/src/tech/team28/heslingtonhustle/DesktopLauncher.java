@@ -8,8 +8,9 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 public class DesktopLauncher {
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        config.setForegroundFPS(0);
-        config.setWindowedMode(1920, 1080);
+        // default: 0 (unlimited)
+        config.setForegroundFPS(60);
+        config.setMaximized(true);
         config.setTitle("Heslington Hustle");
         new Lwjgl3Application(new HeslingtonHustle(), config);
     }

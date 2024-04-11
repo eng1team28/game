@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import tech.team28.heslingtonhustle.areas.EatArea;
 import tech.team28.heslingtonhustle.areas.RecreationArea;
@@ -31,29 +32,54 @@ import tech.team28.heslingtonhustle.areas.SleepArea;
 import tech.team28.heslingtonhustle.areas.StudyArea;
 
 /**
- * Represents the main game screen where the game logic and rendering occur. Implements the {@link
- * com.badlogic.gdx.Screen} interface.
+ * Represents the main game screen where the game logic and rendering is all co-ordinated during
+ * gameplay.
  */
 public class GameScreen implements Screen {
+    /** Reference to the main game instance. */
+    final HeslingtonHustle game;
 
-    final HeslingtonHustle game; // Reference to the main game instance
-    private final OrthographicCamera camera; // Camera for rendering
-    private final Viewport viewport; // Viewport for rendering
-    private final Player player; // Player Character
+    /** Camera for rendering. */
+    private final OrthographicCamera camera;
+
+    /** Viewport for managing camera dimensions. */
+    private final Viewport viewport;
+
+    /** Player Character */
+    private final Player player;
+
+    /** MapRenderer for drawing the background image. */
     private final OrthogonalTiledMapRenderer mapRenderer;
-    private final Stage stage; // Stage for UI
+
+    /** Scene2D stage only used for UI. */
+    private final Stage stage;
+
     // We have many labels
     // Could move these into some other class for UI?
-    private final Label dayLabel; // Label for displaying the day
-    private final Label timeLabel; // Label for displaying the time
-    private final Label energyLabel; // Label for displaying the player's energy
-    private final Label counterLabel; // Label for displaying the counter values
-    private final GameManager gameManager; // Instance of game manager
+    /** Label for displaying the day of the week. */
+    private final Label dayLabel;
+
+    /** Label for displaying the time of day. */
+    private final Label timeLabel;
+
+    /** Label for displaying the player's energy. */
+    private final Label energyLabel;
+
+    /** Label for displaying the counter values */
+    private final Label counterLabel;
+
+    /** Keeping a reference to GameManager's singleton instance for convenience. */
+    private final GameManager gameManager;
+
     Actor hehe;
     Sound jingle;
 
     /**
      * Constructs a new GameScreen instance with the specified game.
+     *
+     * <p>This sets up the camera, viewport, and UI, and creates the player object and all the
+     * interactables by getting their sprites from the game's texture atlas, along with adding them
+     * to the game manager.
      *
      * @param game The main game instance.
      */
@@ -127,7 +153,7 @@ public class GameScreen implements Screen {
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f);
 
         // Scene2D stage and UI
-        stage = new Stage();
+        stage = new Stage(new ScreenViewport());
         Table table = new Table();
         table.setFillParent(true);
         table.top().left();
@@ -135,6 +161,7 @@ public class GameScreen implements Screen {
 
         BitmapFont currentFont = game.font;
         Label.LabelStyle sillyStyle = new Label.LabelStyle(currentFont, Color.WHITE);
+
         // The next couple of lines initialises labels for displaying game information
         dayLabel = new Label("", sillyStyle);
         timeLabel = new Label("", sillyStyle);
@@ -194,6 +221,10 @@ public class GameScreen implements Screen {
     /**
      * Renders the game screen.
      *
+     * <p>The main update method called every frame. Calls the player's update method, then updates
+     * the camera to follow the player, re-draws everything in the game area, and finally calls act
+     * and draw on the UI Stage.
+     *
      * @param delta The time elapsed since the last frame.
      */
     @Override
@@ -250,15 +281,10 @@ public class GameScreen implements Screen {
         stage.draw();
     }
 
-    /**
-     * Updates the viewport when the screen is resized.
-     *
-     * @param width The new width of the screen.
-     * @param height The new height of the screen.
-     */
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -273,7 +299,6 @@ public class GameScreen implements Screen {
     @Override
     public void resume() {}
 
-    /** Gets rid of resources when the screen is no longer needed. */
     @Override
     public void dispose() {
         stage.dispose();

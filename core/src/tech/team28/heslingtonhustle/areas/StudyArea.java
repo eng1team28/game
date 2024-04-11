@@ -18,6 +18,6 @@ public class StudyArea extends Interactable {
     @Override
     public void interactEffect(Player player) {
         GameManager gameManager = GameManager.getInstance();
-        gameManager.getAreaCounter().incrementStudyAreaCounter();
+        gameManager.getAreaCounter().getStudyAreaCounter().incrementCount();
     }
 }

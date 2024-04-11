@@ -10,7 +10,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
  * Represents an abstract entity in the game, extending the sprite import. All entities in the game
- * inherit from this class.
+ * inherit from this class. This allows us to add convenience methods or constructor changes that
+ * all our entities will inherit.
  */
 public abstract class Entity extends Sprite {
 

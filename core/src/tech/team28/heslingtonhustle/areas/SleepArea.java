@@ -15,7 +15,7 @@ public class SleepArea extends Interactable {
     @Override
     public void interactEffect(Player player) {
         GameManager gameManager = GameManager.getInstance();
-        gameManager.getAreaCounter().incrementSleepAreaCounter();
+        gameManager.getAreaCounter().getSleepAreaCounter().incrementCount();
 
         boolean sleepSuccess = gameManager.incrementDay();
         if (sleepSuccess) {

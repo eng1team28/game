@@ -18,8 +18,12 @@ public class HeslingtonHustle extends Game {
     public TextureAtlas atlas;
     public BitmapFont font;
 
+    private int windowedWidth;
+    private int windowedHeight;
+
     @Override
     public void create() {
+        saveWindowSize();
 
         // Asset manager loading
         manager = new AssetManager();
@@ -44,13 +48,35 @@ public class HeslingtonHustle extends Game {
         this.setScreen(new ResultScreen(this, winBool));
     }
 
+    private void saveWindowSize() {
+        windowedWidth = Gdx.graphics.getWidth();
+        windowedHeight = Gdx.graphics.getHeight();
+    }
+
+    public void toggleFullscreen() {
+        if (Gdx.graphics.isFullscreen()) {
+            // go windowed
+            Gdx.graphics.setWindowedMode(windowedWidth, windowedHeight);
+        } else {
+            // go fullscreen
+            saveWindowSize();
+            Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+        }
+    }
+
     @Override
     public void render() {
         super.render();
+
         // Fast quit keybinding
         if (Util.allKeysPressed(Input.Keys.CONTROL_LEFT, Input.Keys.Q)
                 || Util.allKeysPressed(Input.Keys.CONTROL_RIGHT, Input.Keys.Q)) {
             Gdx.app.exit();
+        }
+
+        // Fullscreen toggle
+        if (Util.anyKeyJustPressed(Input.Keys.F, Input.Keys.F11)) {
+            toggleFullscreen();
         }
     }
 

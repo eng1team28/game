@@ -10,11 +10,16 @@ import com.badlogic.gdx.math.Vector2;
  * simulating acceleration.
  */
 public class MoveComponent {
-
+    /** Current velocity as an x-y vector in arbitrary units. */
     public final Vector2 velocity;
+
+    /** Velocity to interpolate towards. */
     private final Vector2 targetVelocity;
 
+    /** The limit to be applied to the magnitude of the velocity. */
     private final float maxSpeed;
+
+    /** The coefficient multiplied with the time delta when interpolating. */
     private final float acceleration;
 
     /**
