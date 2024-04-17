@@ -14,7 +14,11 @@ Gameplay:
 - Arrow keys or WASD - move
 - E - interact, when near / over a building
 - Ctrl + Q - quit
+- F or F11 - toggle fullscreen
 - I, O, P - debug helpers
+
+![image](https://github.com/eng1team28/game/assets/26749912/2284b537-dd09-4b14-b6cc-32c74ea44e86)
+
 
 ## Copyright
 - GPL3 `LICENSE` applies to all project code
